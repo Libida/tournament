@@ -50,10 +50,11 @@ if ($permission['edittourn']) {
 
         $tournament = new PMF_Tournament();
         $tournament_data = array(
-            'name'        => PMF_Filter::filterInput(INPUT_POST, 'name', FILTER_SANITIZE_STRING),
-            'description' => PMF_Filter::filterInput(INPUT_POST, 'description', FILTER_SANITIZE_STRING));
+            PMF_Filter::filterInput(INPUT_POST, 'name', FILTER_SANITIZE_STRING),
+            PMF_Filter::filterInput(INPUT_POST, 'description', FILTER_SANITIZE_STRING)
+        );
 
-        $tournament_id = $tournament->addTournament($tournament_data);
+        $tournament_id = PMF_Tournament::addTournament($tournament_data);
         if ($tournament_id) {
             printf('<p class="alert alert-success">%s</p>', $PMF_LANG['ad_tourn_added']);
         } else {
@@ -176,14 +177,8 @@ if ($permission['edittourn']) {
         }
     }
 
-    // If we changed the category tree, unset the object
-    if (isset($tournament)) {
-        unset($tournament);
-    }
-    $tournament = new PMF_Tournament();
-
     print '<ul>';
-    foreach ($tournament->getAllTournaments() as $tourn) {
+    foreach (PMF_Tournament::getAllTournaments() as $tourn) {
         print '<li>';
         printf("<strong>%s</strong> ", $tourn->name);
 
