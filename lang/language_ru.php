@@ -361,7 +361,7 @@ $PMF_LANG['ad_logout'] = 'Сессия успешно завершена.';
 $PMF_LANG['ad_news_edit'] = 'Редактирование новостей';
 $PMF_LANG['ad_cookie'] = 'Куки';
 $PMF_LANG['ad_sess_head'] = 'Просмотр сессий';
-$PMF_LANG['ad_kateg_add'] = 'добавить';
+$PMF_LANG['ad_kateg_add'] = 'Добавить';
 $PMF_LANG['ad_kateg_rename'] = 'переименовать';
 $PMF_LANG['ad_adminlog_date'] = 'Дата';
 $PMF_LANG['ad_adminlog_user'] = 'Пользователь';
@@ -913,3 +913,6 @@ $PMF_LANG['headerUserControlPanel'] = 'Личный кабинет';
 
 //C&C
 $PMF_LANG['ad_menu_tourn_edit'] = 'Турниры';
+$PMF_LANG['ad_tourn_new'] = 'Создание нового турнира';
+$PMF_LANG['ad_tourn_owner'] = 'Владелец турнира';
+$PMF_LANG['ad_tourn_added'] = 'Турнир создан.';

@@ -1183,3 +1183,6 @@ $PMF_LANG['headerUserControlPanel'] = 'My account';
 
 //C&C
 $PMF_LANG['ad_menu_tourn_edit'] = 'Tournaments';
+$PMF_LANG['ad_tourn_new'] = 'Create new tornament';
+$PMF_LANG['ad_tourn_owner'] = 'Tournament owner';
+$PMF_LANG['ad_tourn_added'] = 'Tournament created.';

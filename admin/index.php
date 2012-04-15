@@ -365,7 +365,11 @@ if (isset($auth) && in_array(true, $permission)) {
             case "transadd":                require_once 'trans.add.php'; break;
             // attachment administration 
             case "attachments":             require_once "att.main.php"; break;
-            
+            //tournaments
+            case 'savetournament':
+            case 'tournament':              require_once 'tournament.main.php'; break;
+            case 'addtournament':           require_once 'tournament.add.php'; break;
+
             default:                        print "Error"; break;
         }
     } else {
