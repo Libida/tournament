@@ -401,3 +401,12 @@ usr int(11) unsigned NOT NULL,
 datum varchar(20) NOT NULL default '',
 ip varchar(15) NOT NULL default '',
 PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci";
+
+//faqcategories
+$query[] = "CREATE TABLE ".$sqltblpre."t_tournaments (
+id INT(11) NOT NULL,
+parent_id INT(11) NOT NULL,
+name VARCHAR(255) NOT NULL,
+description VARCHAR(4000) DEFAULT NULL,
+user_id INT(11) NOT NULL,
+PRIMARY KEY (id)) DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci";
