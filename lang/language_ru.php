@@ -892,7 +892,7 @@ $PMF_LANG['search.relevance.content-keywords-thema'] = 'Ответ - Ключе�
 $PMF_LANG['search.relevance.keywords-content-thema'] = 'Ключевые слова - Ответ - Вопрос';
 $PMF_LANG['search.relevance.keywords-thema-content'] = 'Ключевые слова - Вопрос - Ответ';
 $PMF_LANG['msgNoGoogleApiKeyFound'] = 'Не указан ключ Google API, проверьте конфигурацию';
-$PMF_LANG['msgLoginUser'] = 'Логин';
+$PMF_LANG['msgLoginUser'] = 'Вход';
 $PMF_LANG['socialNetworksControlCenter'] = 'Интеграция с социальными сетями';
 $LANG_CONF['search.relevance'] = array(0 => "select", 1 => "Сортировать по релевантности");
 $LANG_CONF['search.enableRelevance'] = array(0 => "checkbox", 1 => "Включить поддержку релевантности? (по умолчанию: выключено)");
