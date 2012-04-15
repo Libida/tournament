@@ -53,7 +53,7 @@
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container-fluid">
-            <a class="brand" title="{header}" href="{faqHome}">{header}</a>
+            <h1 class="brand" title="{header}" href="{faqHome}">{header}</h1>
             <nav class="nav-collapse">
                 <ul class="nav">
                     <li class="{activeQuickfind}">{showInstantResponse}</li>

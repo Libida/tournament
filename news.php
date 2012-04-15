@@ -130,7 +130,8 @@ $tpl->parse(
         'captchaFieldset'     => PMF_Helper_Captcha::getInstance()->renderCaptcha(
             $captcha,
             'writecomment',
-            $PMF_LANG['msgCaptcha']
+            $PMF_LANG['msgCaptcha'],
+            $PMF_LANG['ad_refresh_captcha']
         ),
         'writeComments'       => $comment->getComments($newsId, PMF_Comment::COMMENT_TYPE_NEWS)
     )

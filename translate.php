@@ -84,7 +84,8 @@ $tpl->parse(
         'captchaFieldset'           => PMF_Helper_Captcha::getInstance()->renderCaptcha(
             $captcha,
             'translate',
-            $PMF_LANG['msgCaptcha']
+            $PMF_LANG['msgCaptcha'],
+            $PMF_LANG['ad_refresh_captcha']
         ),
         'msgNewTranslationSubmit'   => $PMF_LANG['msgNewTranslationSubmit'],
         'tinyMCELanguage'           => (PMF_Language::isASupportedTinyMCELanguage($LANGCODE) ? $LANGCODE : 'en')

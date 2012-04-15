@@ -211,7 +211,7 @@ switch ($action) {
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <a class="brand" href="../index.php"><?php print $faqconfig->get('main.titleFAQ'); ?></a>
+            <h1 class="brand" href="../index.php"><?php print $faqconfig->get('main.titleFAQ'); ?></h1>
             <div class="nav-collapse">
                 <?php if (isset($auth) && in_array(true, $permission)): ?>
                 <ul class="nav">

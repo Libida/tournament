@@ -311,7 +311,8 @@ $tpl->parse('writeContent', array(
     'captchaFieldset'            => PMF_Helper_Captcha::getInstance()->renderCaptcha(
         $captcha,
         'writecomment',
-        $PMF_LANG['msgCaptcha']
+        $PMF_LANG['msgCaptcha'],
+        $PMF_LANG['ad_refresh_captcha']
     ),
     'writeComments'              => $faqComment->getComments($faq->faqRecord['id'], PMF_Comment::COMMENT_TYPE_FAQ),
     'msg_about_faq'              => $PMF_LANG['msg_about_faq']

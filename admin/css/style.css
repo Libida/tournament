@@ -61,6 +61,9 @@ a:focus {
 a:hover, a:active {
   outline: 0;
 }
+#main .categories a {
+    color: #333333;
+}
 sub, sup {
   position: relative;
   font-size: 75%;
@@ -134,7 +137,7 @@ body {
   background-color: #ffffff;
 }
 a {
-  color: #cb3a25;
+  color: #FFD200;
   text-decoration: none;
 }
 a:hover {
@@ -349,7 +352,7 @@ h1 small {
 }
 h2 {
   font-size: 24px;
-  line-height: 36px;
+  padding-bottom: 30px;
 }
 h2 small {
   font-size: 18px;
@@ -982,19 +985,14 @@ input:focus:required:invalid:focus, textarea:focus:required:invalid:focus, selec
 }
 .form-search input,
 .form-inline input,
-.form-horizontal input,
 .form-search textarea,
 .form-inline textarea,
-.form-horizontal textarea,
 .form-search select,
 .form-inline select,
-.form-horizontal select,
 .form-search .help-inline,
 .form-inline .help-inline,
-.form-horizontal .help-inline,
 .form-search .uneditable-input,
-.form-inline .uneditable-input,
-.form-horizontal .uneditable-input {
+.form-inline .uneditable-input {
   display: inline-block;
   margin-bottom: 0;
 }
@@ -1029,6 +1027,9 @@ legend + .control-group {
   margin-top: 18px;
   -webkit-margin-top-collapse: separate;
 }
+.form-horizontal{
+    width: 70%;
+}
 .form-horizontal .control-group {
   margin-bottom: 18px;
   *zoom: 1;
@@ -1047,7 +1048,20 @@ legend + .control-group {
   text-align: right;
 }
 .form-horizontal .controls {
-  margin-left: 160px;
+  float: right;
+  width: 70%;
+}
+.form-horizontal .controls input,
+.form-horizontal .controls textarea,
+.form-horizontal .controls select {
+    width: 100%;
+}
+.form-horizontal .controls input[type="radio"] {
+    width: 20px;
+}
+
+.form-horizontal .control-group > label{
+    display: inline-block;
 }
 .form-horizontal .form-actions {
   padding-left: 160px;
@@ -1668,20 +1682,29 @@ table .span12 {
   -moz-border-radius: 4px;
   border-radius: 4px;
 }
-.well {
-  min-height: 20px;
-  padding: 19px;
-  margin-bottom: 20px;
-  background-color: #f5f5f5;
-  border: 1px solid #eee;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
-  -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+.well,
+.alert-info,
+.alert {
+    background-color: #f5f5f5;
+    border: 1px solid #eee;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+    -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
 }
+.alert-info,
+.alert {
+    color: #999999;
+}
+.well {
+    min-height: 20px;
+    padding: 19px;
+    margin-bottom: 20px;
+}
+    }
 .well blockquote {
   border-color: #ddd;
   border-color: rgba(0, 0, 0, 0.15);
@@ -2144,15 +2167,6 @@ button.btn.small, input[type="submit"].btn.small {
 .alert {
   padding: 8px 35px 8px 14px;
   margin-bottom: 18px;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-  background-color: #fcf8e3;
-  border: 1px solid #fbeed5;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-}
-.alert, .alert-heading {
-  color: #c09853;
 }
 .alert .close {
   position: relative;
@@ -2177,11 +2191,7 @@ button.btn.small, input[type="submit"].btn.small {
 .alert-error .alert-heading {
   color: #b94a48;
 }
-.alert-info {
-  background-color: #d9edf7;
-  border-color: #bce8f1;
-}
-.alert-info, .alert-info .alert-heading {
+.alert-info .alert-heading {
   color: #3a87ad;
 }
 .alert-block {

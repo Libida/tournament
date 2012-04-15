@@ -55,7 +55,8 @@ $tpl->parse (
         'captchaFieldset'    => PMF_Helper_Captcha::getInstance()->renderCaptcha(
             $captcha,
             'contact',
-            $PMF_LANG['msgCaptcha']
+            $PMF_LANG['msgCaptcha'],
+            $PMF_LANG['ad_refresh_captcha']
         )
     )
 );

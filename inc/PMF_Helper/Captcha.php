@@ -87,7 +87,7 @@ class PMF_Helper_Captcha extends PMF_Helper
      * 
      * @return string
      */
-    public function renderCaptcha(PMF_Captcha $captcha, $action, $legend, $error = '')
+    public function renderCaptcha(PMF_Captcha $captcha, $action, $legend, $refreshText, $error = '')
     {
         $html = '';
         
@@ -96,7 +96,7 @@ class PMF_Helper_Captcha extends PMF_Helper
                 $html .= sprintf('<div class="alert alert-error">%s</div>', $error);
             }
             $html .= sprintf('<div class="controls"><label>%s</label>', $legend);
-            $html .= $captcha->printCaptcha($action);
+            $html .= $captcha->printCaptcha($action, $refreshText);
             $html .= sprintf(
                 '<input type="text" name="captcha" id="captcha" class="span2" size="%d" required="required" />',
                 $captcha->caplength
@@ -104,7 +104,7 @@ class PMF_Helper_Captcha extends PMF_Helper
             $html .= sprintf(
                 '<div class="captchaRefresh"><a href="javascript:;" onclick="refreshCaptcha(\'%s\');">%s</a></div>',
                 $action,
-                'click to refresh');
+                $refreshText);
             $html .= '</div>';
         }
         

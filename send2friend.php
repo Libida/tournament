@@ -68,7 +68,8 @@ $tpl->parse (
         'captchaFieldset'    => PMF_Helper_Captcha::getInstance()->renderCaptcha(
             $captcha,
             'send2friend',
-            $PMF_LANG['msgCaptcha']
+            $PMF_LANG['msgCaptcha'],
+            $PMF_LANG['ad_refresh_captcha']
         ),
         'msgS2FButton'       => $PMF_LANG['msgS2FButton']
     )

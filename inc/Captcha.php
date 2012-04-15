@@ -197,7 +197,7 @@ class PMF_Captcha
      * @param   string $action The action parameter
      * @return  string
      */
-    public function printCaptcha($action)
+    public function printCaptcha($action, $refreshText)
     {
         $output = sprintf(
             '<img id="captchaImage" src="%s?%saction=%s&amp;gen=img&amp;ck=%s" height="%d" width="%d" border="0" alt="%s" title="%s" />',
@@ -208,7 +208,7 @@ class PMF_Captcha
             $this->height,
             $this->width,
             'Chuck Norris has counted to infinity. Twice.',
-            'click to refresh');
+            $refreshText);
         return $output;
     }
 
