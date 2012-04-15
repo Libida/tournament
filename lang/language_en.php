@@ -1179,9 +1179,7 @@ $LANG_CONF["records.enableCloseQuestion"] = array(0 => "checkbox", 1 => "Close o
 $LANG_CONF["records.enableDeleteQuestion"] = array(0 => "checkbox", 1 => "Delete open question after answer?");
 $PMF_LANG["msg2answerFAQ"] = "Answered";
 
-// added v2.8.0-alpha - 2012-01-16 by Thorsten
-$PMF_LANG['headerUserControlPanel'] = 'User Control Panel';
-
+$PMF_LANG['headerUserControlPanel'] = 'My account';
 
 //C&C
 $PMF_LANG['ad_menu_tourn_edit'] = 'Tournaments';

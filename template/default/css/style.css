@@ -1648,7 +1648,7 @@ table .span12 {
 .dropdown-menu li > a:hover, .dropdown-menu .active > a, .dropdown-menu .active > a:hover {
   color: #ffffff;
   text-decoration: none;
-  background-color: #cb3a25;
+  background-color: #FFD200;
 }
 .dropdown.open {
   *z-index: 1000;
@@ -1856,25 +1856,17 @@ table .span12 {
   color: rgba(255, 255, 255, 0.75);
 }
 .btn-primary {
-  background-color: #cb5025;
-  background-image: -moz-linear-gradient(top, #cb3a25, #cb7125);
-  background-image: -ms-linear-gradient(top, #cb3a25, #cb7125);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#cb3a25), to(#cb7125));
-  background-image: -webkit-linear-gradient(top, #cb3a25, #cb7125);
-  background-image: -o-linear-gradient(top, #cb3a25, #cb7125);
-  background-image: linear-gradient(top, #cb3a25, #cb7125);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#cb3a25', endColorstr='#cb7125', GradientType=0);
   border-color: #cb7125 #cb7125 #8a4d19;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+  color: #333;
 }
 .btn-primary:hover,
 .btn-primary:active,
 .btn-primary.active,
 .btn-primary.disabled,
 .btn-primary[disabled] {
-  background-color: #cb7125;
+  background-color: #FFD200;
 }
 .btn-primary:active, .btn-primary.active {
   background-color: #a0591d \9;
