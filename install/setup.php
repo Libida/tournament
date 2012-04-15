@@ -830,125 +830,130 @@ if (!isset($_POST["sql_server"]) && !isset($_POST["sql_user"]) && !isset($_POST[
             'name' => 'editconfig',
             'description' => 'Right to edit configuration'
         ),
-        //18 => "addatt", // Duplicate, removed with 2.7.3
-        //array(
-        //    'name' => 'addatt',
-        //    'description' => 'Right to add attachments'
-        //),
-        //19 => "backup delatt", // Duplicate, removed with 2.7.3
-        //array(
-        //    'name' => 'delatt',
-        //    'description' => 'Right to delete attachments'
-        //),
-        //20 => "backup",
+        //18 => "backup",
         array(
             'name' => 'backup',
             'description' => 'Right to save backups'
         ),
-        //21 => "restore",
+        //19 => "restore",
         array(
             'name' => 'restore',
             'description' => 'Right to load backups'
         ),
-        //22 => "delquestion",
+        //20 => "delquestion",
         array(
             'name' => 'delquestion',
             'description' => 'Right to delete questions'
         ),
-        //23 => 'addglossary',
+        //21 => 'addglossary',
         array(
             'name' => 'addglossary',
             'description' => 'Right to add glossary entries'
         ),
-        //24 => 'editglossary',
+        //22 => 'editglossary',
         array(
             'name' => 'editglossary',
             'description' => 'Right to edit glossary entries'
         ),
-        //25 => 'delglossary'
+        //23 => 'delglossary'
         array(
             'name' => 'delglossary',
             'description' => 'Right to delete glossary entries'
         ),
-        //26 => 'changebtrevs'
+        //24 => 'changebtrevs'
         array(
             'name' => 'changebtrevs',
             'description' => 'Right to edit revisions'
         ),
-        //27 => "addgroup",
+        //25 => "addgroup",
         array(
             'name' => 'addgroup',
             'description' => 'Right to add group accounts'
         ),
-        //28 => "editgroup",
+        //26 => "editgroup",
         array(
             'name' => 'editgroup',
             'description' => 'Right to edit group accounts'
         ),
-        //29 => "delgroup",
+        //27 => "delgroup",
         array(
             'name' => 'delgroup',
             'description' => 'Right to delete group accounts'
         ),
-        //30 => "addtranslation",
+        //28 => "addtranslation",
         array(
             'name' => 'addtranslation',
             'description' => 'Right to add translation'
         ),
-        //31 => "edittranslation",
+        //29 => "edittranslation",
         array(
             'name' => 'edittranslation',
             'description' => 'Right to edit translations'
         ),
-        //32 => "deltranslation",
+        //30 => "deltranslation",
         array(
             'name' => 'deltranslation',
             'description' => 'Right to delete translations'
         ),
-        // 33 => 'approverec'
+        //31 => 'approverec'
         array(
             'name' => 'approverec',
             'description' => 'Right to approve records'
         ),
-        // 34 => 'addattachment'
+        //32 => 'addattachment'
         array(
             'name' => 'addattachment',
             'description' => 'Right to add attachments'
         ),
-        // 35 => 'editattachment'
+        //33 => 'editattachment'
         array(
             'name' => 'editattachment',
             'description' => 'Right to edit attachments'
         ),
-        // 36 => 'delattachment'
+        //34 => 'delattachment'
         array(
             'name' => 'delattachment',
             'description' => 'Right to delete attachments'
         ),
-        // 37 => 'dlattachment'
+        //35 => 'dlattachment'
         array(
             'name' => 'dlattachment',
             'description' => 'Right to download attachments'
         ),
-        // 38 => 'dlattachment'
+        //36 => 'dlattachment'
         array(
             'name' => 'reports',
             'description' => 'Right to generate reports'
         ),
-        // 39 => 'addfaq'
+        //37 => 'addfaq'
         array(
             'name' => 'addfaq',
             'description' => 'Right to add FAQs in frontend'
         ),
-        // 40 => 'addquestion'
+        //38 => 'addquestion'
         array(
             'name' => 'addquestion',
             'description' => 'Right to add questions in frontend'
         ),
-        // 41 => 'addcomment'
+        //39 => 'addcomment'
         array(
             'name' => 'addcomment',
             'description' => 'Right to add comments in frontend'
+        ),
+        //40 => "addtourn",
+        array(
+            'name' => 'addtourn',
+            'description' => 'Right to add tournaments'
+        ),
+        //41 => "edittourn",
+        array(
+            'name' => 'edittourn',
+            'description' => 'Right to edit tournaments'
+        ),
+        //42 => "deltourn",
+        array(
+            'name' => 'deltourn',
+            'description' => 'Right to delete tournaments'
         ),
     );
     

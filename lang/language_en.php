@@ -1181,3 +1181,7 @@ $PMF_LANG["msg2answerFAQ"] = "Answered";
 
 // added v2.8.0-alpha - 2012-01-16 by Thorsten
 $PMF_LANG['headerUserControlPanel'] = 'User Control Panel';
+
+
+//C&C
+$PMF_LANG['ad_menu_tourn_edit'] = 'Tournaments';

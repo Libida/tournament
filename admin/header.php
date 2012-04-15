@@ -155,6 +155,7 @@ switch ($action) {
     default:
         $secLevelHeader   = $PMF_LANG['admin_mainmenu_home'];
         $secLevelEntries .= $adminHelper->addMenuEntry('addcateg+editcateg+delcateg', 'category', 'ad_menu_categ_edit');
+        $secLevelEntries .= $adminHelper->addMenuEntry('addtourn+edittourn+deltourn', 'tournament', 'ad_menu_tourn_edit');
         $secLevelEntries .= $adminHelper->addMenuEntry('addbt', 'editentry', 'ad_quick_record');
         $secLevelEntries .= $adminHelper->addMenuEntry('editbt+delbt', 'view', 'ad_menu_entry_edit');
         $secLevelEntries .= $adminHelper->addMenuEntry('delquestion', 'question', 'ad_menu_open');
@@ -275,10 +276,6 @@ switch ($action) {
                     <ul class="nav nav-list">
                         <li class="nav-header"><?php print $secLevelHeader; ?></li>
                         <?php print $secLevelEntries; ?>
-                        <li class="nav-header">Admin worklog</li>
-                        <li><span id="saving_data_indicator"></span></li>
-                        <li class="nav-header">Found an issue?</li>
-                        <li><a href="https://github.com/thorsten/phpMyFAQ/issues/" target="_blank">Please report it here</a></li>
                     </ul>
                 </div>
             </div>

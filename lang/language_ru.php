@@ -908,3 +908,6 @@ $PMF_LANG['msg_about_faq'] = 'Об этом В&О';
 $PMF_LANG['msgTableOfContent'] = 'Содержание';
 $LANG_CONF['security.enableLoginOnly'] = array(0 => "checkbox", 1 => "Полностью закрытые В&О (по умолчанию: отключено)");
 $LANG_CONF['security.useSslOnly'] = array(0 => "checkbox", 1 => "Использовать В&О только с SSL (по умолчанию: отключено)");
+
+//C&C
+$PMF_LANG['ad_menu_tourn_edit'] = 'Турниры';
