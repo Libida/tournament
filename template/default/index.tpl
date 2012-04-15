@@ -14,8 +14,8 @@
     <meta name="description" content="{metaDescription}">
     <meta name="author" content="{metaPublisher}">
     <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
-    <meta name="application-name" content="phpMyFAQ {phpmyfaqversion}">
-    <meta name="copyright" content="(c) 2001-2012 phpMyFAQ Team">
+    <meta name="application-name" content="{title}">
+    <meta name="copyright" content="(c) 2012 Maria Rudko">
     <meta name="publisher" content="{metaPublisher}">
     <meta name="robots" content="INDEX, FOLLOW">
     <meta name="revisit-after" content="7 days">

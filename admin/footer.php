@@ -43,10 +43,7 @@ if (!defined('IS_VALID_PHPMYFAQ')) {
         </div>
         <div class="row">
             <p class="copyright pull-right">
-                Proudly powered by <strong>phpMyFAQ <?php print $faqconfig->get('main.currentVersion'); ?></strong> |
-                <a href="http://www.phpmyfaq.de/documentation.php" target="_blank">phpMyFAQ documentation</a> |
-                Follow us on <a href="http://twitter.com/phpMyFAQ">Twitter</a> |
-                &copy; 2001-2012 <a href="http://www.phpmyfaq.de/" target="_blank">phpMyFAQ Team</a>
+                Proudly powered by <strong>Maria Rudko </strong>
             </p>
         </div>
     </div>

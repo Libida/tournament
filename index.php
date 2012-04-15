@@ -290,7 +290,7 @@ if (!is_null($id)) {
     $metaDescription = $faq->getRecordPreview($id);
 } else {
     $id              = '';
-    $title           = ' -  powered by phpMyFAQ ' . $faqconfig->get('main.currentVersion');
+    $title           = ' -  ' . $faqconfig->get('main.metaDescription');
     $keywords        = '';
     $metaDescription = $faqconfig->get('main.metaDescription');
 }
@@ -300,7 +300,7 @@ if (!is_null($id)) {
 //
 $solutionId = PMF_Filter::filterInput(INPUT_GET, 'solution_id', FILTER_VALIDATE_INT);
 if (! is_null($solutionId)) {
-    $title    = ' -  powered by phpMyFAQ ' . $faqconfig->get('main.currentVersion');
+    $title    = ' -  ' . $faqconfig->get('main.metaDescription');
     $keywords = '';
     $faqData  = $faq->getIdFromSolutionId($solutionId);
     if (is_array($faqData)) {
@@ -456,8 +456,7 @@ $tplMainPage = array(
                              $plr->getMsg('plmsgGuestOnline', $usersOnLine[0]) .
                              $plr->getMsg('plmsgRegisteredOnline',$usersOnLine[1]),
     'stickyRecordsHeader' => $PMF_LANG['stickyRecordsHeader'],
-    'copyright'           => 'powered by <a href="http://www.phpmyfaq.de" target="_blank">phpMyFAQ</a> ' . 
-                             $faqconfig->get('main.currentVersion'),
+    'copyright'           => 'powered by <a href="mailto: myr-kat@bk.ru" target="_blank">Maria Rudko</a> ',
     'registerUser'        => '<a href="?action=register">' . $PMF_LANG['msgRegistration'] . '</a>',
     'sendPassword'        => '<a href="./admin/password.php">' . $PMF_LANG['lostPassword'] . '</a>'
 );

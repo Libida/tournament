@@ -66,7 +66,7 @@ $refreshTime = (PMF_SESSION_ID_EXPIRES - PMF_SESSION_ID_REFRESH) * 60;
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>phpMyFAQ - "Welcome to the real world."</title>
+    <title></title>
 
     <meta name="description" content="Only Chuck Norris can divide by zero.">
     <meta name="author" content="phpMyFAQ Team">

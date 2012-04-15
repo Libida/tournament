@@ -134,11 +134,10 @@ body {
   background-color: #ffffff;
 }
 a {
-  color: #cb3a25;
+  color: #FFD200;
   text-decoration: none;
 }
 a:hover {
-  color: #8a2819;
   text-decoration: underline;
 }
 .row {
@@ -3536,6 +3535,9 @@ body {
 #main .categories {
   padding: 8px 0;
   font-size: 15px;
+}
+#main .categories a{
+  color: #333333;
 }
 #main .search-box form {
   margin-bottom: 5px;
