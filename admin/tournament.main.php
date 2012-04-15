@@ -176,145 +176,33 @@ if ($permission['edittourn']) {
         }
     }
 
-    // Lists all categories
-    $lang = PMF_Filter::filterInput(INPUT_POST, 'lang', FILTER_SANITIZE_STRING, $LANGCODE);
-
     // If we changed the category tree, unset the object
-    if (isset($category)) {
-        unset($category);
+    if (isset($tournament)) {
+        unset($tournament);
     }
-    $category = new PMF_Category($current_admin_user, $current_admin_groups, false);
-    $category->getMissingCategories();
-    $category->buildTree();
+    $tournament = new PMF_Tournament();
 
-    $open = $lastCatId = 0;
     print '<ul>';
-    foreach ($category->catTree as $id => $cat) {
+    foreach ($tournament->getAllTournaments() as $tourn) {
+        print '<li>';
+        printf("<strong>%s</strong> ", $tourn->name);
 
-        $indent = '';
-        for ($i = 0; $i < $cat['indent']; $i++) {
-            $indent .= '&nbsp;&nbsp;&nbsp;';
-        }
-
-        // Category translated in this language?
-        if ($cat['lang'] == $lang) {
-            $categoryName = $cat['name'];
-        } else {
-            $categoryName = $cat['name'] . ' (' . $languageCodes[strtoupper($cat['lang'])] . ')';
-        }
-
-        $level     = $cat['level'];
-        $leveldiff = $open - $level;
-
-        if ($leveldiff > 1) {
-            print '</li>';
-            for ($i = $leveldiff; $i > 1; $i--) {
-                printf(
-                    "\n%s</ul>\n%s</li>\n</div>\n",
-                    str_repeat("\t", $level + $i + 1),
-                    str_repeat("\t", $level + $i)
-                );
-            }
-        }
-
-        if ($level < $open) {
-            if (($level - $open) == -1) {
-                print '</li>';
-            }
-            print "\n".str_repeat("\t", $level + 2)."</ul>\n".str_repeat("\t", $level + 1)."</li>\n";
-        } elseif ($level == $open && $id != 0) {
-            print "</li>\n";
-        }
-
-        if ($level > $open) {
-            printf('<div id="div_%d" style="display: none;">', $lastCatId);
-            printf("\n%s<ul>\n%s<li>",
-                str_repeat("\t", $level + 1),
-                str_repeat("\t", $level + 1));
-        } else {
-            print str_repeat("\t", $level + 1)."<li>";
-        }
-
-        if (count($category->getChildren($cat['id'])) != 0) {
-            // Show name and icon for expand the sub-categories
-            printf(
-                "<strong><a href=\"javascript:;\" onclick=\"toggleFieldset('%d');\">%s</a></strong> ",
-                $cat['id'],
-                $categoryName
-            );
-        } else {
-            // Show just the name
-            printf("<strong>%s</strong> ", $categoryName);
-        }
-
-        if ($cat["lang"] == $lang) {
-            // add sub category (if current language)
-            printf('
-            <a href="?action=addcategory&amp;cat=%s&amp;lang=%s"><img src="images/add.png" width="16" height="16" alt="%s" title="%s" border="0" /></a>&nbsp;',
-                $cat['id'],
-                $cat['lang'],
-                $PMF_LANG['ad_quick_category'],
-                $PMF_LANG['ad_quick_category']
-            );
-
-            // rename (sub) category (if current language)
-            printf('
-               <a href="?action=editcategory&amp;cat=%s"><img src="images/edit.png" width="16" height="16" border="0" title="%s" alt="%s" /></a>&nbsp;',
-                $cat['id'],
-                $PMF_LANG['ad_kateg_rename'],
-                $PMF_LANG['ad_kateg_rename']
-            );
-        }
-
-        // translate category (always)
-        printf(
-            '<a href="?action=translatecategory&amp;cat=%s"><img src="images/translate.png" width="16" height="16" border="0" title="%s" alt="%s" /></a>&nbsp;',
-            $cat['id'],
-            $PMF_LANG['ad_categ_translate'],
-            $PMF_LANG['ad_categ_translate']
+        printf('<a href="?action=edittournament&amp;tourn=%s"><img src="images/edit.png" width="16" height="16" border="0" title="%s" alt="%s" /></a>&nbsp;',
+            $tourn->id,
+            $PMF_LANG['ad_kateg_rename'],
+            $PMF_LANG['ad_kateg_rename']
         );
 
-        // delete (sub) category (if current language)
-        if (count($category->getChildren($cat['id'])) == 0 && $cat["lang"] == $lang) {
-            printf(
-                '<a href="?action=deletecategory&amp;cat=%s&amp;catlang=%s"><img src="images/delete.png" width="16" height="16" alt="%s" title="%s" border="0" /></a>&nbsp;',
-                $cat['id'],
-                $cat['lang'],
-                $PMF_LANG['ad_categ_delete'],
-                $PMF_LANG['ad_categ_delete']
-            );
-        }
 
-        if ($cat["lang"] == $lang) {
-            // cut category (if current language)
-            printf(
-                '<a href="?action=cutcategory&amp;cat=%s"><img src="images/cut.png" width="16" height="16" alt="%s" border="0" title="%s" /></a>&nbsp;',
-                $cat['id'],
-                $PMF_LANG['ad_categ_cut'],
-                $PMF_LANG['ad_categ_cut']
-            );
-
-            if ($category->numParent($cat['parent_id']) > 1) {
-                // move category (if current language) AND more than 1 category at the same level)
-                printf(
-                    '<a href="?action=movecategory&amp;cat=%s&amp;parent_id=%s"><img src="images/move.gif" width="16" height="16" alt="%s" border="0" title="%s" /></a>',
-                    $cat['id'],
-                    $cat['parent_id'],
-                    $PMF_LANG['ad_categ_move'],
-                    $PMF_LANG['ad_categ_move']
-                );
-            }
-        }
-
-        $open      = $level;
-        $lastCatId = $cat['id'];
+        printf('<a href="?action=deletetournament&amp;tourn=%s"><img src="images/delete.png" width="16" height="16" alt="%s" title="%s" border="0" /></a>&nbsp;',
+            $tourn->id,
+            $PMF_LANG['ad_categ_delete'],
+            $PMF_LANG['ad_categ_delete']
+        );
+        print '</li>';
     }
 
-    if ($open > 0) {
-        print str_repeat("</li>\n\t</ul>\n\t", $open);
-    }
-
-    print "</li>\n</ul>";
+    print '</ul>';
 } else {
     print $PMF_LANG['err_NotAuth'];
 }

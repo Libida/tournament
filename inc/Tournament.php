@@ -42,4 +42,11 @@ class PMF_Tournament
 
         return $id;
     }
+
+    public static  function getAllTournaments()
+    {
+        $sql = sprintf("SELECT id, name, description FROM %st_tournaments", SQLPREFIX);
+        $result = $this->db->query($sql);
+        return $this->db->fetchAll($result);
+    }
 }
