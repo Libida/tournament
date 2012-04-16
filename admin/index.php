@@ -367,8 +367,10 @@ if (isset($auth) && in_array(true, $permission)) {
             case "attachments":             require_once "att.main.php"; break;
             //tournaments
             case 'savetournament':
+            case 'updatetournament':
             case 'tournament':              require_once 'tournament.main.php'; break;
             case 'addtournament':           require_once 'tournament.add.php'; break;
+            case 'edittournament':          require_once 'tournament.edit.php'; break;
 
             default:                        print "Error"; break;
         }

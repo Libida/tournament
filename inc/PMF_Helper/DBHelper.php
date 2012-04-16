@@ -15,13 +15,13 @@ class PMF_DB_Helper
 
         $id = PMF_Db::getInstance()->nextId(SQLPREFIX . $table_name, 'id');
 
-        $query = "INSERT INTO " . SQLPREFIX . $table_name . " VALUES (" . $id;
+        $sql = "INSERT INTO " . SQLPREFIX . $table_name . " VALUES (" . $id;
         foreach ($data as $value) {
-            $query .= ", '" . $value . "'";
+            $sql .= ", '" . $value . "'";
         }
-        $query .= ");";
+        $sql .= ");";
 
-        PMF_Db::getInstance()->query($query);
+        PMF_Db::getInstance()->query($sql);
 
         return $id;
     }
@@ -33,4 +33,25 @@ class PMF_DB_Helper
         return PMF_Db::getInstance()->fetchAll($result);
     }
 
+    public static function getById($table_name, $id)
+    {
+        $sql = "SELECT * FROM " . SQLPREFIX . $table_name . " WHERE id = " . $id;
+        $result = PMF_Db::getInstance()->query($sql);
+        return PMF_Db::getInstance()->fetchObject($result);
+    }
+
+    public static function updateItem($table_name, $id, $data)
+    {
+        $sql = "UPDATE " . $table_name . " SET";
+        $i = 0;
+        foreach ($data as $column_name => $new_value) {
+            $sql .= " " . $column_name . "= '" . $new_value . "'";
+            if ($i++ != count($data) - 1) {
+                $sql .= ",";
+            }
+        }
+        $sql .= " WHERE id = " . $id;
+
+        PMF_Db::getInstance()->query($sql);
+    }
 }

@@ -1186,4 +1186,7 @@ $PMF_LANG['ad_menu_tourn_edit'] = 'Tournaments';
 $PMF_LANG['ad_tourn_new'] = 'Create new tornament';
 $PMF_LANG['ad_tourn_owner'] = 'Tournament owner';
 $PMF_LANG['ad_tourn_added'] = 'Tournament created.';
+$PMF_LANG['ad_tournedit_header'] = 'Edit tournament';
+$PMF_LANG['ad_tournedit_title'] = 'Title';
+$PMF_LANG['ad_tournedit_desc'] = 'Description';
 $PMF_LANG['ad_refresh_captcha'] = 'click here to refresh image';
