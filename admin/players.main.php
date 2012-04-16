@@ -6,7 +6,7 @@ if (!defined('IS_VALID_PHPMYFAQ')) {
 }
 ?>
 <header>
-    <h2><?php print $PMF_LANG['ad_menu_tourn_edit']; ?></h2>
+    <h2><?php print $PMF_LANG['ad_menu_players']; ?></h2>
 </header>
 <ul>
     <li><a href="?action=addplayer"><?php print $PMF_LANG['ad_menu_add_player']; ?></a></li>
@@ -16,7 +16,17 @@ if (!defined('IS_VALID_PHPMYFAQ')) {
 if ($permission['editplayer']) {
 
     if ($action == 'saveplayer') {
-        print PMF_Filter::filterInput(INPUT_POST, 'country', FILTER_SANITIZE_STRING);
+        $player_data = array(
+            PMF_Filter::filterInput(INPUT_POST, 'first_name', FILTER_SANITIZE_STRING),
+            PMF_Filter::filterInput(INPUT_POST, 'last_name', FILTER_SANITIZE_STRING),
+            PMF_Filter::filterInput(INPUT_POST, 'country', FILTER_SANITIZE_STRING),
+            PMF_Filter::filterInput(INPUT_POST, 'birth_year', FILTER_SANITIZE_STRING),
+            PMF_Filter::filterInput(INPUT_POST, 'gender', FILTER_SANITIZE_STRING),
+            PMF_Filter::filterInput(INPUT_POST, 'title', FILTER_SANITIZE_STRING),
+            PMF_Filter::filterInput(INPUT_POST, 'rating', FILTER_SANITIZE_STRING),
+            PMF_Filter::filterInput(INPUT_POST, 'category', FILTER_SANITIZE_STRING),
+            PMF_Filter::filterInput(INPUT_POST, 'degree', FILTER_SANITIZE_STRING)
+        );
     }
 
     if ($action == 'updatetournament') {
