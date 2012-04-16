@@ -154,8 +154,8 @@ switch ($action) {
         break;
     default:
         $secLevelHeader   = $PMF_LANG['admin_mainmenu_home'];
-        $secLevelEntries .= $adminHelper->addMenuEntry('addcateg+editcateg+delcateg', 'category', 'ad_menu_categ_edit');
         $secLevelEntries .= $adminHelper->addMenuEntry('addtourn+edittourn+deltourn', 'tournament', 'ad_menu_tourn_edit');
+        $secLevelEntries .= $adminHelper->addMenuEntry('addplayer+editplayer+delplayer', 'players', 'ad_menu_players');
         $secLevelEntries .= $adminHelper->addMenuEntry('addbt', 'editentry', 'ad_quick_record');
         $secLevelEntries .= $adminHelper->addMenuEntry('editbt+delbt', 'view', 'ad_menu_entry_edit');
         $secLevelEntries .= $adminHelper->addMenuEntry('delquestion', 'question', 'ad_menu_open');

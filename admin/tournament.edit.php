@@ -35,7 +35,7 @@ if ($permission['edittourn']) {
 
 
     <div class="form-actions">
-        <input class="btn-primary" type="submit" name="submit" value="<?php print $PMF_LANG['ad_categ_updatecateg']; ?>" />
+        <input class="btn-primary" type="submit" name="submit" value="<?php print $PMF_LANG['ad_tournedit_submit']; ?>" />
     </div>
 </form>
 <?php

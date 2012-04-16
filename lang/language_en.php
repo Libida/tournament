@@ -1189,4 +1189,21 @@ $PMF_LANG['ad_tourn_added'] = 'Tournament created.';
 $PMF_LANG['ad_tournedit_header'] = 'Edit tournament';
 $PMF_LANG['ad_tournedit_title'] = 'Title';
 $PMF_LANG['ad_tournedit_desc'] = 'Description';
+$PMF_LANG['ad_tournedit_submit'] = 'Update tournament';
+
 $PMF_LANG['ad_refresh_captcha'] = 'click here to refresh image';
+
+$PMF_LANG['ad_menu_players'] = 'Players';
+$PMF_LANG['ad_menu_add_player'] = 'Add player';
+$PMF_LANG['ad_add_player_header'] = 'Add a new player';
+$PMF_LANG['ad_player_first_name'] = 'First name';
+$PMF_LANG['ad_player_second_name'] = 'Last name';
+$PMF_LANG['ad_player_country'] = 'Country';
+$PMF_LANG['ad_player_birth_year'] = 'Year of birth';
+$PMF_LANG['ad_player_gender'] = 'Gender';
+$PMF_LANG['ad_player_male'] = 'Male';
+$PMF_LANG['ad_player_female'] = 'Female';
+$PMF_LANG['ad_player_title'] = 'Title';
+$PMF_LANG['ad_player_rating'] = 'Rating';
+$PMF_LANG['ad_player_category'] = 'Category';
+$PMF_LANG['ad_player_degree'] = 'Degree';

@@ -10,15 +10,8 @@ if (!defined('IS_VALID_PHPMYFAQ')) {
 </header>
 <ul>
     <li><a href="?action=addtournament"><?php print $PMF_LANG['ad_kateg_add']; ?></a></li>
-    <li><a href="?action=showtournament"><?php print $PMF_LANG['ad_categ_show'];?></a></li>
 </ul>
 <?php
-
-$csrfToken = PMF_Filter::filterInput(INPUT_POST, 'csrf', FILTER_SANITIZE_STRING);
-if ('category' != $action && 'content' != $action &&
-    (!isset($_SESSION['phpmyfaq_csrf_token']) || $_SESSION['phpmyfaq_csrf_token'] !== $csrfToken)) {
-    $permission['editcateg'] = false;
-}
 
 if ($permission['edittourn']) {
 
