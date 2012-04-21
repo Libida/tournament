@@ -1094,7 +1094,7 @@ $PMF_LANG['Puerto Rico'] = 'Беларусь';
 $PMF_LANG['Qatar'] = 'Беларусь';
 $PMF_LANG['Reunion'] = 'Беларусь';
 $PMF_LANG['Romainia'] = 'Беларусь';
-$PMF_LANG['Russia'] = 'Беларусь';
+$PMF_LANG['Russia'] = 'Россия';
 $PMF_LANG['Rwanda'] = 'Беларусь';
 $PMF_LANG['Saint Helena'] = 'Беларусь';
 $PMF_LANG['Saint Kitts and Nevis'] = 'Беларусь';
@@ -1161,7 +1161,7 @@ $PMF_LANG['Serbia'] = 'Сербия';
 $PMF_LANG['Albania'] = 'Албания';
 
 
-$PMF_LANG['none'] = 'отсутствует';
+$PMF_LANG['none'] = '-';
 $PMF_LANG['ad_menu_tourn_edit'] = 'Турниры';
 $PMF_LANG['ad_tourn_new'] = 'Создание нового турнира';
 $PMF_LANG['ad_tourn_owner'] = 'Владелец турнира';

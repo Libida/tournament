@@ -48,19 +48,37 @@ if ($permission['editplayer']) {
         print '<tr>';
         printf("<td>%s</td>", $player->last_name);
         printf("<td>%s</td>", $player->first_name);
+
         $country_title = $player->country;
         if (isset($PMF_LANG[$country_title])) {
             $country_title = $PMF_LANG[$country_title];
         }
         printf("<td><img src='../images/countries_32/%s.png' title='%s'></td>", $player->country, $country_title);
+
         printf("<td>%s</td>", $player->birth_year);
-        printf("<td>%s</td>", $player->title);
+
+        $title = $player->title;
+        if (isset($PMF_LANG[$title])) {
+            $title = $PMF_LANG[$title];
+        }
+        printf("<td>%s</td>", $title);
+
         printf("<td>%s</td>", $player->rating);
-        printf("<td>%s</td>", $player->category);
-        printf("<td>%s</td>", $player->degree);
+
+        $category = $player->category;
+        if (isset($PMF_LANG[$category])) {
+            $category = $PMF_LANG[$category];
+        }
+        printf("<td>%s</td>", $category);
+
+        $degree = $player->degree;
+        if (isset($PMF_LANG[$degree])) {
+            $degree = $PMF_LANG[$degree];
+        }
+        printf("<td>%s</td>", $degree);
         print '</tr>';
     }
-print '</table>';
+    print '</table>';
 
 } else {
     print $PMF_LANG['err_NotAuth'];
