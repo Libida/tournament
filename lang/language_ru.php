@@ -1170,6 +1170,7 @@ $PMF_LANG['ad_tournedit_header'] = 'Редактирование турнира'
 $PMF_LANG['ad_tournedit_title'] = 'Название';
 $PMF_LANG['ad_tournedit_desc'] = 'Описание';
 $PMF_LANG['ad_tournedit_submit'] = 'Обновить турнир';
+$PMF_LANG['ad_tournedit_add_players'] = 'Добавить игроков';
 
 $PMF_LANG['ad_refresh_captcha'] = 'нажмите здесь, чтобы обновить изображение';
 

@@ -35,50 +35,8 @@ if ($permission['editplayer']) {
         }
     }
 
-    print '<table border="1">';
-    printf("<th>%s</th>", $PMF_LANG['ad_player_second_name']);
-    printf("<th>%s</th>", $PMF_LANG['ad_player_first_name']);
-    printf("<th>%s</th>", $PMF_LANG['ad_player_country']);
-    printf("<th>%s</th>", $PMF_LANG['ad_player_birth_year']);
-    printf("<th>%s</th>", $PMF_LANG['ad_player_title']);
-    printf("<th>%s</th>", $PMF_LANG['ad_player_rating']);
-    printf("<th>%s</th>", $PMF_LANG['ad_player_category']);
-    printf("<th>%s</th>", $PMF_LANG['ad_player_degree']);
-    foreach (PMF_Player::getAllPlayers() as $player) {
-        print '<tr>';
-        printf("<td>%s</td>", $player->last_name);
-        printf("<td>%s</td>", $player->first_name);
-
-        $country_title = $player->country;
-        if (isset($PMF_LANG[$country_title])) {
-            $country_title = $PMF_LANG[$country_title];
-        }
-        printf("<td><img src='../images/countries_32/%s.png' title='%s'></td>", $player->country, $country_title);
-
-        printf("<td>%s</td>", $player->birth_year);
-
-        $title = $player->title;
-        if (isset($PMF_LANG[$title])) {
-            $title = $PMF_LANG[$title];
-        }
-        printf("<td>%s</td>", $title);
-
-        printf("<td>%s</td>", $player->rating);
-
-        $category = $player->category;
-        if (isset($PMF_LANG[$category])) {
-            $category = $PMF_LANG[$category];
-        }
-        printf("<td>%s</td>", $category);
-
-        $degree = $player->degree;
-        if (isset($PMF_LANG[$degree])) {
-            $degree = $PMF_LANG[$degree];
-        }
-        printf("<td>%s</td>", $degree);
-        print '</tr>';
-    }
-    print '</table>';
+    $players = PMF_Player::getAllPlayers();
+    require '../common/players.table.php';
 
 } else {
     print $PMF_LANG['err_NotAuth'];

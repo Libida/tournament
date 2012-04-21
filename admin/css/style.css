@@ -1064,7 +1064,7 @@ legend + .control-group {
     display: inline-block;
 }
 .form-horizontal .form-actions {
-  padding-left: 160px;
+  padding-left: 0;
 }
 table {
   max-width: 100%;

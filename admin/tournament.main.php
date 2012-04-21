@@ -43,14 +43,7 @@ if ($permission['edittourn']) {
     print '<ul>';
     foreach (PMF_Tournament::getAllTournaments() as $tourn) {
         print '<li>';
-        printf("<strong>%s</strong> ", $tourn->name);
-
-        printf('<a href="?action=edittournament&amp;tourn=%s"><img src="images/edit.png" width="16" height="16" border="0" title="%s" alt="%s" /></a>&nbsp;',
-            $tourn->id,
-            $PMF_LANG['ad_kateg_rename'],
-            $PMF_LANG['ad_kateg_rename']
-        );
-
+        printf("<a href='?action=edittournament&amp;tourn=%s' style='margin-right: 7px;'>%s</a>", $tourn->id, $tourn->name);
 
         printf('<a href="?action=deletetournament&amp;tourn=%s"><img src="images/delete.png" width="16" height="16" alt="%s" title="%s" border="0" /></a>&nbsp;',
             $tourn->id,
