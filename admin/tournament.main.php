@@ -27,7 +27,7 @@ if ($permission['edittourn']) {
         if ($tournament_id) {
             printf('<p class="alert alert-success">%s</p>', $PMF_LANG['ad_tourn_added']);
         } else {
-            printf('<p class="alert alert-error">%s</p>', $db->error());
+            printf('<p class="alert alert-error">%s</p>', PMF_Db::getInstance()->error());
         }
     }
 

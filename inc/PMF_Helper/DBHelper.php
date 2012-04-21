@@ -6,16 +6,15 @@ class PMF_DB_Helper
     {
     }
 
-
     public static function createDBInstance($table_name, Array $data)
     {
         if (empty($table_name) || !is_array($data)) {
             return false;
         }
 
-        $id = PMF_Db::getInstance()->nextId(SQLPREFIX . $table_name, 'id');
+        $id = PMF_Db::getInstance()->nextId($table_name, 'id');
 
-        $sql = "INSERT INTO " . SQLPREFIX . $table_name . " VALUES (" . $id;
+        $sql = "INSERT INTO " . $table_name . " VALUES (" . $id;
         foreach ($data as $value) {
             $sql .= ", '" . $value . "'";
         }
@@ -28,14 +27,14 @@ class PMF_DB_Helper
 
     public static function getAllValues($table_name)
     {
-        $sql = "SELECT * FROM " . SQLPREFIX . $table_name;
+        $sql = "SELECT * FROM " . $table_name;
         $result = PMF_Db::getInstance()->query($sql);
         return PMF_Db::getInstance()->fetchAll($result);
     }
 
     public static function getById($table_name, $id)
     {
-        $sql = "SELECT * FROM " . SQLPREFIX . $table_name . " WHERE id = " . $id;
+        $sql = "SELECT * FROM " . $table_name . " WHERE id = " . $id;
         $result = PMF_Db::getInstance()->query($sql);
         return PMF_Db::getInstance()->fetchObject($result);
     }

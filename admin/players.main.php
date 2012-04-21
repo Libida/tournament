@@ -1,7 +1,7 @@
 <?php
 
 if (!defined('IS_VALID_PHPMYFAQ')) {
-    header('Location: http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['SCRIPT_NAME']));
+    header('Location: http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']));
     exit();
 }
 ?>
@@ -27,38 +27,41 @@ if ($permission['editplayer']) {
             PMF_Filter::filterInput(INPUT_POST, 'category', FILTER_SANITIZE_STRING),
             PMF_Filter::filterInput(INPUT_POST, 'degree', FILTER_SANITIZE_STRING)
         );
+        $player_id = PMF_Player::addPlayer($player_data);
+        if ($player_id) {
+            printf('<p class="alert alert-success">%s</p>', $PMF_LANG['ad_player_added']);
+        } else {
+            printf('<p class="alert alert-error">%s</p>', PMF_Db::getInstance()->error());
+        }
     }
 
-    if ($action == 'updatetournament') {
-        $id = PMF_Filter::filterInput(INPUT_POST, 'id', FILTER_VALIDATE_INT);
-        $tournament_data = array(
-            "name" => PMF_Filter::filterInput(INPUT_POST, 'name', FILTER_SANITIZE_STRING),
-            "description" => PMF_Filter::filterInput(INPUT_POST, 'description', FILTER_SANITIZE_STRING)
-        );
-        PMF_Tournament::updateTournament($id, $tournament_data);
+    print '<table border="1">';
+    printf("<th>%s</th>", $PMF_LANG['ad_player_second_name']);
+    printf("<th>%s</th>", $PMF_LANG['ad_player_first_name']);
+    printf("<th>%s</th>", $PMF_LANG['ad_player_country']);
+    printf("<th>%s</th>", $PMF_LANG['ad_player_birth_year']);
+    printf("<th>%s</th>", $PMF_LANG['ad_player_title']);
+    printf("<th>%s</th>", $PMF_LANG['ad_player_rating']);
+    printf("<th>%s</th>", $PMF_LANG['ad_player_category']);
+    printf("<th>%s</th>", $PMF_LANG['ad_player_degree']);
+    foreach (PMF_Player::getAllPlayers() as $player) {
+        print '<tr>';
+        printf("<td>%s</td>", $player->last_name);
+        printf("<td>%s</td>", $player->first_name);
+        $country_title = $player->country;
+        if (isset($PMF_LANG[$country_title])) {
+            $country_title = $PMF_LANG[$country_title];
+        }
+        printf("<td><img src='../images/countries_32/%s.png' title='%s'></td>", $player->country, $country_title);
+        printf("<td>%s</td>", $player->birth_year);
+        printf("<td>%s</td>", $player->title);
+        printf("<td>%s</td>", $player->rating);
+        printf("<td>%s</td>", $player->category);
+        printf("<td>%s</td>", $player->degree);
+        print '</tr>';
     }
+print '</table>';
 
-    print '<ul>';
-    foreach (PMF_Tournament::getAllTournaments() as $tourn) {
-        print '<li>';
-        printf("<strong>%s</strong> ", $tourn->name);
-
-        printf('<a href="?action=edittournament&amp;tourn=%s"><img src="images/edit.png" width="16" height="16" border="0" title="%s" alt="%s" /></a>&nbsp;',
-            $tourn->id,
-            $PMF_LANG['ad_kateg_rename'],
-            $PMF_LANG['ad_kateg_rename']
-        );
-
-
-        printf('<a href="?action=deletetournament&amp;tourn=%s"><img src="images/delete.png" width="16" height="16" alt="%s" title="%s" border="0" /></a>&nbsp;',
-            $tourn->id,
-            $PMF_LANG['ad_categ_delete'],
-            $PMF_LANG['ad_categ_delete']
-        );
-        print '</li>';
-    }
-
-    print '</ul>';
 } else {
     print $PMF_LANG['err_NotAuth'];
 }

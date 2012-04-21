@@ -911,34 +911,6 @@ $LANG_CONF['security.useSslOnly'] = array(0 => "checkbox", 1 => "Использ�
 
 $PMF_LANG['headerUserControlPanel'] = 'Личный кабинет';
 
-//C&C
-$PMF_LANG['none'] = 'отсутствует';
-$PMF_LANG['ad_menu_tourn_edit'] = 'Турниры';
-$PMF_LANG['ad_tourn_new'] = 'Создание нового турнира';
-$PMF_LANG['ad_tourn_owner'] = 'Владелец турнира';
-$PMF_LANG['ad_tourn_added'] = 'Турнир создан.';
-$PMF_LANG['ad_tournedit_header'] = 'Редактирование турнира';
-$PMF_LANG['ad_tournedit_title'] = 'Название';
-$PMF_LANG['ad_tournedit_desc'] = 'Описание';
-$PMF_LANG['ad_tournedit_submit'] = 'Обновить турнир';
-
-$PMF_LANG['ad_refresh_captcha'] = 'нажмите здесь, чтобы обновить изображение';
-
-$PMF_LANG['ad_menu_players'] = 'Игроки';
-$PMF_LANG['ad_menu_add_player'] = 'Добавить игрока';
-$PMF_LANG['ad_add_player_header'] = 'Добавление нового игрока';
-$PMF_LANG['ad_player_first_name'] = 'Имя';
-$PMF_LANG['ad_player_second_name'] = 'Фамилия';
-$PMF_LANG['ad_player_country'] = 'Страна';
-$PMF_LANG['ad_player_birth_year'] = 'Год рождения';
-$PMF_LANG['ad_player_gender'] = 'Пол';
-$PMF_LANG['ad_player_male'] = 'Мужской';
-$PMF_LANG['ad_player_female'] = 'Женский';
-$PMF_LANG['ad_player_title'] = 'Титул';
-$PMF_LANG['ad_player_rating'] = 'Рейтинг';
-$PMF_LANG['ad_player_category'] = 'Разряд';
-$PMF_LANG['ad_player_degree'] = 'Звание';
-
 //countries
 $PMF_LANG['Afghanistan'] = 'Афганистан';
 $PMF_LANG['UK'] = 'Великобритания';
@@ -1187,3 +1159,34 @@ $PMF_LANG['Zimbabwe'] = 'Зимбабве';
 $PMF_LANG['Montenegro'] = 'Черногория';
 $PMF_LANG['Serbia'] = 'Сербия';
 $PMF_LANG['Albania'] = 'Албания';
+
+
+$PMF_LANG['none'] = 'отсутствует';
+$PMF_LANG['ad_menu_tourn_edit'] = 'Турниры';
+$PMF_LANG['ad_tourn_new'] = 'Создание нового турнира';
+$PMF_LANG['ad_tourn_owner'] = 'Владелец турнира';
+$PMF_LANG['ad_tourn_added'] = 'Турнир создан.';
+$PMF_LANG['ad_tournedit_header'] = 'Редактирование турнира';
+$PMF_LANG['ad_tournedit_title'] = 'Название';
+$PMF_LANG['ad_tournedit_desc'] = 'Описание';
+$PMF_LANG['ad_tournedit_submit'] = 'Обновить турнир';
+
+$PMF_LANG['ad_refresh_captcha'] = 'нажмите здесь, чтобы обновить изображение';
+
+$PMF_LANG['ad_menu_players'] = 'Игроки';
+$PMF_LANG['ad_menu_add_player'] = 'Добавить игрока';
+$PMF_LANG['ad_add_player_header'] = 'Добавление нового игрока';
+$PMF_LANG['ad_player_first_name'] = 'Имя';
+$PMF_LANG['ad_player_second_name'] = 'Фамилия';
+$PMF_LANG['ad_player_country'] = 'Страна';
+$PMF_LANG['ad_player_birth_year'] = 'Год рождения';
+$PMF_LANG['ad_player_gender'] = 'Пол';
+$PMF_LANG['ad_player_male'] = 'Мужской';
+$PMF_LANG['ad_player_female'] = 'Женский';
+$PMF_LANG['ad_player_title'] = 'Титул';
+$PMF_LANG['ad_player_rating'] = 'Рейтинг';
+$PMF_LANG['ad_player_category'] = 'Разряд';
+$PMF_LANG['ad_player_degree'] = 'Звание';
+$PMF_LANG['ad_player_added'] = 'Игрок успешно создан';
+
+
