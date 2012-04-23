@@ -15,7 +15,7 @@ foreach ($players as $player) {
     print '<tr>';
     printf("<td>%s</td>", $player->last_name);
     printf("<td>%s</td>", $player->first_name);
-    printf("<td><img src='../images/countries_32/%s.png' title='%s'></td>", $player->country, $player->country_title);
+    printf("<td><img src='../images/countries/32/%s.png' title='%s'></td>", $player->country, $player->country_title);
     printf("<td>%s</td>", $player->birth_year);
     printf("<td>%s</td>", $player->title);
     printf("<td>%s</td>", $player->rating);

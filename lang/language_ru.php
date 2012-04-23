@@ -1172,6 +1172,11 @@ $PMF_LANG['ad_tournedit_title'] = 'Название';
 $PMF_LANG['ad_tournedit_desc'] = 'Описание';
 $PMF_LANG['ad_tournedit_submit'] = 'Обновить турнир';
 $PMF_LANG['ad_tournedit_add_players'] = 'Добавить игроков';
+$PMF_LANG['ad_tournedit_generate_tours'] = 'Сгенерировать туры';
+
+$PMF_LANG['tour'] = 'Тур';
+$PMF_LANG['game_edit_score'] = 'Изменить счет игры';
+
 
 $PMF_LANG['ad_refresh_captcha'] = 'нажмите здесь, чтобы обновить изображение';
 

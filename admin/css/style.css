@@ -3609,3 +3609,16 @@ footer ul.footer-menu li {
 footer .copyright {
   color: #f2f2f2;
 }
+
+.tours {
+    margin-top: 20px;
+}
+
+.tour {
+    margin-top: 10px;
+    background: #daf5ff;
+    border-radius: 10px;
+}
+.tour header {
+    margin-bottom: 10px;
+}

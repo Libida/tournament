@@ -1191,6 +1191,10 @@ $PMF_LANG['ad_tournedit_title'] = 'Title';
 $PMF_LANG['ad_tournedit_desc'] = 'Description';
 $PMF_LANG['ad_tournedit_submit'] = 'Update tournament';
 $PMF_LANG['ad_tournedit_add_players'] = 'Add players';
+$PMF_LANG['ad_tournedit_generate_tours'] = 'Generate tours';
+
+$PMF_LANG['tour'] = 'Tour';
+$PMF_LANG['game_edit_score'] = 'Edit game score';
 
 $PMF_LANG['ad_refresh_captcha'] = 'click here to refresh image';
 

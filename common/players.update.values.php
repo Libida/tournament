@@ -14,6 +14,6 @@ foreach ($players as $player) {
     }
 
     if (isset($PMF_LANG[$player->degree])) {
-        $degree = $PMF_LANG[$player->degree];
+        $player->degree = $PMF_LANG[$player->degree];
     }
 }

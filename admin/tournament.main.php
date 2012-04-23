@@ -17,13 +17,12 @@ if ($permission['edittourn']) {
 
     if ($action == 'savetournament') {
 
-        $tournament = new PMF_Tournament();
         $tournament_data = array(
             PMF_Filter::filterInput(INPUT_POST, 'name', FILTER_SANITIZE_STRING),
             PMF_Filter::filterInput(INPUT_POST, 'description', FILTER_SANITIZE_STRING)
         );
 
-        $tournament_id = PMF_Tournament::addTournament($tournament_data);
+        $tournament_id = PMF_TournamentService::addTournament($tournament_data);
         if ($tournament_id) {
             printf('<p class="alert alert-success">%s</p>', $PMF_LANG['ad_tourn_added']);
         } else {
@@ -37,11 +36,11 @@ if ($permission['edittourn']) {
             "name" => PMF_Filter::filterInput(INPUT_POST, 'name', FILTER_SANITIZE_STRING),
             "description" => PMF_Filter::filterInput(INPUT_POST, 'description', FILTER_SANITIZE_STRING)
         );
-        PMF_Tournament::updateTournament($id, $tournament_data);
+        PMF_TournamentService::updateTournament($id, $tournament_data);
     }
 
     print '<ul>';
-    foreach (PMF_Tournament::getAllTournaments() as $tourn) {
+    foreach (PMF_TournamentService::getAllTournaments() as $tourn) {
         print '<li>';
         printf("<a href='?action=edittournament&amp;tourn=%s' style='margin-right: 7px;'>%s</a>", $tourn->id, $tourn->name);
 
