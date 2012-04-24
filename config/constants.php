@@ -213,7 +213,10 @@ $allowedVariables = array(
     'thankyou'        => 1,
     'translate'       => 1,
     'ucp'             => 1,
-    'writecomment'    => 1
+    'writecomment'    => 1,
+    'players'         => 1,
+    'tournaments'     => 1,
+    'tournview'       => 1
 );
 
 /**

@@ -32,10 +32,10 @@ if (!is_null($currentCategory) && isset($category->categoryName[$currentCategory
     $parent              = $category->categoryName[$currentCategory]['parent_id'];
     $name                = $category->categoryName[$currentCategory]['name'];
     $categoryDescription = $category->categoryName[$currentCategory]['description'];
-    $records             = $faq->showAllRecords($currentCategory, 
-                                                $faqconfig->get('records.orderby'), 
+    $records             = $faq->showAllRecords($currentCategory,
+                                                $faqconfig->get('records.orderby'),
                                                 $faqconfig->get('records.sortby'));
-    
+
     if (!$records) {
         $subCategory = new PMF_Category($current_user, $current_groups, true);
         $subCategory->transform($currentCategory);

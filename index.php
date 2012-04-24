@@ -522,17 +522,9 @@ if ($faqconfig->get('main.enableRewriteRules')) {
         'opensearch'          => $systemUri . 'opensearch.html');
 } else {
     $tplNavigation = array(
-        "msgSearch"           => '<a href="index.php?'.$sids.'action=search">'.$PMF_LANG["msgAdvancedSearch"].'</a>',
-        "msgAddContent"       => '<a href="index.php?'.$sids.'action=add&cat='.$cat.'">'.$PMF_LANG["msgAddContent"].'</a>',
-        "msgQuestion"         => '<a href="index.php?'.$sids.'action=ask&category_id='.$cat.'">'.$PMF_LANG["msgQuestion"].'</a>',
-        "msgOpenQuestions"    => '<a href="index.php?'.$sids.'action=open">'.$PMF_LANG["msgOpenQuestions"].'</a>',
-        "msgHelp"             => '<a href="index.php?'.$sids.'action=help">'.$PMF_LANG["msgHelp"].'</a>',
-        "msgContact"          => '<a href="index.php?'.$sids.'action=contact">'.$PMF_LANG["msgContact"].'</a>',
-        "allCategories"       => '<a href="index.php?'.$sids.'action=show">'.$PMF_LANG["msgShowAllCategories"].'</a>',
-        "backToHome"          => '<a href="index.php?'.$sids.'">'.$PMF_LANG["msgHome"].'</a>',
-        'showInstantResponse' => '<a href="index.php?'.$sids.'action=instantresponse">'.$PMF_LANG['msgInstantResponse'].'</a>',
-        'showSitemap'         => '<a href="index.php?'.$sids.'action=sitemap&amp;lang='.$LANGCODE.'">'.$PMF_LANG['msgSitemap'].'</a>',
-        'opensearch'          => $systemUri . 'opensearch.php');
+        "news" => '<a href="index.php">' . $PMF_LANG["msgNews"] . '</a>',
+        "players" => '<a href="index.php?action=players">' . $PMF_LANG["ad_menu_players"] . '</a>',
+        "tournaments" => '<a href="index.php?action=tournaments">' . $PMF_LANG["ad_menu_tourn_edit"] . '</a>');
 }
 
 $tplNavigation['faqHome']             = $systemUri;

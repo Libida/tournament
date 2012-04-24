@@ -7,10 +7,10 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    
+
     <title>{title}</title>
     <base href="{baseHref}" />
-    
+
     <meta name="description" content="{metaDescription}">
     <meta name="author" content="{metaPublisher}">
     <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
@@ -34,7 +34,7 @@
 
     <link rel="shortcut icon" href="template/{tplSetName}/favicon.ico">
     <link rel="apple-touch-icon" href="template/{tplSetName}/apple-touch-icon.png">
-    
+
     <link rel="alternate" title="News RSS Feed" type="application/rss+xml" href="feed/news/rss.php">
     <link rel="alternate" title="TopTen RSS Feed" type="application/rss+xml" href="feed/topten/rss.php">
     <link rel="alternate" title="Latest FAQ Records RSS Feed" type="application/rss+xml" href="feed/latest/rss.php">
@@ -85,15 +85,14 @@
 <section id="main" class="clearfix">
     <div id="sideBar">
                     <ul class="nav nav-list categories">
-                        <li class="home">{backToHome}</li>
-                        <li>{allCategories}</li>
-                        {showCategories}
+                        <li>{news}</li>
+                        <li>{players}</li>
+                        <li>{tournaments}</li>
                     </ul>
                <p id="statistics">{userOnline}</p>
     </div>
 
             <div class="span6 main-content">
-
                 {writeContent}
             </div>
 </section>

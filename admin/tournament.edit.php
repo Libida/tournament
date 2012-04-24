@@ -27,14 +27,14 @@
         $("#generateTours").live('click', function() {
             submitGenerateTours();
         });
-        
+
         $("#closeTour").live('click', function() {
             submitCloseTour();
         });
     });
 </script>
 
-<?php
+    <?php
 
 
 if (!defined('IS_VALID_PHPMYFAQ')) {
@@ -44,7 +44,7 @@ if (!defined('IS_VALID_PHPMYFAQ')) {
 
 if ($permission['edittourn']) {
     $tournament_id = PMF_Filter::filterInput(INPUT_GET, 'tourn', FILTER_VALIDATE_INT, 0);
-    $tournament_started = $tournament->started != 0;
+
 
     $add_player_id = PMF_Filter::filterInput(INPUT_GET, 'addplayer', FILTER_VALIDATE_INT, 0);
     $remove_player_id = PMF_Filter::filterInput(INPUT_GET, 'removeplayer', FILTER_VALIDATE_INT, 0);
@@ -59,16 +59,16 @@ if ($permission['edittourn']) {
         PMF_TournamentService::removePlayerFromTournament($tournament_id, $remove_player_id);
     }
 
-    if ($winners_count && !$tournament_started) {
-        PMF_TournamentService::generateTours($tournament_id, $winners_count);
-        $tournament_started = true;
-    }
-
     if ($tour_id_to_close != 0) {
         PMF_TournamentService::closeTour($tournament_id, $tour_id_to_close);
     }
 
     $tournament = PMF_TournamentService::getById($tournament_id);
+    $tournament_started = $tournament->started != 0;
+    if ($winners_count && !$tournament_started) {
+        PMF_TournamentService::generateTours($tournament_id, $winners_count);
+        $tournament_started = true;
+    }
     ?>
 
 <header>
@@ -178,29 +178,9 @@ if ($permission['edittourn']) {
         $participants = PMF_Player::getAllParticipantsSorted($tournament_id);
         print '<section class="standings">';
         printf('<header><h3>%s</h3></header>', $PMF_LANG['ad_standings']);
-        print '<table border="1">';
-        printf('<th style="width: 30px;">%s</th>', '№');
-        printf('<th>%s</th>', $PMF_LANG['ad_standings_name']);
-        printf('<th>%s</th>', $PMF_LANG['ad_player_country']);
-        printf('<th>%s</th>', $PMF_LANG['ad_standings_points']);
-        $winners_count = $tournament->winners_count;
-        $i = 1;
-        foreach ($participants as $participant) {
-            print '<tr>';
-            if ($i <= $winners_count) {
-                printf("<td class='winner'><strong>%d</strong></td>", $i);
-                printf("<td class='winner'><strong>%s</strong></td>", $participant->name);
-            } else {
-                printf("<td>%d</td>", $i);
-                printf("<td>%s</td>", $participant->name);
-            }
-            $i++;
-            printf("<td style='text-align: center;'><img src='../images/countries/16/%s.png' title='%s'></td>",
-                $participant->player->country, $participant->player->country_title);
-            printf("<td style='text-align: center;'>%s</td>", $participant->rating);
-            print '</tr>';
-        }
-        print '</table>';
+        print PMF_TournamentRenderer::renderTournamentStandings($tournament_id, "../images", array($PMF_LANG['ad_standings_name'],
+                                                                                                  $PMF_LANG['ad_player_country'],
+                                                                                                  $PMF_LANG['ad_standings_points']));
         print '</section>';
     }
     ?>
