@@ -53,14 +53,11 @@
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container-fluid">
-            <h1 class="brand" title="{header}" href="{faqHome}">{header}</h1>
+            <form action="{writeLangAdress}" method="post" class="pull-right">
+                {switchLanguages}
+                <input type="hidden" name="action" value="" />
+            </form>
             <nav class="nav-collapse">
-                <ul class="nav">
-                    <li class="{activeQuickfind}">{showInstantResponse}</li>
-                    <li class="{activeAddContent}">{msgAddContent}</li>
-                    <li class="{activeAddQuestion}">{msgQuestion}</li>
-                    <li class="{activeOpenQuestions}">{msgOpenQuestions}</li>
-                </ul>
                 <ul class="nav pull-right">
                     [notLoggedIn]
                     <li class="{activeRegister}">{msgRegisterUser}</li>
@@ -86,88 +83,24 @@
     </div>
 </div>
 
-<section id="main">
-    <div class="container-fluid">
-        <div class="row-fluid">
-            <div class="span3">
-                <div class="well categories">
-                    <ul class="nav nav-list">
+<section id="main" class="clearfix">
+    <div id="sideBar">
+                    <ul class="nav nav-list categories">
                         <li class="home">{backToHome}</li>
                         <li>{allCategories}</li>
-                        <li class="divider-horizontal"></li>
                         {showCategories}
                     </ul>
-                </div>
-                {userOnline}
-            </div>
+               <p id="statistics">{userOnline}</p>
+    </div>
 
             <div class="span6 main-content">
-                [globalSearchBox]
-                <section class="well search-box">
-                    <form id="search" action="{writeSendAdress}" method="get" class="form-search">
-                        <input type="hidden" name="searchcategory" value="{categoryId}" />
-                        <input type="hidden" name="action" value="search" />
-                        <input type="search" name="search" id="searchfield" size="30" placeholder="{searchBox} ..."
-                               class="input-xlarge search-query" />
-                        <input type="submit" name="submit" value="{searchBox}" />
-                    </form>
-                    {msgSearch}
-                </section>
-                [/globalSearchBox]
-                [globalSuggestBox]
-                <section class="well search-box">
-                    <form id="instantform" action="?action=instantresponse" method="post" class="form-search">
-                        <input type="hidden" name="ajaxlanguage" id="ajaxlanguage" value="{ajaxlanguage}" />
-                        <input type="search" name="search" id="instantfield" class="input-xxlarge search-query" value=""
-                               placeholder="{msgDescriptionInstantResponse}" onfocus="autoSuggest(); return false;" />
-                    </form>
-                    {msgSearch}
-                </section>
-                [/globalSuggestBox]
 
                 {writeContent}
             </div>
-
-            <div class="span3">
-                {rightBox}
-                <section class="well">
-                    <header>
-                        <h3>{stickyRecordsHeader}</h3>
-                    </header>
-                    <ul>
-                        [stickyRecordsList]
-                        <li><a href="{stickyRecordsUrl}">{stickyRecordsTitle}</a></li>
-                        [/stickyRecordsList]
-                    </ul>
-                </section>
-            </div>
-
-        </div>
-    </div>
 </section>
 
 <footer>
-    <div class="container-fluid">
-        <div class="row-fluid">
-            <div class="span6">
-                <ul class="footer-menu">
-                    <li>{showSitemap}</li>
-                    <li>{msgContact}</li>
-                </ul>
-            </div>
-            <div class="span6">
-                <form action="{writeLangAdress}" method="post" class="pull-right">
-                {switchLanguages}
-                    <input type="hidden" name="action" value="" />
-                </form>
-            </div>
-        </div>
-        <div class="row">
-            <p class="copyright pull-right">
-                {copyright}
-            </p>
-        </div>
-    </div>
+    <p>Copyright &copy; 2012 by <a target="_blank" href="mailto: myr-kat@bk.ru">Maryia Rudzko</a></p>
 </footer>
 
 </body>
