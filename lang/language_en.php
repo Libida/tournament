@@ -1223,3 +1223,4 @@ $PMF_LANG['ad_player_rating'] = 'Rating';
 $PMF_LANG['ad_player_category'] = 'Category';
 $PMF_LANG['ad_player_degree'] = 'Degree';
 $PMF_LANG['ad_player_added'] = 'The player has been created';
+$PMF_LANG['site_name'] = "Checker's University Championship";

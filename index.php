@@ -433,6 +433,7 @@ $keywords = implode(',', $keywordsArray);
 
 $tplMainPage = array(
     'msgLoginUser'        => $PMF_LANG['msgLoginUser'],
+    'siteName'            => $PMF_LANG['site_name'],
     'title'               => $faqconfig->get('main.titleFAQ') . $title,
     'baseHref'            => $systemUri,
     'version'             => $faqconfig->get('main.currentVersion'),

@@ -1572,7 +1572,7 @@ table .span12 {
   height: 0;
   text-indent: -99999px;
   *text-indent: 0;
-  vertical-align: top;
+  vertical-align: middle;
   border-left: 4px solid transparent;
   border-right: 4px solid transparent;
   border-top: 4px solid #000000;
@@ -1581,7 +1581,6 @@ table .span12 {
   content: "\2193";
 }
 .dropdown .caret {
-  margin-top: 8px;
   margin-left: 2px;
 }
 .dropdown:hover .caret, .open.dropdown .caret {
@@ -2440,10 +2439,10 @@ button.btn.small, input[type="submit"].btn.small {
 .navbar {
   overflow: visible;
   margin-bottom: 18px;
+  height: 50px;
+  line-height: 50px;
 }
 .navbar-inner {
-  padding-left: 20px;
-  padding-right: 20px;
   background-color: #292929;
   background-image: -moz-linear-gradient(top, #222222, #333333);
   background-image: -ms-linear-gradient(top, #222222, #333333);
@@ -2638,11 +2637,12 @@ button.btn.small, input[type="submit"].btn.small {
 .navbar .nav > li {
   display: block;
   float: left;
+  height: 100%;
 }
 .navbar .nav > li > a {
   float: none;
-  padding: 10px 10px 11px;
-  line-height: 19px;
+  padding: 0 10px;
+  line-height: 50px;
   color: #eeeeee;
   text-decoration: none;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
@@ -2668,6 +2668,7 @@ button.btn.small, input[type="submit"].btn.small {
 .navbar .nav.pull-right {
   margin-left: 10px;
   margin-right: 0;
+  height: 100%;
 }
 .navbar .dropdown-menu {
   margin-top: 1px;
@@ -3479,8 +3480,10 @@ a.thumbnail:hover {
   line-height: 27px;
 }
 .pull-right {
-  float: left;
-  margin: 5px 0 5px 8%;
+  float: right;
+  margin: 0;
+  padding: 0;
+  margin-left: 8%;
 }
 .pull-left {
   float: left;
@@ -3634,4 +3637,19 @@ footer .copyright {
 }
 #language{
     margin: 0 5px;
+}
+#logo{
+    float: left;
+    margin-left: 9%;
+}
+#logo img{
+    padding: 5px 0;
+    vertical-align: middle;
+}
+#logo h1{
+    font-size: 14px;
+    color: #ffffff;
+    vertical-align: middle;
+    display: inline;
+    padding-left: 5px;
 }

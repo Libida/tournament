@@ -50,37 +50,36 @@
 </div>
  <![endif]-->
 
-<div class="navbar navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container-fluid">
-            <form action="{writeLangAdress}" method="post" class="pull-right">
-                {switchLanguages}
-                <input type="hidden" name="action" value="" />
-            </form>
-            <nav class="nav-collapse">
-                <ul class="nav pull-right">
-                    [notLoggedIn]
-                    <li class="{activeRegister}">{msgRegisterUser}</li>
-                    <li class="divider-vertical"></li>
-                    <li class="{activeLogin}">{msgLoginUser}</li>
-                    [/notLoggedIn]
-                    [userloggedIn]
-                    <li class="{activeUserControl}">{msgUserControl}</li>
-                    <li class="divider-vertical"></li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <span title="{msgFullName}">{msgLoginName}</span><b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li>{msgUserControlDropDown}</li>
-                            <li>{msgLogoutUser}</li>
-                        </ul>
-                    </li>
-                    [/userloggedIn]
-                </ul>
-            </nav>
-        </div>
+<div class="navbar navbar-inner clearfix">
+    <div id="logo">
+        <a href="/tournament/"><img src="images/logo.png" alt="Logo" title="Logo" width="30" height="30"
+                                    border="0"/></a>
+        <h1>{siteName}</h1>
     </div>
+    <form action="{writeLangAdress}" method="post" class="pull-right">
+    {switchLanguages}
+        <input type="hidden" name="action" value=""/>
+    </form>
+    <ul class="nav pull-right">
+        [notLoggedIn]
+        <li class="{activeRegister}">{msgRegisterUser}</li>
+        <li class="divider-vertical"></li>
+        <li class="{activeLogin}">{msgLoginUser}</li>
+        [/notLoggedIn]
+        [userloggedIn]
+        <li class="{activeUserControl}">{msgUserControl}</li>
+        <li class="divider-vertical"></li>
+        <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <span title="{msgFullName}">{msgLoginName}</span><b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>{msgUserControlDropDown}</li>
+                <li>{msgLogoutUser}</li>
+            </ul>
+        </li>
+        [/userloggedIn]
+    </ul>
 </div>
 
 <section id="main" class="clearfix">

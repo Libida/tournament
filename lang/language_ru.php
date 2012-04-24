@@ -1203,5 +1203,5 @@ $PMF_LANG['ad_player_rating'] = 'Рейтинг';
 $PMF_LANG['ad_player_category'] = 'Разряд';
 $PMF_LANG['ad_player_degree'] = 'Звание';
 $PMF_LANG['ad_player_added'] = 'Игрок успешно создан';
-
+$PMF_LANG['site_name'] = 'Чемпионат университета по шашкам';
 
