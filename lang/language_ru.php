@@ -1173,6 +1173,8 @@ $PMF_LANG['ad_tournedit_desc'] = 'Описание';
 $PMF_LANG['ad_tournedit_submit'] = 'Обновить турнир';
 $PMF_LANG['ad_tournedit_add_players'] = 'Добавить игроков';
 $PMF_LANG['ad_tournedit_generate_tours'] = 'Сгенерировать туры';
+$PMF_LANG['ad_tournedit_generate_tours_disabled'] = 'Количество игроков должно быть больше 7-ми и четным';
+$PMF_LANG['ad_tournedit_generate_tours_winners_count'] = 'Количестов победителей';
 
 $PMF_LANG['tour'] = 'Тур';
 $PMF_LANG['ad_tour_close'] = 'Завершить тур';

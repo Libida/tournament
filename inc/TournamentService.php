@@ -3,26 +3,26 @@ require_once 'PMF_Helper/DBHelper.php';
 
 class PMF_TournamentService
 {
-    const TABLE_NAME = 't_tournaments';
+    const TOURNAMENTS_TABLE = 't_tournaments';
 
     public static function addTournament(Array $tournament_data)
     {
-        return PMF_DB_Helper::createDBInstance(self::TABLE_NAME, $tournament_data);
+        return PMF_DB_Helper::createDBInstance(self::TOURNAMENTS_TABLE, $tournament_data);
     }
 
     public static function getAllTournaments()
     {
-        return PMF_DB_Helper::getAllValues(self::TABLE_NAME);
+        return PMF_DB_Helper::getAllValues(self::TOURNAMENTS_TABLE);
     }
 
     public static function getById($tourn_id)
     {
-        return PMF_DB_Helper::getById(self::TABLE_NAME, $tourn_id);
+        return PMF_DB_Helper::getById(self::TOURNAMENTS_TABLE, $tourn_id);
     }
 
     public static function updateTournament($id, $data)
     {
-        return PMF_DB_Helper::updateItem(self::TABLE_NAME, $id, $data);
+        return PMF_DB_Helper::updateItem(self::TOURNAMENTS_TABLE, $id, $data);
     }
 
     public static function addPlayerToTournament($tournament_id, $add_player_id)
@@ -76,9 +76,11 @@ class PMF_TournamentService
 
     public static function generateTours($tournament_id, $winners_count)
     {
-        PMF_SwissTournGenerator::generateTours($tournament_id, $winners_count);
+        PMF_SwissTournGenerator::generateFirstTour($tournament_id, $winners_count);
         $sql_set_tournament_started = sprintf("UPDATE t_tournaments SET started=%d WHERE id=%s", 1, $tournament_id);
         PMF_Db::getInstance()->query($sql_set_tournament_started);
+        $sql_set_winners_count = sprintf("UPDATE t_tournaments SET winners_count=%d WHERE id=%s", $winners_count, $tournament_id);
+        PMF_Db::getInstance()->query($sql_set_winners_count);
     }
 
     public static function getTours($tournament_id)
@@ -142,7 +144,7 @@ class PMF_TournamentService
         PMF_Db::getInstance()->query($sql);
     }
 
-    public static function closeTour($tour_id)
+    public static function closeTour($tournament_id, $tour_id)
     {
         $tour = PMF_DB_Helper::getById("t_tours", $tour_id);
         if ($tour->finished) {
@@ -156,6 +158,7 @@ class PMF_TournamentService
             PMF_SwissTournGenerator::updateParticipantsRating($game);
         }
 
-        return PMF_SwissTournGenerator::prepareNextTour($tour->tournament_id, 3);
+        $tournament = PMF_DB_Helper::getById(self::TOURNAMENTS_TABLE, $tournament_id);
+        return PMF_SwissTournGenerator::generateNextTour($tour->tournament_id, $tournament->winners_count);
     }
 }

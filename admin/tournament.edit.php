@@ -10,7 +10,8 @@
     }
 
     function submitGenerateTours() {
-        window.location.replace(getCurrentURL() + "&generatetours=1");
+        var winnersCount = $("#winnersCount").val();
+        window.location.replace(getCurrentURL() + "&generatetours=" + winnersCount);
     }
 
     function submitCloseTour() {
@@ -48,7 +49,7 @@ if ($permission['edittourn']) {
 
     $add_player_id = PMF_Filter::filterInput(INPUT_GET, 'addplayer', FILTER_VALIDATE_INT, 0);
     $remove_player_id = PMF_Filter::filterInput(INPUT_GET, 'removeplayer', FILTER_VALIDATE_INT, 0);
-    $generate_tours = PMF_Filter::filterInput(INPUT_GET, 'generatetours', FILTER_VALIDATE_INT, 0);
+    $winners_count = PMF_Filter::filterInput(INPUT_GET, 'generatetours', FILTER_VALIDATE_INT, 0);
     $tour_id_to_close = PMF_Filter::filterInput(INPUT_GET, 'closetour', FILTER_VALIDATE_INT, 0);
 
     if ($add_player_id != 0) {
@@ -59,13 +60,13 @@ if ($permission['edittourn']) {
         PMF_TournamentService::removePlayerFromTournament($tournament_id, $remove_player_id);
     }
 
-    if ($generate_tours && !$tournament_started) {
-        PMF_TournamentService::generateTours($tournament_id, 3);
+    if ($winners_count && !$tournament_started) {
+        PMF_TournamentService::generateTours($tournament_id, $winners_count);
         $tournament_started = true;
     }
 
     if ($tour_id_to_close != 0) {
-        print var_dump(PMF_TournamentService::closeTour($tour_id_to_close));
+        PMF_TournamentService::closeTour($tournament_id, $tour_id_to_close);
     }
     ?>
 
@@ -114,7 +115,7 @@ if ($permission['edittourn']) {
             printf("<td>%d</td>", $i++);
             printf("<td>%s</td>", $player->last_name);
             printf("<td>%s</td>", $player->first_name);
-            printf("<td style='text-align: center;'><img src='../images/countries/16/%s.png' title='%s'></td>", $player->country, $player->country_title);
+            printf("<td style='text-align: center;'><img src='../images/countries/32/%s.png' title='%s'></td>", $player->country, $player->country_title);
             printf("<td>%s</td>", $player->birth_year);
             printf("<td>%s</td>", $player->title);
             printf("<td>%s</td>", $player->rating);
@@ -153,9 +154,21 @@ if ($permission['edittourn']) {
             </select>
             <?php
             if (count($players) >= 8 && count($players) % 2 == 0) {
+                printf("<input id='generateTours' type='button' value='%s'/>", $PMF_LANG['ad_tournedit_generate_tours']);
                 ?>
-                <input id="generateTours" type="button" value="<?php print $PMF_LANG['ad_tournedit_generate_tours']; ?>"/>
+                <label for="winnersCount" style="display: inline;"><?php print $PMF_LANG['ad_tournedit_generate_tours_winners_count'] . ":"; ?></label>
+                <select id="winnersCount" style="width: 50px;">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
                 <?php
+            } else {
+                printf("<input id='generateTours' type='button' value='%s' disabled='disabled' title='%s'/>",
+                    $PMF_LANG['ad_tournedit_generate_tours'], $PMF_LANG['ad_tournedit_generate_tours_disabled']);
             }
             ?>
         </div>
@@ -169,11 +182,18 @@ if ($permission['edittourn']) {
         printf('<th>%s</th>', $PMF_LANG['ad_standings_name']);
         printf('<th>%s</th>', $PMF_LANG['ad_player_country']);
         printf('<th>%s</th>', $PMF_LANG['ad_standings_points']);
+        $winners_count = $tournament->winners_count;
         $i = 1;
         foreach ($participants as $participant) {
             print '<tr>';
-            printf("<td>%d</td>", $i++);
-            printf("<td>%s</td>", $participant->name);
+            if ($i <= $winners_count) {
+                printf("<td class='winner'><strong>%d</strong></td>", $i);
+                printf("<td class='winner'><strong>%s</strong></td>", $participant->name);
+            } else {
+                printf("<td>%d</td>", $i);
+                printf("<td>%s</td>", $participant->name);
+            }
+            $i++;
             printf("<td style='text-align: center;'><img src='../images/countries/16/%s.png' title='%s'></td>",
                 $participant->player->country, $participant->player->country_title);
             printf("<td style='text-align: center;'>%s</td>", $participant->rating);

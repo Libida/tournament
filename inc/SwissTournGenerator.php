@@ -3,20 +3,15 @@ require_once 'PMF_Helper/DBHelper.php';
 
 class PMF_SwissTournGenerator
 {
-    public static function generateTours($tournament_id, $winners_count)
+    public static function generateFirstTour($tournament_id)
     {
         $players = PMF_Player::getAllPlayersForTournament($tournament_id);
-        self::prepareFirstTour($tournament_id, $players);
-    }
-
-    private static function prepareFirstTour($tournament_id, $players)
-    {
         $participant_ids = PMF_TournamentService::create_participants_for_tournament($tournament_id, $players);
         $first_tour_id = self::createFirstTour($tournament_id);
         self::createGamesForFirstTour($participant_ids, $first_tour_id);
     }
 
-    public static function prepareNextTour($tournament_id, $winners_count)
+    public static function generateNextTour($tournament_id, $winners_count)
     {
         $participants = PMF_Player::getAllParticipantsSorted($tournament_id);
 

@@ -1192,6 +1192,9 @@ $PMF_LANG['ad_tournedit_desc'] = 'Description';
 $PMF_LANG['ad_tournedit_submit'] = 'Update tournament';
 $PMF_LANG['ad_tournedit_add_players'] = 'Add players';
 $PMF_LANG['ad_tournedit_generate_tours'] = 'Generate tours';
+$PMF_LANG['ad_tournedit_generate_tours_disabled'] = 'Num of players should be greater than 7 and even';
+$PMF_LANG['ad_tournedit_generate_tours_winners_count'] = 'Winners count';
+
 
 $PMF_LANG['tour'] = 'Tour';
 $PMF_LANG['ad_tour_close'] = 'Close the tour';
