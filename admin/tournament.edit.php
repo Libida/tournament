@@ -44,7 +44,6 @@ if (!defined('IS_VALID_PHPMYFAQ')) {
 
 if ($permission['edittourn']) {
     $tournament_id = PMF_Filter::filterInput(INPUT_GET, 'tourn', FILTER_VALIDATE_INT, 0);
-    $tournament = PMF_TournamentService::getById($tournament_id);
     $tournament_started = $tournament->started != 0;
 
     $add_player_id = PMF_Filter::filterInput(INPUT_GET, 'addplayer', FILTER_VALIDATE_INT, 0);
@@ -68,6 +67,8 @@ if ($permission['edittourn']) {
     if ($tour_id_to_close != 0) {
         PMF_TournamentService::closeTour($tournament_id, $tour_id_to_close);
     }
+
+    $tournament = PMF_TournamentService::getById($tournament_id);
     ?>
 
 <header>
