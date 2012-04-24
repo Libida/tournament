@@ -95,14 +95,6 @@ if ($permission['editconfig']) {
             </fieldset>
             <fieldset>
                 <legend>
-                    <a href="javascript:void(0);" onclick="javascript:toggleConfig('Records');">
-                        <?php print $PMF_LANG['recordsControlCenter']; ?>
-                    </a>
-                </legend>
-                <div id="configRecords" style="display: none;"></div>
-            </fieldset>
-            <fieldset>
-                <legend>
                     <a href="javascript:void(0);" onclick="javascript:toggleConfig('Search');">
                         <?php print $PMF_LANG['searchControlCenter']; ?>
                     </a>
@@ -124,22 +116,6 @@ if ($permission['editconfig']) {
                     </a>
                 </legend>
                 <div id="configSpam" style="display: none;"></div>
-            </fieldset>
-            <fieldset>
-                <legend>
-                    <a href="javascript:void(0);" onclick="javascript:toggleConfig('SocialNetworks');">
-                        <?php print $PMF_LANG['socialNetworksControlCenter']; ?>
-                    </a>
-                </legend>
-                <div id="configSocialNetworks" style="display: none;"></div>
-            </fieldset>
-            <fieldset>
-                <legend>
-                    <a href="javascript:void(0);" onclick="javascript:toggleConfig('Cache');">
-                        <?php print $PMF_LANG['cacheControlCenter']; ?>
-                    </a>
-                </legend>
-                <div id="configCache" style="display: none;"></div>
             </fieldset>
             <p>
                 <input class="btn-primary" type="submit" value="<?php print $PMF_LANG['ad_config_save']; ?>" />

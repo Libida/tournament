@@ -97,7 +97,7 @@ switch ($action) {
     case 'attachments':
         $secLevelHeader = $PMF_LANG['admin_mainmenu_content'];
         $secLevelEntries .= $adminHelper->addMenuEntry('delcomment', 'comments', 'ad_menu_comments', $action);
-        $secLevelEntries .= $adminHelper->addMenuEntry('addattachment+editattachment+delattachment', 'attachments', 'ad_menu_attachments', $action);
+        $secLevelEntries .= $adminHelper->addMenuEntry('addnews+editnews+delnews', 'news', 'ad_menu_news_edit', $action);
         $dashboardPage    = false;
         $contentPage      = true;
         break;
@@ -110,9 +110,7 @@ switch ($action) {
     case 'reports':
     case 'reportview':
         $secLevelHeader   = $PMF_LANG['admin_mainmenu_statistics'];
-        $secLevelEntries .= $adminHelper->addMenuEntry('viewlog', 'statistics', 'ad_menu_stat', $action);
         $secLevelEntries .= $adminHelper->addMenuEntry('viewlog', 'viewsessions', 'ad_menu_session', $action);
-        $secLevelEntries .= $adminHelper->addMenuEntry('adminlog', 'adminlog', 'ad_menu_adminlog', $action);
         $secLevelEntries .= $adminHelper->addMenuEntry('viewlog', 'searchstats', 'ad_menu_searchstats', $action);
         $secLevelEntries .= $adminHelper->addMenuEntry('reports', 'reports', 'ad_menu_reports', $action);
         $dashboardPage    = false;
@@ -141,7 +139,6 @@ switch ($action) {
         $secLevelEntries  .= $adminHelper->addMenuEntry('editconfig', 'config', 'ad_menu_editconfig', $action);
         $secLevelEntries  .= $adminHelper->addMenuEntry('editconfig+editbt+delbt', 'linkconfig', 'ad_menu_linkconfig', $action);
         $secLevelEntries  .= $adminHelper->addMenuEntry('editconfig', 'stopwordsconfig', 'ad_menu_stopwordsconfig', $action);
-        $secLevelEntries  .= $adminHelper->addMenuEntry('edittranslation+addtranslation+deltranslation', 'translist', 'ad_menu_translations', $action);
         $dashboardPage     = false;
         $configurationPage = true;
         break;
@@ -201,7 +198,7 @@ switch ($action) {
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </a>
-            <h1 class="brand" href="../index.php"><?php print $faqconfig->get('main.titleFAQ'); ?></h1>
+            <a href="/tournament/"><h1 class="brand" href="../index.php"><?php print $faqconfig->get('main.titleFAQ'); ?></h1></a>
             <div class="nav-collapse">
                 <?php if (isset($auth) && in_array(true, $permission)): ?>
                 <ul class="nav">
@@ -216,9 +213,6 @@ switch ($action) {
                     </li>
                     <li<?php print ($statisticsPage ? ' class="active"' : ''); ?>>
                         <a href="index.php?action=statistics"><?php print $PMF_LANG['admin_mainmenu_statistics']; ?></a>
-                    </li>
-                    <li<?php print ($exportsPage ? ' class="active"' : ''); ?>>
-                        <a href="index.php?action=export"><?php print $PMF_LANG['admin_mainmenu_exports']; ?></a>
                     </li>
                     <li<?php print ($backupPage ? ' class="active"' : ''); ?>>
                         <a href="index.php?action=backup"><?php print $PMF_LANG['admin_mainmenu_backup']; ?></a>

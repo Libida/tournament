@@ -394,16 +394,8 @@ if (isset($auth) && in_array(true, $permission)) {
                     <td><?php print $PMF_TABLE_INFO[SQLPREFIX . "faqsessions"]; ?></td>
                 </tr>
                 <tr>
-                    <td><strong><a href="?action=view"><?php print $PMF_LANG["ad_start_articles"]; ?></a></strong></td>
-                    <td><?php print $PMF_TABLE_INFO[SQLPREFIX . "faqdata"]; ?></td>
-                </tr>
-                <tr>
                     <td><strong><a href="?action=comments"><?php print $PMF_LANG["ad_start_comments"]; ?></strong></a></td>
                     <td><?php print $PMF_TABLE_INFO[SQLPREFIX . "faqcomments"]; ?></td>
-                </tr>
-                <tr>
-                    <td><strong><a href="?action=question"><?php print $PMF_LANG["msgOpenQuestions"]; ?></strong></a></td>
-                    <td><?php print $PMF_TABLE_INFO[SQLPREFIX . "faqquestions"]; ?></td>
                 </tr>
                 <tr>
                     <td><strong><a href="?action=news"><?php print $PMF_LANG["msgNews"]; ?></strong></a></td>
@@ -425,8 +417,8 @@ if (isset($auth) && in_array(true, $permission)) {
             <table class="table table-striped">
             <tbody>
                 <tr>
-                    <td style="width: 150px;"><strong>phpMyFAQ Version</strong></td>
-                    <td>phpMyFAQ <?php print $faqconfig->get('main.currentVersion'); ?></td>
+                    <td style="width: 150px;"><strong>System Version</strong></td>
+                    <td><?php print $faqconfig->get('main.currentVersion'); ?></td>
                 </tr>
                 <tr>
                     <td><strong>Server Software</strong></td>
@@ -490,7 +482,7 @@ if (isset($auth) && in_array(true, $permission)) {
 ?>
 
             <header>
-                <h2>phpMyFAQ Login</h2>
+                <h2><?php print $PMF_LANG['msgLoginUser']; ?></h2>
             </header>
 <?php
     if (isset($error) && 0 < strlen($error)) {

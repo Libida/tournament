@@ -2244,8 +2244,7 @@ button.btn.small, input[type="submit"].btn.small {
 }
 .nav-list .active > a, .nav-list .active > a:hover {
   color: #ffffff;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
-  background-color: #cb3a25;
+  background-color: #FFD200;
 }
 .nav-list [class^="icon-"] {
   margin-right: 2px;

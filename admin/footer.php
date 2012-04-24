@@ -43,7 +43,7 @@ if (!defined('IS_VALID_PHPMYFAQ')) {
         </div>
         <div class="row">
             <p class="copyright pull-right">
-                Proudly powered by <strong>Maria Rudko </strong>
+                © 2012 Maria Rudko
             </p>
         </div>
     </div>

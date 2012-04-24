@@ -913,7 +913,7 @@ $LANG_CONF['records.defaultAllowComments'] = array(0 => "checkbox", 1 => "Allow 
 $PMF_LANG['msgAllCatArticles'] = 'Records in this category';
 $PMF_LANG['msgDescriptionInstantResponse'] = 'Just type and find the answers ...';
 $PMF_LANG['msgTagSearch'] = 'Tagged entries';
-$PMF_LANG['ad_pmf_info'] = 'phpMyFAQ Information';
+$PMF_LANG['ad_pmf_info'] = 'System Information';
 $PMF_LANG['ad_online_info'] = 'Online version check';
 $PMF_LANG['ad_system_info'] = 'System Information';
 
