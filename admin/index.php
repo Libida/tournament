@@ -375,6 +375,7 @@ if (isset($auth) && in_array(true, $permission)) {
             case 'saveplayer':
             case 'players':                 require_once 'players.main.php'; break;
             case 'addplayer':               require_once 'players.add.php'; break;
+            case 'editgame':                require_once 'game.edit.php'; break;
 
             default:                        print "Error"; break;
         }

@@ -503,7 +503,7 @@ $PMF_LANG["ad_categ_copy"] = "copy";
 $PMF_LANG["ad_categ_process"] = "Processing categories...";
 
 // Added v1.1.4 - 07.05.2002 - Thorsten
-$PMF_LANG["err_NotAuth"] = "<strong>You are not authorized.</strong>";
+$PMF_LANG["err_NotAuth"] = "<strong>You dont have permissions to view this page.</strong>";
 
 // Added v1.2.3 - 29.11.2002 - Thorsten
 $PMF_LANG["msgPreviusPage"] = "previous page";
@@ -1194,7 +1194,14 @@ $PMF_LANG['ad_tournedit_add_players'] = 'Add players';
 $PMF_LANG['ad_tournedit_generate_tours'] = 'Generate tours';
 
 $PMF_LANG['tour'] = 'Tour';
+$PMF_LANG['ad_tour_close'] = 'Close the tour';
 $PMF_LANG['game_edit_score'] = 'Edit game score';
+$PMF_LANG['ad_editgame_header'] = 'Edit game';
+$PMF_LANG['ad_editgame_save'] = 'Save';
+
+$PMF_LANG['ad_standings'] = 'Standings';
+$PMF_LANG['ad_standings_name'] = 'Name';
+$PMF_LANG['ad_standings_points'] = 'Points';
 
 $PMF_LANG['ad_refresh_captcha'] = 'click here to refresh image';
 

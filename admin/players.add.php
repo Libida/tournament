@@ -59,7 +59,7 @@ if ($permission["addplayer"]) {
         <label class="control-label" for="birth_year"><?php print $PMF_LANG["ad_player_birth_year"]; ?>:</label>
 
         <div class="controls">
-            <input type="number" min="1990" max="2012" value="1990" id="birth_year" name="birth_year"
+            <input type="number" min="1980" max="2012" value="1990" id="birth_year" name="birth_year"
                    required="required"/>
         </div>
     </div>

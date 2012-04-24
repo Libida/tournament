@@ -394,3 +394,8 @@ CREATE TABLE  `t_games` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ALTER TABLE `t_tournaments` ADD COLUMN `started` Bool NOT NULL DEFAULT 0;
+
+insert into faqright values (46, 'editgame', 'Right to edit games score', 1, 1);
+insert into faquser_right values (1, 46);
+
+ALTER TABLE `t_games` CHANGE `first_paticipant_score` `first_participant_score` int(11) NOT NULL DEFAULT 0;

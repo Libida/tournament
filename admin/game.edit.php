@@ -1,8 +1,98 @@
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("#saveButton").live('click', function() {
+            var gameId = $("#gameId").val();
+            var firstScore = $(".first").val();
+            var secondScore = $(".second").val();
+            window.location.replace(window.location.pathname + "?action=editgame&game=" +
+                gameId + "&first=" + firstScore + "&second=" + secondScore);
+            return false;
+        });
+    });
+</script>
+
 <?php
-/**
- * Created by JetBrains PhpStorm.
- * User: KeFA
- * Date: 23.04.12
- * Time: 15:29
- * To change this template use File | Settings | File Templates.
- */
+
+
+if (!defined('IS_VALID_PHPMYFAQ')) {
+    header('Location: http://' . $_SERVER['HTTP_HOST'] . dirname($_SERVER['SCRIPT_NAME']));
+    exit();
+}
+
+function printScoreOptions($selected_value)
+{
+    $i = 0;
+    while ($i <= PMF_TournamentService::getMaxGameScore()) {
+        if ($selected_value == $i) {
+            printf("<option value='%d' selected='selected'>%d</option>", $i, $i);
+        } else {
+            printf("<option value='%d'>%d</option>", $i, $i);
+        }
+        $i++;
+    }
+}
+
+if ($permission['editgame']) {
+    $game_id = PMF_Filter::filterInput(INPUT_GET, 'game', FILTER_VALIDATE_INT, 0);
+    $game = PMF_TournamentService::getGameById($game_id);
+
+    $first_new_score = $_REQUEST['first'];
+    $second_new_score = $_REQUEST['second'];
+    print $_REQUEST['from'];
+    if (isset($first_new_score) && isset($second_new_score)) {
+        PMF_TournamentService::updateGameScore($game_id, $first_new_score, $second_new_score);
+        header('Location: ?action=edittournament&tourn=' . $game->first_participant->tournament_id);
+    }
+    ?>
+
+<header>
+    <h2><?php print $PMF_LANG['ad_editgame_header']?></h2>
+</header>
+
+<form class="form-horizontal" action="<?php print $_SERVER['HTTP_REFERER']; ?>" method="post">
+    <input type="hidden" id="gameId" value="<?php print $game_id; ?>"/>
+    <input type="hidden" id="fromURL" value="<?php print $_SERVER['HTTP_REFERER']; ?>"/>
+    <table border="0" width="100%">
+        <tr>
+            <td>
+                <div style="text-align: right;"><?php printf("<img src='../images/countries/48/%s.png'/>", $game->first_country); ?></div>
+            </td>
+            <td>
+                <div style="text-align: left; font-size: 25px;"><strong><?php print $game->first_name; ?></strong></div>
+            </td>
+            <td>
+                <div style="text-align: right;">
+                    <select class="select-game-score first">
+                        <?php
+                        printScoreOptions($game->first_participant_score);
+                        ?>
+                    </select>
+                </div>
+            </td>
+            <td><div style="fonst-size: 25px; text-align: center;"><strong>-</strong></div></td>
+            <td>
+                <div style="text-align: left;">
+                    <select class="select-game-score second">
+                        <?php
+                        printScoreOptions($game->second_participant_score);
+                        ?>
+                    </select>
+                </div>
+            </td>
+            <td>
+                <div style="text-align: right; font-size: 25px;"><strong><?php print $game->second_name; ?></strong></div>
+            </td>
+            <td>
+                <div style="text-align: left;"><?php printf("<img src='../images/countries/48/%s.png'/>", $game->second_country); ?></div>
+            </td>
+        </tr>
+    </table>
+
+    <div class="form-actions">
+        <input id="saveButton" class="btn-primary" type="submit" name="submit" value="<?php print $PMF_LANG['ad_editgame_save']; ?>"/>
+    </div>
+</form>
+<?php
+} else {
+    print $PMF_LANG['err_NotAuth'];
+}

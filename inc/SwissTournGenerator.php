@@ -5,28 +5,77 @@ class PMF_SwissTournGenerator
 {
     public static function generateTours($tournament_id, $winners_count)
     {
-        $players = PMF_TournamentService::getAllPlayersForTournament($tournament_id);
-        self::prepare_first_tour($tournament_id, $players);
+        $players = PMF_Player::getAllPlayersForTournament($tournament_id);
+        self::prepareFirstTour($tournament_id, $players);
     }
 
-    private static function prepare_first_tour($tournament_id, $players)
+    private static function prepareFirstTour($tournament_id, $players)
     {
         $participant_ids = PMF_TournamentService::create_participants_for_tournament($tournament_id, $players);
-        $first_tour_id = self::create_first_tour($tournament_id);
-        self::create_games_for_first_tour($participant_ids, $first_tour_id);
+        $first_tour_id = self::createFirstTour($tournament_id);
+        self::createGamesForFirstTour($participant_ids, $first_tour_id);
     }
 
-    private static function create_first_tour($tournament_id)
+    public static function prepareNextTour($tournament_id, $winners_count)
+    {
+        $participants = PMF_Player::getAllParticipantsSorted($tournament_id);
+
+        $current_tours_count = self::getCurrentNumOfTours($tournament_id);
+        if ($current_tours_count >= self::getNumOfTours(count($participants), $winners_count)) {
+            return;
+        }
+
+        $tour_index = $current_tours_count + 1;
+        $tour_id = self::createTour($tournament_id, $tour_index);
+
+        for ($i = 0; $i < count($participants); $i++) {
+            if (!$participants[$i]->busy) {
+                for ($j = $i + 1; $j < count($participants); $j++) {
+                    if (!$participants[$j]->busy && !self::played($participants[$i], $participants[$j])) {
+                        $participants[$i]->busy = true;
+                        $participants[$j]->busy = true;
+                        PMF_DB_Helper::createDBInstance("t_games", array($tour_id, $participants[$i]->id, $participants[$j]->id, 0, 0));
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    private static function played($participant_a, $participant_b)
+    {
+        $sql = "SELECT * FROM t_games t WHERE (first_participant_id = %d AND second_participant_id = %d) OR (first_participant_id = %d AND second_participant_id = %d)";
+        $sql = sprintf($sql, $participant_a->id, $participant_b->id, $participant_b->id, $participant_a->id);
+        $result = PMF_DB_Helper::fetchAllResults($sql);
+        return count($result) > 0;
+    }
+
+    public static function getCurrentNumOfTours($tournament_id)
+    {
+        $sql_count_of_tours = sprintf("SELECT * FROM t_tours WHERE tournament_id=%d", $tournament_id);
+        $current_tours_count = count(PMF_DB_Helper::fetchAllResults($sql_count_of_tours));
+        return $current_tours_count;
+    }
+
+    private static function createFirstTour($tournament_id)
     {
         PMF_TournamentService::delete_all_tours($tournament_id);
-        $tour_index = 1;
-        $finished = 0;
-        $first_tour_id = PMF_DB_Helper::createDBInstance("t_tours", array($tournament_id, $tour_index, $finished));
-        PMF_TournamentService::delete_all_games_of_tour($first_tour_id);
+        $first_tour_id = self::createTour($tournament_id, 1);
         return $first_tour_id;
     }
 
-    private static function create_games_for_first_tour($participant_ids, $first_tour_id)
+    private static function createTour($tournament_id, $tour_index)
+    {
+        $sql_delete_tour = sprintf("DELETE FROM t_tours WHERE tournament_id=%d AND tour_index=%d", $tournament_id, $tour_index);
+        PMF_Db::getInstance()->query($sql_delete_tour);
+
+        $finished = 0;
+        $tour_id = PMF_DB_Helper::createDBInstance("t_tours", array($tournament_id, $tour_index, $finished));
+        PMF_TournamentService::deleteAllGamesOfTour($tour_id);
+        return $tour_id;
+    }
+
+    private static function createGamesForFirstTour($participant_ids, $first_tour_id)
     {
         $first_part_of_participants = array_slice($participant_ids, 0, count($participant_ids) / 2);
         $second_part_of_participants = array_slice($participant_ids, count($participant_ids) / 2);
@@ -37,14 +86,29 @@ class PMF_SwissTournGenerator
         }
     }
 
-    public static function getNumOfTours($players, $winners_count)
+    public static function getNumOfTours($players_count, $winners_count)
     {
-        $count = count($players) + 2;
-        $numOfTours = log($count, 2);
+        $numOfTours = log($players_count, 2);
         if ($winners_count > 1) {
             $numOfTours += log($winners_count - 1, 2);
         }
-        $numOfTours = intval($numOfTours);
-        return $numOfTours;
+        return intval($numOfTours);
+    }
+
+    public static function updateParticipantsRating($game)
+    {
+        $first_score = $game->first_participant_score;
+        $second_score = $game->second_participant_score;
+        if ($first_score > $second_score) {
+            $game->first_participant->rating += 2;
+        } else if ($second_score > $first_score) {
+            $game->second_participant->rating += 2;
+        } else {
+            $game->first_participant->rating += 1;
+            $game->second_participant->rating += 1;
+        }
+        $sql_update_rating = "UPDATE t_participants SET rating=%d WHERE id=%d";
+        PMF_Db::getInstance()->query(sprintf($sql_update_rating, $game->first_participant->rating, $game->first_participant_id));
+        PMF_Db::getInstance()->query(sprintf($sql_update_rating, $game->second_participant->rating, $game->second_participant_id));
     }
 }

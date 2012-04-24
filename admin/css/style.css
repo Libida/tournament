@@ -3614,11 +3614,35 @@ footer .copyright {
     margin-top: 20px;
 }
 
+.standings {
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
 .tour {
     margin-top: 10px;
-    background: #daf5ff;
+    margin-bottom: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 15px;
+    background: #b0ff9b;
     border-radius: 10px;
 }
+
+.current {
+    background: #fff382;
+}
+
 .tour header {
     margin-bottom: 10px;
+}
+
+.select-game-score {
+    width: 50px;
+    font-size: 25px;
+    height: 40px;
+}
+
+.close-tour-button {
+    margin-top: 15px;
 }

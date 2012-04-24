@@ -31,10 +31,35 @@ class PMF_Player
     public static function getParticipantById($participant_id)
     {
         $participant = PMF_DB_Helper::getById("t_participants", $participant_id);
+        self::addPlayerToParticipant($participant);
+        return $participant;
+    }
+
+
+    public static function getAllParticipantsSorted($tournament_id)
+    {
+        $sql = sprintf("SELECT * FROM t_participants WHERE tournament_id=%d", $tournament_id);
+        $participants = PMF_DB_Helper::fetchAllResults($sql);
+        foreach ($participants as $participant) {
+            self::addPlayerToParticipant($participant);
+            $participant->name = $participant->player->last_name . " " . $participant->player->first_name;
+        }
+        usort($participants, 'self::compareByRating');
+        return $participants;
+    }
+
+    private static function compareByRating($a, $b)
+    {
+        $retval = strnatcmp($b->rating, $a->rating);
+        if(!$retval) return strnatcmp($a->name, $b->name);
+        return $retval;
+    }
+
+    public static function addPlayerToParticipant($participant)
+    {
         $player_id = $participant->player_id;
         $player = self::getPlayerById($player_id);
         $participant->player = $player;
-        return $participant;
     }
 
     public static function getPlayerById($player_id)
@@ -47,6 +72,27 @@ class PMF_Player
     public static function getAllPlayers()
     {
         $players = PMF_DB_Helper::getAllValues("t_players");
+        self::makeAllPlayersAttributesReadable($players);
+        return $players;
+    }
+
+    public static function getAllPlayersForTournament($tournament_id)
+    {
+        $sql = "SELECT * FROM t_players AS p INNER JOIN t_tournaments_players AS tp ON p.id = tp.player_id WHERE tp.tournament_id = %d";
+        $sql = sprintf($sql, $tournament_id);
+        return self::fetchPlayers($sql);
+    }
+
+    public static function getAllPlayersThatNotInTournament($tournament_id)
+    {
+        $sql = "select * from t_players where id not in (select player_id from t_tournaments_players where tournament_id = %d)";
+        $sql = sprintf($sql, $tournament_id);
+        return self::fetchPlayers($sql);
+    }
+
+    private static function fetchPlayers($sql)
+    {
+        $players = PMF_DB_Helper::fetchAllResults($sql);
         self::makeAllPlayersAttributesReadable($players);
         return $players;
     }

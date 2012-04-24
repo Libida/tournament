@@ -19,7 +19,8 @@ if ($permission['edittourn']) {
 
         $tournament_data = array(
             PMF_Filter::filterInput(INPUT_POST, 'name', FILTER_SANITIZE_STRING),
-            PMF_Filter::filterInput(INPUT_POST, 'description', FILTER_SANITIZE_STRING)
+            PMF_Filter::filterInput(INPUT_POST, 'description', FILTER_SANITIZE_STRING),
+            0, 0
         );
 
         $tournament_id = PMF_TournamentService::addTournament($tournament_data);

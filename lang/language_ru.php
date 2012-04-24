@@ -392,7 +392,7 @@ $PMF_LANG['ad_categ_paste'] = 'вставить';
 $PMF_LANG['ad_categ_cut'] = 'вырезать';
 $PMF_LANG['ad_categ_copy'] = 'копировать';
 $PMF_LANG['ad_categ_process'] = 'Обработка категорий ...';
-$PMF_LANG['err_NotAuth'] = '<strong>Вы не авторизованы.</strong>';
+$PMF_LANG['err_NotAuth'] = '<strong>Вам не хватает прав для просмотра этой страницы.</strong>';
 $PMF_LANG['msgPreviusPage'] = 'предыдущая';
 $PMF_LANG['msgNextPage'] = 'следующая';
 $PMF_LANG['msgPageDoublePoint'] = 'Страницы: ';
@@ -1175,8 +1175,14 @@ $PMF_LANG['ad_tournedit_add_players'] = 'Добавить игроков';
 $PMF_LANG['ad_tournedit_generate_tours'] = 'Сгенерировать туры';
 
 $PMF_LANG['tour'] = 'Тур';
+$PMF_LANG['ad_tour_close'] = 'Завершить тур';
 $PMF_LANG['game_edit_score'] = 'Изменить счет игры';
+$PMF_LANG['ad_editgame_header'] = 'Редактирование игры';
+$PMF_LANG['ad_editgame_save'] = 'Сохранить';
 
+$PMF_LANG['ad_standings'] = 'Турнирная таблица';
+$PMF_LANG['ad_standings_name'] = 'Имя';
+$PMF_LANG['ad_standings_points'] = 'Очки';
 
 $PMF_LANG['ad_refresh_captcha'] = 'нажмите здесь, чтобы обновить изображение';
 

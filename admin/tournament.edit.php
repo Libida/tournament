@@ -13,6 +13,11 @@
         window.location.replace(getCurrentURL() + "&generatetours=1");
     }
 
+    function submitCloseTour() {
+        var currentTourIndex = $("#tourIndex").val();
+        window.location.replace(getCurrentURL() + "&closetour=" + currentTourIndex);
+    }
+
     $(document).ready(function() {
         $("#listOfUsers").live('change', function() {
             submitAddPlayer()
@@ -20,6 +25,10 @@
 
         $("#generateTours").live('click', function() {
             submitGenerateTours();
+        });
+        
+        $("#closeTour").live('click', function() {
+            submitCloseTour();
         });
     });
 </script>
@@ -40,6 +49,7 @@ if ($permission['edittourn']) {
     $add_player_id = PMF_Filter::filterInput(INPUT_GET, 'addplayer', FILTER_VALIDATE_INT, 0);
     $remove_player_id = PMF_Filter::filterInput(INPUT_GET, 'removeplayer', FILTER_VALIDATE_INT, 0);
     $generate_tours = PMF_Filter::filterInput(INPUT_GET, 'generatetours', FILTER_VALIDATE_INT, 0);
+    $tour_id_to_close = PMF_Filter::filterInput(INPUT_GET, 'closetour', FILTER_VALIDATE_INT, 0);
 
     if ($add_player_id != 0) {
         PMF_TournamentService::addPlayerToTournament($tournament_id, $add_player_id);
@@ -52,6 +62,10 @@ if ($permission['edittourn']) {
     if ($generate_tours && !$tournament_started) {
         PMF_TournamentService::generateTours($tournament_id, 3);
         $tournament_started = true;
+    }
+
+    if ($tour_id_to_close != 0) {
+        print var_dump(PMF_TournamentService::closeTour($tour_id_to_close));
     }
     ?>
 
@@ -75,12 +89,16 @@ if ($permission['edittourn']) {
             <textarea id="description" name="description" rows="3" cols="80"><?php print $tournament->description ?></textarea>
         </div>
     </div>
-
+    <div class="form-actions">
+        <input class="btn-primary" type="submit" name="submit" value="<?php print $PMF_LANG['ad_tournedit_submit']; ?>" />
+    </div>
+</form>
+<div style="width: 75%;">
     <?php
-    $players = PMF_TournamentService::getAllPlayersForTournament($tournament_id);
+    $players = PMF_Player::getAllPlayersForTournament($tournament_id);
     if (count($players) > 0) {
         require_once '../common/players.update.values.php';
-        print '<table border="1">';
+        print '<table border="1"  width="100%">';
         printf("<th>%s</th>", "");
         printf("<th>%s</th>", $PMF_LANG['ad_player_second_name']);
         printf("<th>%s</th>", $PMF_LANG['ad_player_first_name']);
@@ -96,7 +114,7 @@ if ($permission['edittourn']) {
             printf("<td>%d</td>", $i++);
             printf("<td>%s</td>", $player->last_name);
             printf("<td>%s</td>", $player->first_name);
-            printf("<td><img src='../images/countries/16/%s.png' title='%s'></td>", $player->country, $player->country_title);
+            printf("<td style='text-align: center;'><img src='../images/countries/16/%s.png' title='%s'></td>", $player->country, $player->country_title);
             printf("<td>%s</td>", $player->birth_year);
             printf("<td>%s</td>", $player->title);
             printf("<td>%s</td>", $player->rating);
@@ -118,7 +136,7 @@ if ($permission['edittourn']) {
         print '</table>';
     }
 
-    $not_in_tournament_players = PMF_TournamentService::getAllPlayersThatNotInTournament($tournament_id);
+    $not_in_tournament_players = PMF_Player::getAllPlayersThatNotInTournament($tournament_id);
     ?>
     <?php
     if (!$tournament_started) {
@@ -136,13 +154,33 @@ if ($permission['edittourn']) {
             <?php
             if (count($players) >= 8 && count($players) % 2 == 0) {
                 ?>
-                <input id="generateTours" type="button"
-                       value="<?php print $PMF_LANG['ad_tournedit_generate_tours']; ?>"/>
+                <input id="generateTours" type="button" value="<?php print $PMF_LANG['ad_tournedit_generate_tours']; ?>"/>
                 <?php
             }
             ?>
         </div>
         <?php
+    } else {
+        $participants = PMF_Player::getAllParticipantsSorted($tournament_id);
+        print '<section class="standings">';
+        printf('<header><h3>%s</h3></header>', $PMF_LANG['ad_standings']);
+        print '<table border="1">';
+        printf('<th style="width: 30px;">%s</th>', '№');
+        printf('<th>%s</th>', $PMF_LANG['ad_standings_name']);
+        printf('<th>%s</th>', $PMF_LANG['ad_player_country']);
+        printf('<th>%s</th>', $PMF_LANG['ad_standings_points']);
+        $i = 1;
+        foreach ($participants as $participant) {
+            print '<tr>';
+            printf("<td>%d</td>", $i++);
+            printf("<td>%s</td>", $participant->name);
+            printf("<td style='text-align: center;'><img src='../images/countries/16/%s.png' title='%s'></td>",
+                $participant->player->country, $participant->player->country_title);
+            printf("<td style='text-align: center;'>%s</td>", $participant->rating);
+            print '</tr>';
+        }
+        print '</table>';
+        print '</section>';
     }
     ?>
 
@@ -151,41 +189,48 @@ if ($permission['edittourn']) {
         $tours = PMF_TournamentService::getTours($tournament_id);
 
         foreach ($tours as $tour) {
-            print "<article class='tour'>";
+            if (!$tour->finished) {
+                print "<article class='tour current'>";
+            } else {
+                print "<article class='tour'>";
+            }
             print "<header>";
             printf("<h3>%s %d</h3>", $PMF_LANG['tour'], $tour->tour_index);
             print "</header>";
             print "<table class='games' border='0'>";
             foreach ($tour->games as $game) {
                 print "<tr>";
-                printf("<td><img src='../images/countries/16/%s.png'</td>", $game->first_participant->player->country);
-                printf("<td>%s %s</td>", $game->first_participant->player->last_name, $game->first_participant->player->first_name);
-                printf("<td><div style='padding-left: 10px;'>%s</div></td>", $game->first_paticipant_score);
+                printf("<td><img src='../images/countries/16/%s.png'/></td>", $game->first_country);
+                printf("<td>%s</td>", $game->first_name);
+                printf("<td><div style='padding-left: 10px;'>%s</div></td>", $game->first_participant_score);
                 print "<td>:</td>";
                 printf("<td><div style='padding-right: 10px;'>%s</div></td>", $game->second_participant_score);
-                printf("<td><img src='../images/countries/16/%s.png'</td>", $game->second_participant->player->country);
-                printf("<td>%s %s</td>", $game->second_participant->player->last_name, $game->second_participant->player->first_name);
+                printf("<td><img src='../images/countries/16/%s.png'/></td>", $game->second_country);
+                printf("<td>%s</td>", $game->second_name);
 
                 print "<td><div style='padding-left: 15px'> ";
-                printf('<a href="?action=editgame&amp;game=%s"><img src="images/edit.png" width="16" height="16" alt="%s" title="%s" border="0" /></a>&nbsp;',
-                    $game->id,
-                    $PMF_LANG['game_edit_score'],
-                    $PMF_LANG['game_edit_score']
-                );
+                if (!$tour->finished) {
+                    printf('<a href="?action=editgame&amp;game=%s"><img src="images/edit.png" width="16" height="16" alt="%s" title="%s" border="0" /></a>&nbsp;',
+                        $game->id,
+                        $PMF_LANG['game_edit_score'],
+                        $PMF_LANG['game_edit_score']
+                    );
+                }
                 print "</div></td>";
                 print "</tr>";
             }
             print "</table>";
+            if (!$tour->finished) {
+                printf("<input id='tourIndex' type='hidden' value='%s'/>", $tour->id);
+                printf("<input id='closeTour' class='close-tour-button' type='submit' value='%s'/>", $PMF_LANG['ad_tour_close']);
+            }
             print "</article>";
         }
         ?>
     </section>
+</div>
 
 
-    <div class="form-actions">
-        <input class="btn-primary" type="submit" name="submit" value="<?php print $PMF_LANG['ad_tournedit_submit']; ?>" />
-    </div>
-</form>
 <?php
 } else {
     print $PMF_LANG['err_NotAuth'];
