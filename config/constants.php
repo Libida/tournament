@@ -216,7 +216,11 @@ $allowedVariables = array(
     'writecomment'    => 1,
     'players'         => 1,
     'tournaments'     => 1,
-    'tournview'       => 1
+    'tournview'       => 1,
+    'reglament'       => 1,
+    'program'         => 1,
+    'gallery'         => 1,
+    'contacts'        => 1
 );
 
 /**

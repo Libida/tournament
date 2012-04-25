@@ -523,8 +523,12 @@ if ($faqconfig->get('main.enableRewriteRules')) {
 } else {
     $tplNavigation = array(
         "news" => '<a href="index.php">' . $PMF_LANG["msgNews"] . '</a>',
+        "program" => '<a href="index.php?action=program">' . $PMF_LANG["msgProgram"] . '</a>',
         "players" => '<a href="index.php?action=players">' . $PMF_LANG["ad_menu_players"] . '</a>',
-        "tournaments" => '<a href="index.php?action=tournaments">' . $PMF_LANG["ad_menu_tourn_edit"] . '</a>');
+        "reglament" => '<a href="index.php?action=reglament">' . $PMF_LANG["msgReglament"] . '</a>',
+        "tournaments" => '<a href="index.php?action=tournaments">' . $PMF_LANG["ad_menu_tourn_edit"] . '</a>',
+        "gallery" => '<a href="index.php?action=gallery">' . $PMF_LANG["msgGallery"] . '</a>',
+        "contacts" => '<a href="index.php?action=contacts">' . $PMF_LANG["msgContacts"] . '</a>');
 }
 
 $tplNavigation['faqHome']             = $systemUri;

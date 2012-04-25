@@ -138,6 +138,9 @@ a {
 a:hover {
   text-decoration: underline;
 }
+h3 a, h2 + ul li a{
+    color: #504C41;
+}
 .row {
   margin-left: -20px;
   *zoom: 1;
@@ -343,13 +346,17 @@ h1 small {
 }
 h2 {
   font-size: 24px;
-  line-height: 36px;
+  padding-bottom: 20px;
+  color: #FFD200;
+}
+.main-content > section > header + article > header:first-child > h3, h2 + h3{
+    padding-top: 0px;
 }
 h2 small {
   font-size: 18px;
 }
 h3 {
-  line-height: 27px;
+    padding: 20px 0 10px;
   font-size: 18px;
 }
 h3 small {
@@ -2632,12 +2639,15 @@ button.btn.small, input[type="submit"].btn.small {
   margin: 0 10px 0 0;
 }
 .navbar .nav.pull-right {
-  float: right;
+
 }
 .navbar .nav > li {
   display: block;
   float: left;
   height: 100%;
+}
+.navbar .nav > li:first-child {
+  border-right: 1px solid #222222;
 }
 .navbar .nav > li > a {
   float: none;
@@ -2666,9 +2676,9 @@ button.btn.small, input[type="submit"].btn.small {
   border-right: 1px solid #222222;
 }
 .navbar .nav.pull-right {
-  margin-left: 10px;
-  margin-right: 0;
-  height: 100%;
+  width: auto;
+  float: right;
+  margin: 0;
 }
 .navbar .dropdown-menu {
   margin-top: 1px;
@@ -3480,10 +3490,8 @@ a.thumbnail:hover {
   line-height: 27px;
 }
 .pull-right {
-  float: right;
-  margin: 0;
-  padding: 0;
-  margin-left: 8%;
+  float: left;
+  margin-left: 10px;
 }
 .pull-left {
   float: left;
@@ -3514,6 +3522,8 @@ body {
 }
 #main {
   padding-top: 20px;
+  width: 960px;
+  margin: 0 auto;
 }
 #main .categories {
   padding: 8px 0;
@@ -3545,6 +3555,7 @@ body {
 }
 #main .nav {
   margin-bottom: 0;
+  width: 115px;
 }
 #main .tab-content {
   padding: 5px;
@@ -3597,8 +3608,8 @@ body {
 }
 footer {
   color: #f2f2f2;
-  padding-top: 1%;
-  margin-left: 9%;
+  margin: 10px auto;
+  width: 960px;
 }
 footer p, footer a {
   color: #565348 !important;
@@ -3625,22 +3636,26 @@ footer .copyright {
 
 #main > .main-content{
     background-color: #ffffff;
-    width: 60%;
-    margin: 0 2%;
-    padding: 2%;
+    margin: 0 20px 0 0;
+    padding: 20px;
     border-radius: 4px;
     float: right;
+    min-height: 400px;
+    width: 655px;
+}
+#mainSection{
+    width: 695px;
+    float: left;
 }
 #sideBar{
     float: right;
-    width: 25%;
+    width: 245px;
 }
 #language{
     margin: 0 5px;
 }
 #logo{
     float: left;
-    margin-left: 9%;
 }
 #logo img{
     padding: 5px 0;
@@ -3653,3 +3668,8 @@ footer .copyright {
     display: inline;
     padding-left: 5px;
 }
+#mainHeader {
+    width: 960px;
+    margin: 0 auto;
+}
+

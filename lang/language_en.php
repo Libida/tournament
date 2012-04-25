@@ -66,10 +66,12 @@ $PMF_LANG["msgQuestion"] = "Add question";
 $PMF_LANG["msgOpenQuestions"] = "Open questions";
 $PMF_LANG["msgHelp"] = "Help";
 $PMF_LANG["msgContact"] = "Contact";
-$PMF_LANG["msgHome"] = "FAQ Home";
-$PMF_LANG["msgNews"] = "FAQ News";
-$PMF_LANG["msgUserOnline"] = " Users online";
-$PMF_LANG["msgBack2Home"] = "Back to main page";
+$PMF_LANG["msgHome"] = "Home";
+$PMF_LANG["msgNews"] = "News";
+$PMF_LANG['msgProgram'] = ' Program';
+$PMF_LANG['msgReglament'] = ' Reglament';
+$PMF_LANG['msgGallery'] = ' Gallery';
+$PMF_LANG['msgContacts'] = ' Contacts';
 
 // Contentpages
 $PMF_LANG["msgFullCategories"] = "Categories with FAQs";

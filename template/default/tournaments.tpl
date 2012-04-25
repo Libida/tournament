@@ -1,6 +1,2 @@
-<section>
-    <header>
-        <h3>{header}</h3>
-    </header>
-    {tournaments}
-</section>
+<h2>{header}</h2>
+{tournaments}
