@@ -7,7 +7,7 @@ class PMF_TournamentRenderer
         $tournament = PMF_TournamentService::getById($tournament_id);
         $participants = PMF_Player::getAllParticipantsSorted($tournament_id);
 
-        $html = '<table border="1">';
+        $html = '<table id="standings" border="1">';
         $html .= sprintf('<th style="width: 30px;">%s</th>', '№');
 
         $html .= sprintf('<th>%s</th>', $PMF_LANG['ad_standings_name']);
@@ -36,7 +36,7 @@ class PMF_TournamentRenderer
 
     public static function renderPlayersTable($players, $PMF_LANG)
     {
-        $html = '<table border="1">';
+        $html = '<table id="players" border="1">';
         $html .= sprintf("<th>%s</th>", "№");
         $html .= sprintf("<th>%s</th>", $PMF_LANG['ad_player_second_name']);
         $html .= sprintf("<th>%s</th>", $PMF_LANG['ad_player_first_name']);
