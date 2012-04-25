@@ -64,6 +64,9 @@ a:hover, a:active {
 #main .categories a {
     color: #333333;
 }
+#main{
+    padding-bottom: 20px;
+}
 sub, sup {
   position: relative;
   font-size: 75%;
