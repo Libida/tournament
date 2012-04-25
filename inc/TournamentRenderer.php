@@ -2,7 +2,7 @@
 
 class PMF_TournamentRenderer
 {
-    public static function renderTournamentStandings($tournament_id, $images_root, $PMF_LANG)
+    public static function renderTournamentStandings($tournament_id, $PMF_LANG)
     {
         $tournament = PMF_TournamentService::getById($tournament_id);
         $participants = PMF_Player::getAllParticipantsSorted($tournament_id);
@@ -25,9 +25,39 @@ class PMF_TournamentRenderer
                 $html .= sprintf("<td>%s</td>", $participant->name);
             }
             $i++;
-            $html .= sprintf("<td style='text-align: center;'><img src='%s/countries/16/%s.png' title='%s'></td>",
-                $images_root, $participant->player->country, $participant->player->country_title);
+            $html .= sprintf("<td style='text-align: center;'><img src='/tournament/images/countries/16/%s.png' title='%s'></td>",
+                $participant->player->country, $participant->player->country_title);
             $html .= sprintf("<td style='text-align: center;'>%s</td>", $participant->rating);
+            $html .= '</tr>';
+        }
+        $html .= '</table>';
+        return $html;
+    }
+
+    public static function renderPlayersTable($players, $PMF_LANG)
+    {
+        $html = '<table border="1">';
+        $html .= sprintf("<th>%s</th>", "№");
+        $html .= sprintf("<th>%s</th>", $PMF_LANG['ad_player_second_name']);
+        $html .= sprintf("<th>%s</th>", $PMF_LANG['ad_player_first_name']);
+        $html .= sprintf("<th>%s</th>", $PMF_LANG['ad_player_country']);
+        $html .= sprintf("<th>%s</th>", $PMF_LANG['ad_player_birth_year']);
+        $html .= sprintf("<th>%s</th>", $PMF_LANG['ad_player_title']);
+        $html .= sprintf("<th>%s</th>", $PMF_LANG['ad_player_rating']);
+        $html .= sprintf("<th>%s</th>", $PMF_LANG['ad_player_category']);
+        $html .= sprintf("<th>%s</th>", $PMF_LANG['ad_player_degree']);
+        $i = 1;
+        foreach ($players as $player) {
+            $html .= '<tr>';
+            $html .= sprintf("<td>%s</td>", $i++);
+            $html .= sprintf("<td>%s</td>", $player->last_name);
+            $html .= sprintf("<td>%s</td>", $player->first_name);
+            $html .= sprintf("<td style='text-align: center;'><img src='/tournament/images/countries/32/%s.png' title='%s'></td>", $player->country, $player->country_title);
+            $html .= sprintf("<td>%s</td>", $player->birth_year);
+            $html .= sprintf("<td>%s</td>", $player->title);
+            $html .= sprintf("<td>%s</td>", $player->rating);
+            $html .= sprintf("<td>%s</td>", $player->category);
+            $html .= sprintf("<td>%s</td>", $player->degree);
             $html .= '</tr>';
         }
         $html .= '</table>';

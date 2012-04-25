@@ -36,7 +36,8 @@ if ($permission['editplayer']) {
     }
 
     $players = PMF_Player::getAllPlayers();
-    require '../common/players.table.php';
+    require_once '../common/players.update.values.php';
+    print PMF_TournamentRenderer::renderPlayersTable($players, $PMF_LANG);
 
 } else {
     print $PMF_LANG['err_NotAuth'];
