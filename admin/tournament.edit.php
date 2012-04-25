@@ -178,9 +178,7 @@ if ($permission['edittourn']) {
         $participants = PMF_Player::getAllParticipantsSorted($tournament_id);
         print '<section class="standings">';
         printf('<header><h3>%s</h3></header>', $PMF_LANG['ad_standings']);
-        print PMF_TournamentRenderer::renderTournamentStandings($tournament_id, "../images", array($PMF_LANG['ad_standings_name'],
-                                                                                                  $PMF_LANG['ad_player_country'],
-                                                                                                  $PMF_LANG['ad_standings_points']));
+        print PMF_TournamentRenderer::renderTournamentStandings($tournament_id, "../images", $PMF_LANG);
         print '</section>';
     }
     ?>

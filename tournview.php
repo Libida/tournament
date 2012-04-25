@@ -11,9 +11,7 @@ $tournament = PMF_TournamentService::getById($tournament_id);
 $participants = PMF_Player::getAllParticipantsSorted($tournament_id);
 
 $html = '<section style="margin-top: 20px;">';
-$html .= PMF_TournamentRenderer::renderTournamentStandings($tournament_id, "images", array($PMF_LANG['ad_standings_name'],
-                                                                                          $PMF_LANG['ad_player_country'],
-                                                                                          $PMF_LANG['ad_standings_points']));
+$html .= PMF_TournamentRenderer::renderTournamentStandings($tournament_id, "images", $PMF_LANG);
 $html .= '</section>';
 
 

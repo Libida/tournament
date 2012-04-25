@@ -2,16 +2,17 @@
 
 class PMF_TournamentRenderer
 {
-    public static function renderTournamentStandings($tournament_id, $images_root, $headers)
+    public static function renderTournamentStandings($tournament_id, $images_root, $PMF_LANG)
     {
         $tournament = PMF_TournamentService::getById($tournament_id);
         $participants = PMF_Player::getAllParticipantsSorted($tournament_id);
 
         $html = '<table border="1">';
         $html .= sprintf('<th style="width: 30px;">%s</th>', '№');
-        foreach ($headers as $header) {
-            $html .= sprintf('<th>%s</th>', $header);
-        }
+
+        $html .= sprintf('<th>%s</th>', $PMF_LANG['ad_standings_name']);
+        $html .= sprintf('<th>%s</th>', $PMF_LANG['ad_player_country']);
+        $html .= sprintf('<th>%s</th>', $PMF_LANG['ad_standings_points']);
         $winners_count = $tournament->winners_count;
         $i = 1;
         foreach ($participants as $participant) {
