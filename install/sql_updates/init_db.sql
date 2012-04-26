@@ -401,3 +401,5 @@ insert into faquser_right values (1, 46);
 ALTER TABLE `t_games` CHANGE `first_paticipant_score` `first_participant_score` int(11) NOT NULL DEFAULT 0;
 
 ALTER TABLE `t_tournaments` ADD COLUMN `winners_count` int(11) NOT NULL DEFAULT 0;
+
+ALTER TABLE `t_participants` ADD COLUMN `factor` int(11) NOT NULL DEFAULT 0;

@@ -65,6 +65,7 @@ if ($permission['edittourn']) {
 
     $tournament = PMF_TournamentService::getById($tournament_id);
     $tournament_started = $tournament->started != 0;
+    print var_dump($tournament_id);
     if ($winners_count && !$tournament_started) {
         PMF_TournamentService::generateTours($tournament_id, $winners_count);
         $tournament_started = true;
@@ -175,7 +176,7 @@ if ($permission['edittourn']) {
         </div>
         <?php
     } else {
-        $participants = PMF_Player::getAllParticipantsSorted($tournament_id);
+        $participants = PMF_Player::getAllParticipantsSortedByRating($tournament_id);
         print '<section class="standings">';
         printf('<header><h3>%s</h3></header>', $PMF_LANG['ad_standings']);
         print PMF_TournamentRenderer::renderTournamentStandings($tournament_id, $PMF_LANG);

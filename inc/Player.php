@@ -36,7 +36,7 @@ class PMF_Player
     }
 
 
-    public static function getAllParticipantsSorted($tournament_id)
+    public static function getAllParticipantsSortedByRating($tournament_id)
     {
         $sql = sprintf("SELECT * FROM t_participants WHERE tournament_id=%d", $tournament_id);
         $participants = PMF_DB_Helper::fetchAllResults($sql);
@@ -48,14 +48,17 @@ class PMF_Player
         return $participants;
     }
 
-    private static function compareByRating($a, $b)
+    private static function compareByRating($participant_a, $participant_b)
     {
-        $retval = strnatcmp($b->rating, $a->rating);
-        if(!$retval) return strnatcmp($a->name, $b->name);
+        $retval = $participant_b->rating - $participant_a->rating;
+        if ($retval == 0)
+            $retval = $participant_b->factor - $participant_a->factor;
+        if($retval == 0)
+            return strnatcmp($participant_a->name, $participant_b->name);
         return $retval;
     }
 
-    public static function addPlayerToParticipant($participant)
+    private static function addPlayerToParticipant($participant)
     {
         $player_id = $participant->player_id;
         $player = self::getPlayerById($player_id);

@@ -5,7 +5,7 @@ class PMF_TournamentRenderer
     public static function renderTournamentStandings($tournament_id, $PMF_LANG)
     {
         $tournament = PMF_TournamentService::getById($tournament_id);
-        $participants = PMF_Player::getAllParticipantsSorted($tournament_id);
+        $participants = PMF_Player::getAllParticipantsSortedByRating($tournament_id);
 
         $html = '<table id="standings" border="1">';
         $html .= sprintf('<th style="width: 30px;">%s</th>', '№');

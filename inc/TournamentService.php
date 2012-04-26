@@ -45,12 +45,12 @@ class PMF_TournamentService
     }
 
 
-    public static function create_participants_for_tournament($tournament_id, $players)
+    public static function createParticipantsForTournament($tournament_id, $players)
     {
         self::delete_all_participants($tournament_id);
         $participant_ids = array();
         foreach ($players as $player) {
-            $participant_id = PMF_DB_Helper::createDBInstance("t_participants", array($tournament_id, intval($player->id), 0));
+            $participant_id = PMF_DB_Helper::createDBInstance("t_participants", array($tournament_id, intval($player->id), 0, 0));
             array_push($participant_ids, $participant_id);
         }
         return $participant_ids;

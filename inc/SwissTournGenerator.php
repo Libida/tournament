@@ -6,14 +6,14 @@ class PMF_SwissTournGenerator
     public static function generateFirstTour($tournament_id)
     {
         $players = PMF_Player::getAllPlayersForTournament($tournament_id);
-        $participant_ids = PMF_TournamentService::create_participants_for_tournament($tournament_id, $players);
+        $participant_ids = PMF_TournamentService::createParticipantsForTournament($tournament_id, $players);
         $first_tour_id = self::createFirstTour($tournament_id);
         self::createGamesForFirstTour($participant_ids, $first_tour_id);
     }
 
     public static function generateNextTour($tournament_id, $winners_count)
     {
-        $participants = PMF_Player::getAllParticipantsSorted($tournament_id);
+        $participants = PMF_Player::getAllParticipantsSortedByRating($tournament_id);
 
         $current_tours_count = self::getCurrentNumOfTours($tournament_id);
         if ($current_tours_count >= self::getNumOfTours(count($participants), $winners_count)) {
@@ -96,14 +96,21 @@ class PMF_SwissTournGenerator
         $second_score = $game->second_participant_score;
         if ($first_score > $second_score) {
             $game->first_participant->rating += 2;
+            $game->second_participant->factor += 2;
         } else if ($second_score > $first_score) {
             $game->second_participant->rating += 2;
+            $game->first_participant->factor += 2;
         } else {
             $game->first_participant->rating += 1;
+            $game->first_participant->factor += 1;
             $game->second_participant->rating += 1;
+            $game->second_participant->factor += 1;
         }
         $sql_update_rating = "UPDATE t_participants SET rating=%d WHERE id=%d";
         PMF_Db::getInstance()->query(sprintf($sql_update_rating, $game->first_participant->rating, $game->first_participant_id));
         PMF_Db::getInstance()->query(sprintf($sql_update_rating, $game->second_participant->rating, $game->second_participant_id));
+        $sql_update_factor = "UPDATE t_participants SET factor=%d WHERE id=%d";
+        PMF_Db::getInstance()->query(sprintf($sql_update_factor, $game->first_participant->factor, $game->first_participant_id));
+        PMF_Db::getInstance()->query(sprintf($sql_update_factor, $game->second_participant->factor, $game->second_participant_id));
     }
 }
