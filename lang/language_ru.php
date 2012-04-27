@@ -1168,12 +1168,14 @@ $PMF_LANG['Albania'] = 'Албания';
 
 $PMF_LANG['none'] = '-';
 $PMF_LANG['ad_menu_tourn_edit'] = 'Турниры';
+$PMF_LANG['ad_menu_deleted_tourns'] = 'Удаленные турниры';
 $PMF_LANG['ad_tourn_new'] = 'Создание нового турнира';
 $PMF_LANG['ad_tourn_owner'] = 'Владелец турнира';
 $PMF_LANG['ad_tourn_added'] = 'Турнир создан.';
 $PMF_LANG['ad_tournedit_header'] = 'Редактирование турнира';
 $PMF_LANG['ad_tournedit_title'] = 'Название';
 $PMF_LANG['ad_tournedit_desc'] = 'Описание';
+$PMF_LANG['ad_tournedit_deleted'] = 'Удален';
 $PMF_LANG['ad_tournedit_submit'] = 'Обновить турнир';
 $PMF_LANG['ad_tournedit_add_players'] = 'Добавить игроков';
 $PMF_LANG['ad_tournedit_generate_tours'] = 'Сгенерировать туры';

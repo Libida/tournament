@@ -1185,12 +1185,14 @@ $PMF_LANG['headerUserControlPanel'] = 'My account';
 
 //C&C
 $PMF_LANG['ad_menu_tourn_edit'] = 'Tournaments';
+$PMF_LANG['ad_menu_deleted_tourns'] = 'Deleted tournaments';
 $PMF_LANG['ad_tourn_new'] = 'Create new tornament';
 $PMF_LANG['ad_tourn_owner'] = 'Tournament owner';
 $PMF_LANG['ad_tourn_added'] = 'Tournament created.';
 $PMF_LANG['ad_tournedit_header'] = 'Edit tournament';
 $PMF_LANG['ad_tournedit_title'] = 'Title';
 $PMF_LANG['ad_tournedit_desc'] = 'Description';
+$PMF_LANG['ad_tournedit_deleted'] = 'Deleted';
 $PMF_LANG['ad_tournedit_submit'] = 'Update tournament';
 $PMF_LANG['ad_tournedit_add_players'] = 'Add players';
 $PMF_LANG['ad_tournedit_generate_tours'] = 'Generate tours';

@@ -65,7 +65,6 @@ if ($permission['edittourn']) {
 
     $tournament = PMF_TournamentService::getById($tournament_id);
     $tournament_started = $tournament->started != 0;
-    print var_dump($tournament_id);
     if ($winners_count && !$tournament_started) {
         PMF_TournamentService::generateTours($tournament_id, $winners_count);
         $tournament_started = true;
@@ -91,6 +90,16 @@ if ($permission['edittourn']) {
         <div class="controls">
             <textarea id="description" name="description" rows="3" cols="80"><?php print $tournament->description ?></textarea>
         </div>
+    </div>
+    <div class="control-group">
+        <label for="deleted"><?php print $PMF_LANG['ad_tournedit_deleted']; ?>:</label>
+        <?php
+        if ($tournament->deleted) {
+            print '<input id="deleted" name="deleted" type="checkbox" checked="checked"/>';
+        } else {
+            print '<input id="deleted" name="deleted" type="checkbox" />';
+        }
+        ?>
     </div>
     <div class="form-actions">
         <input class="btn-primary" type="submit" name="submit" value="<?php print $PMF_LANG['ad_tournedit_submit']; ?>" />

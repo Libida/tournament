@@ -8,19 +8,16 @@ if (!defined('IS_VALID_PHPMYFAQ')) {
 <header>
     <h2><?php print $PMF_LANG['ad_menu_tourn_edit']; ?></h2>
 </header>
-<ul>
-    <li><a href="?action=addtournament"><?php print $PMF_LANG['ad_kateg_add']; ?></a></li>
-</ul>
+    <input type="button" value="<?php print $PMF_LANG['ad_kateg_add']; ?>" onclick="document.location.href='?action=addtournament';">
 <?php
 
 if ($permission['edittourn']) {
 
     if ($action == 'savetournament') {
-
         $tournament_data = array(
             PMF_Filter::filterInput(INPUT_POST, 'name', FILTER_SANITIZE_STRING),
             PMF_Filter::filterInput(INPUT_POST, 'description', FILTER_SANITIZE_STRING),
-            0, 0
+            0, 0, 0
         );
 
         $tournament_id = PMF_TournamentService::addTournament($tournament_data);
@@ -32,28 +29,31 @@ if ($permission['edittourn']) {
     }
 
     if ($action == 'updatetournament') {
+        $deleted = $_POST['deleted'] != null ? 1 : 0;
         $id = PMF_Filter::filterInput(INPUT_POST, 'id', FILTER_VALIDATE_INT);
         $tournament_data = array(
             "name" => PMF_Filter::filterInput(INPUT_POST, 'name', FILTER_SANITIZE_STRING),
-            "description" => PMF_Filter::filterInput(INPUT_POST, 'description', FILTER_SANITIZE_STRING)
+            "description" => PMF_Filter::filterInput(INPUT_POST, 'description', FILTER_SANITIZE_STRING),
+            "deleted" => $deleted
         );
         PMF_TournamentService::updateTournament($id, $tournament_data);
+    }
+
+    if ($action == 'deletetournament') {
+        $tournament_id = $_GET['tourn'];
+        PMF_TournamentService::deleteTournament($tournament_id);
     }
 
     print '<ul>';
     foreach (PMF_TournamentService::getAllTournaments() as $tourn) {
         print '<li>';
         printf("<a href='?action=edittournament&amp;tourn=%s' style='margin-right: 7px;'>%s</a>", $tourn->id, $tourn->name);
-
-        printf('<a href="?action=deletetournament&amp;tourn=%s"><img src="images/delete.png" width="16" height="16" alt="%s" title="%s" border="0" /></a>&nbsp;',
-            $tourn->id,
-            $PMF_LANG['ad_categ_delete'],
-            $PMF_LANG['ad_categ_delete']
-        );
         print '</li>';
     }
 
     print '</ul>';
+
+    printf('<a href="?action=deletedtournaments">%s</a>', $PMF_LANG['ad_menu_deleted_tourns']);
 } else {
     print $PMF_LANG['err_NotAuth'];
 }

@@ -12,7 +12,14 @@ class PMF_TournamentService
 
     public static function getAllTournaments()
     {
-        return PMF_DB_Helper::getAllValues(self::TOURNAMENTS_TABLE);
+        $result = PMF_Db::getInstance()->query(sprintf("SELECT * FROM %s WHERE deleted=0", self::TOURNAMENTS_TABLE));
+        return PMF_Db::getInstance()->fetchAll($result);
+    }
+
+    public static function getAllDeletedTournaments()
+    {
+        $result = PMF_Db::getInstance()->query(sprintf("SELECT * FROM %s WHERE deleted=1", self::TOURNAMENTS_TABLE));
+        return PMF_Db::getInstance()->fetchAll($result);
     }
 
     public static function getById($tourn_id)
@@ -22,7 +29,13 @@ class PMF_TournamentService
 
     public static function updateTournament($id, $data)
     {
-        return PMF_DB_Helper::updateItem(self::TOURNAMENTS_TABLE, $id, $data);
+        PMF_DB_Helper::updateItem(self::TOURNAMENTS_TABLE, $id, $data);
+    }
+
+    public static function deleteTournament($tournament_id)
+    {
+        $sql = sprintf("UPDATE t_tournaments SET deleted=1 WHERE id=%d", $tournament_id);
+        PMF_Db::getInstance()->query($sql);
     }
 
     public static function addPlayerToTournament($tournament_id, $add_player_id)
@@ -39,15 +52,9 @@ class PMF_TournamentService
         PMF_Db::getInstance()->query($sql);
     }
 
-    public static function get_all_games($tournament_id)
-    {
-
-    }
-
-
     public static function createParticipantsForTournament($tournament_id, $players)
     {
-        self::delete_all_participants($tournament_id);
+        self::deleteAllParticipants($tournament_id);
         $participant_ids = array();
         foreach ($players as $player) {
             $participant_id = PMF_DB_Helper::createDBInstance("t_participants", array($tournament_id, intval($player->id), 0, 0));
@@ -56,13 +63,13 @@ class PMF_TournamentService
         return $participant_ids;
     }
 
-    public static function delete_all_participants($tournament_id)
+    public static function deleteAllParticipants($tournament_id)
     {
         $sql_delete_all_participants = sprintf("DELETE FROM t_participants WHERE tournament_id=%s", $tournament_id);
         PMF_Db::getInstance()->query($sql_delete_all_participants);
     }
 
-    public static function delete_all_tours($tournament_id)
+    public static function deleteAllTours($tournament_id)
     {
         $sql_delete_all_tours = sprintf("DELETE FROM t_tours WHERE tournament_id=%s", $tournament_id);
         PMF_Db::getInstance()->query($sql_delete_all_tours);
@@ -93,7 +100,7 @@ class PMF_TournamentService
         return $tours;
     }
 
-    public static function updateTourAttributes($tour)
+    private static function updateTourAttributes($tour)
     {
         $tour_id = $tour->id;
         $tour->games = self::getAllGamesForTour($tour_id);

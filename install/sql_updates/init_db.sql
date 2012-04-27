@@ -403,3 +403,5 @@ ALTER TABLE `t_games` CHANGE `first_paticipant_score` `first_participant_score` 
 ALTER TABLE `t_tournaments` ADD COLUMN `winners_count` int(11) NOT NULL DEFAULT 0;
 
 ALTER TABLE `t_participants` ADD COLUMN `factor` int(11) NOT NULL DEFAULT 0;
+
+ALTER TABLE `t_tournaments` ADD COLUMN `deleted` Bool NOT NULL DEFAULT 0;

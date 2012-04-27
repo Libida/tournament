@@ -368,9 +368,11 @@ if (isset($auth) && in_array(true, $permission)) {
             //tournaments
             case 'savetournament':
             case 'updatetournament':
+            case 'deletetournament':
             case 'tournament':              require_once 'tournament.main.php'; break;
             case 'addtournament':           require_once 'tournament.add.php'; break;
             case 'edittournament':          require_once 'tournament.edit.php'; break;
+            case 'deletedtournaments':      require_once 'tournaments.deleted.php'; break;
             //players
             case 'saveplayer':
             case 'players':                 require_once 'players.main.php'; break;

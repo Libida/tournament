@@ -54,7 +54,7 @@ class PMF_SwissTournGenerator
 
     private static function createFirstTour($tournament_id)
     {
-        PMF_TournamentService::delete_all_tours($tournament_id);
+        PMF_TournamentService::deleteAllTours($tournament_id);
         $first_tour_id = self::createTour($tournament_id, 1);
         return $first_tour_id;
     }

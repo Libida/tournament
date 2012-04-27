@@ -9,7 +9,7 @@ if (!defined('IS_VALID_PHPMYFAQ')) {
     <h2><?php print $PMF_LANG['ad_menu_players']; ?></h2>
 </header>
 <ul>
-    <li><a href="?action=addplayer"><?php print $PMF_LANG['ad_menu_add_player']; ?></a></li>
+    <input type="button" value="<?php print $PMF_LANG['ad_menu_add_player']; ?>" onclick="document.location.href='?action=addplayer';">
 </ul>
 <?php
 
