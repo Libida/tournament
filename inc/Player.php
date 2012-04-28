@@ -92,7 +92,7 @@ class PMF_Player
 
     public static function getAllPlayersThatNotInTournament($tournament_id)
     {
-        $sql = "select * from t_players where id not in (select player_id from t_tournaments_players where tournament_id = %d)";
+        $sql = "SELECT * FROM t_players WHERE id NOT IN (SELECT player_id FROM t_tournaments_players WHERE tournament_id = %d) AND deleted=0";
         $sql = sprintf($sql, $tournament_id);
         return self::fetchPlayers($sql);
     }
