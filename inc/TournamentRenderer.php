@@ -46,9 +46,6 @@ class PMF_TournamentRenderer
         $html .= sprintf("<th>%s</th>", $PMF_LANG['ad_player_rating']);
         $html .= sprintf("<th>%s</th>", $PMF_LANG['ad_player_category']);
         $html .= sprintf("<th>%s</th>", $PMF_LANG['ad_player_degree']);
-        if ($is_admin_menu) {
-            $html .= sprintf("<th>%s</th>", $PMF_LANG['ad_player_degree']);
-        }
         $i = 1;
         foreach ($players as $player) {
             $html .= '<tr>';
@@ -62,7 +59,11 @@ class PMF_TournamentRenderer
             $html .= sprintf("<td>%s</td>", $player->category);
             $html .= sprintf("<td>%s</td>", $player->degree);
             if ($is_admin_menu) {
-                $html .= sprintf("<td>%s</td>", $player->degree);
+                $html .= sprintf('<td><a href="?action=editplayer&amp;player=%s"><img src="/tournament/admin/images/edit.png" width="16" height="16" alt="%s" title="%s" border="0" /></a></td>',
+                    $player->id,
+                    $PMF_LANG['ad_categ_edit_1'],
+                    $PMF_LANG['ad_categ_edit_1']
+                );
             }
             $html .= '</tr>';
         }

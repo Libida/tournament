@@ -3660,7 +3660,7 @@ footer .copyright {
     padding-right: 16px;
 }
 
-.input-text input {
+.input-text input[type='text'],input[type='number'] {
     width:250px;
 }
 

@@ -375,8 +375,10 @@ if (isset($auth) && in_array(true, $permission)) {
             case 'deletedtournaments':      require_once 'tournaments.deleted.php'; break;
             //players
             case 'saveplayer':
+            case 'updateplayer':
             case 'players':                 require_once 'players.main.php'; break;
             case 'addplayer':               require_once 'players.add.php'; break;
+            case 'editplayer':              require_once 'players.edit.php'; break;
             case 'editgame':                require_once 'game.edit.php'; break;
 
             default:                        print "Error"; break;

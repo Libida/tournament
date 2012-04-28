@@ -28,6 +28,11 @@ class PMF_Player
         return PMF_DB_Helper::createDBInstance("t_players", $player_data);
     }
 
+    public static function updatePlayer($id, $player_data)
+    {
+        PMF_DB_Helper::updateItem("t_players", $id, $player_data);
+    }
+
     public static function getParticipantById($participant_id)
     {
         $participant = PMF_DB_Helper::getById("t_participants", $participant_id);
@@ -68,7 +73,7 @@ class PMF_Player
     public static function getPlayerById($player_id)
     {
         $player = PMF_DB_Helper::getById("t_players", $player_id);
-        self::makeOnePlayerAttributesReadable($player);
+        self::makePlayerAttributesReadable($player);
         return $player;
     }
 
@@ -102,11 +107,11 @@ class PMF_Player
     public static function makeAllPlayersAttributesReadable($players)
     {
         foreach ($players as $player) {
-            self::makeOnePlayerAttributesReadable($player);
+            self::makePlayerAttributesReadable($player);
         }
     }
 
-    public static function makeOnePlayerAttributesReadable($player)
+    public static function makePlayerAttributesReadable($player)
     {
         $country_id = $player->country_id;
         $player->country = PMF_DB_Helper::getById("t_countries", $country_id)->name;
