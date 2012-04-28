@@ -74,9 +74,8 @@ class PMF_Player
 
     public static function getAllPlayers()
     {
-        $players = PMF_DB_Helper::getAllValues("t_players");
-        self::makeAllPlayersAttributesReadable($players);
-        return $players;
+        $sql = "SELECT * FROM t_players WHERE deleted=0";
+        return self::fetchPlayers($sql);
     }
 
     public static function getAllPlayersForTournament($tournament_id)

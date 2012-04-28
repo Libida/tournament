@@ -34,11 +34,11 @@ class PMF_TournamentRenderer
         return $html;
     }
 
-    public static function renderPlayersTable($players, $PMF_LANG)
+    public static function renderPlayersTable($players, $PMF_LANG, $is_admin_menu = false)
     {
         $html = '<table id="players" border="1">';
         $html .= sprintf("<th>%s</th>", "№");
-        $html .= sprintf("<th>%s</th>", $PMF_LANG['ad_player_second_name']);
+        $html .= sprintf("<th>%s</th>", $PMF_LANG['ad_player_last_name']);
         $html .= sprintf("<th>%s</th>", $PMF_LANG['ad_player_first_name']);
         $html .= sprintf("<th>%s</th>", $PMF_LANG['ad_player_country']);
         $html .= sprintf("<th>%s</th>", $PMF_LANG['ad_player_birth_year']);
@@ -46,6 +46,9 @@ class PMF_TournamentRenderer
         $html .= sprintf("<th>%s</th>", $PMF_LANG['ad_player_rating']);
         $html .= sprintf("<th>%s</th>", $PMF_LANG['ad_player_category']);
         $html .= sprintf("<th>%s</th>", $PMF_LANG['ad_player_degree']);
+        if ($is_admin_menu) {
+            $html .= sprintf("<th>%s</th>", $PMF_LANG['ad_player_degree']);
+        }
         $i = 1;
         foreach ($players as $player) {
             $html .= '<tr>';
@@ -58,6 +61,9 @@ class PMF_TournamentRenderer
             $html .= sprintf("<td>%s</td>", $player->rating);
             $html .= sprintf("<td>%s</td>", $player->category);
             $html .= sprintf("<td>%s</td>", $player->degree);
+            if ($is_admin_menu) {
+                $html .= sprintf("<td>%s</td>", $player->degree);
+            }
             $html .= '</tr>';
         }
         $html .= '</table>';

@@ -14,10 +14,13 @@ if (!defined('IS_VALID_PHPMYFAQ')) {
 if ($permission['edittourn']) {
 
     if ($action == 'savetournament') {
+        $started = 0;
+        $winners_count = 0;
+        $deleted = 0;
         $tournament_data = array(
             PMF_Filter::filterInput(INPUT_POST, 'name', FILTER_SANITIZE_STRING),
             PMF_Filter::filterInput(INPUT_POST, 'description', FILTER_SANITIZE_STRING),
-            0, 0, 0
+            $started, $winners_count, $deleted
         );
 
         $tournament_id = PMF_TournamentService::addTournament($tournament_data);

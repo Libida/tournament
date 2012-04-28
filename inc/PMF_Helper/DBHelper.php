@@ -52,9 +52,9 @@ class PMF_DB_Helper
         PMF_Db::getInstance()->query($sql);
     }
 
-    public static function fetchAllResults($sql_select_all_games_for_tour)
+    public static function fetchAllResults($sql)
     {
-        $result = PMF_Db::getInstance()->query($sql_select_all_games_for_tour);
+        $result = PMF_Db::getInstance()->query($sql);
         $games = PMF_Db::getInstance()->fetchAll($result);
         return $games;
     }

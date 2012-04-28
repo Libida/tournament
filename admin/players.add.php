@@ -23,62 +23,65 @@ function printOptions($PMF_LANG, $options)
 
 if ($permission["addplayer"]) {
     ?>
-<form class="form-horizontal" action="?action=saveplayer" method="post">
-    <div class="control-group">
-        <label class="control-label" for="first_name"><?php print $PMF_LANG["ad_player_first_name"]; ?>:</label>
-
-        <div class="controls">
-            <input type="text" id="first_name" name="first_name" required="required"/>
-        </div>
+<form action="?action=saveplayer" method="post">
+    <div class="inputs-block">
+        <span class="input-left">
+            <label for="first_name"><?php print $PMF_LANG["ad_player_name"]; ?>:</label>
+        </span>
+        <span>
+            <span class="input-text">
+                <input id="last_name" name="last_name" placeholder="<?php print $PMF_LANG["ad_player_last_name"]; ?>"
+                       required="required">
+            </span>
+            <span class="input-text">
+                <input id="first_name" name="first_name" placeholder="<?php print $PMF_LANG["ad_player_first_name"]; ?>"
+                       required="required">
+            </span>
+        </span>
     </div>
 
-    <div class="control-group">
-        <label class="control-label" for="last_name"><?php print $PMF_LANG["ad_player_second_name"]; ?>:</label>
-
-        <div class="controls">
-            <input type="text" id="last_name" name="last_name" required="required"/>
-        </div>
-    </div>
-
-    <div class="control-group">
-        <label class="control-label" for="country"><?php print $PMF_LANG["ad_player_country"]; ?>:</label>
-
-        <div class="controls">
-            <?php
-            $countries = PMF_Player::getAllCountries();
-            ?>
+    <div class="inputs-block">
+        <span class="input-left">
+            <label for="country"><?php print $PMF_LANG["ad_player_country"]; ?>:</label>
+        </span>
+        <?php
+        $countries = PMF_Player::getAllCountries();
+        ?>
+        <span class="input-text">
             <select id="country" name="country">
                 <?php
                 printOptions($PMF_LANG, $countries);
                 ?>
             </select>
-        </div>
+        </span>
     </div>
 
-    <div class="control-group">
-        <label class="control-label" for="birth_year"><?php print $PMF_LANG["ad_player_birth_year"]; ?>:</label>
-
-        <div class="controls">
-            <input type="number" min="1980" max="2012" value="1990" id="birth_year" name="birth_year"
-                   required="required"/>
-        </div>
+    <div class="inputs-block">
+        <span class="input-left">
+            <label for="birth_year"><?php print $PMF_LANG["ad_player_birth_year"]; ?>:</label>
+        </span>
+        <span class="input-text">
+            <input type="number" min="1980" max="2012" value="1990" id="birth_year" name="birth_year" required="required"/>
+        </span>
     </div>
 
-    <div class="control-group">
-        <label class="control-label" for="gender"><?php print $PMF_LANG["ad_player_gender"]; ?>:</label>
-
-        <div class="controls">
+    <div class="inputs-block">
+        <span class="input-left">
+            <label class="control-label" for="gender"><?php print $PMF_LANG["ad_player_gender"]; ?>:</label>
+        </span>
+        <span class="input-text">
             <select id="gender" name="gender">
                 <option value="1"><?php print $PMF_LANG["ad_player_male"];?></option>
                 <option value="0"><?php print $PMF_LANG["ad_player_female"];?></option>
             </select>
-        </div>
+        </span>
     </div>
 
-    <div class="control-group">
-        <label class="control-label" for="title"><?php print $PMF_LANG["ad_player_title"]; ?>:</label>
-
-        <div class="controls">
+    <div class="inputs-block">
+        <span class="input-left">
+            <label class="control-label" for="title"><?php print $PMF_LANG["ad_player_title"]; ?>:</label>
+        </span>
+        <span class="input-text">
             <?php
             $titles = PMF_Player::getAllTitles();
             ?>
@@ -87,21 +90,23 @@ if ($permission["addplayer"]) {
                 printOptions($PMF_LANG, $titles);
                 ?>
             </select>
-        </div>
+        </span>
     </div>
 
-    <div class="control-group">
-        <label class="control-label" for="rating"><?php print $PMF_LANG["ad_player_rating"]; ?>:</label>
-
-        <div class="controls">
+    <div class="inputs-block">
+        <span class="input-left">
+            <label class="control-label" for="rating"><?php print $PMF_LANG["ad_player_rating"]; ?>:</label>
+        </span>
+        <span class="input-text">
             <input type="number" min="0" value="0" id="rating" name="rating" required="required"/>
-        </div>
+        </span>
     </div>
 
-    <div class="control-group">
-        <label class="control-label" for="category"><?php print $PMF_LANG["ad_player_category"]; ?>:</label>
-
-        <div class="controls">
+    <div class="inputs-block">
+        <span class="input-left">
+            <label class="control-label" for="category"><?php print $PMF_LANG["ad_player_category"]; ?>:</label>
+        </span>
+        <span class="input-text">
             <?php
             $categories = PMF_Player::getAllCategories();
             ?>
@@ -110,13 +115,15 @@ if ($permission["addplayer"]) {
                 printOptions($PMF_LANG, $categories);
                 ?>
             </select>
-        </div>
+        </span>
     </div>
 
-    <div class="control-group">
-        <label class="control-label" for="degree"><?php print $PMF_LANG["ad_player_degree"]; ?>:</label>
 
-        <div class="controls">
+    <div class="inputs-block">
+        <span class="input-left">
+            <label class="control-label" for="degree"><?php print $PMF_LANG["ad_player_degree"]; ?>:</label>
+        </span>
+        <span class="input-text">
             <?php
             $degrees = PMF_Player::getAllDegrees();
             ?>
@@ -125,7 +132,7 @@ if ($permission["addplayer"]) {
                 printOptions($PMF_LANG, $degrees);
                 ?>
             </select>
-        </div>
+        </span>
     </div>
 
     <div class="form-actions">

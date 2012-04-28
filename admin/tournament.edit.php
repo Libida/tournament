@@ -112,7 +112,7 @@ if ($permission['edittourn']) {
         require_once '../common/players.update.values.php';
         print '<table border="1"  width="100%">';
         printf("<th>%s</th>", "");
-        printf("<th>%s</th>", $PMF_LANG['ad_player_second_name']);
+        printf("<th>%s</th>", $PMF_LANG['ad_player_last_name']);
         printf("<th>%s</th>", $PMF_LANG['ad_player_first_name']);
         printf("<th>%s</th>", $PMF_LANG['ad_player_country']);
         printf("<th>%s</th>", $PMF_LANG['ad_player_birth_year']);

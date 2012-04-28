@@ -16,6 +16,7 @@ if (!defined('IS_VALID_PHPMYFAQ')) {
 if ($permission['editplayer']) {
 
     if ($action == 'saveplayer') {
+        $deleted = 0;
         $player_data = array(
             PMF_Filter::filterInput(INPUT_POST, 'first_name', FILTER_SANITIZE_STRING),
             PMF_Filter::filterInput(INPUT_POST, 'last_name', FILTER_SANITIZE_STRING),
@@ -25,7 +26,8 @@ if ($permission['editplayer']) {
             PMF_Filter::filterInput(INPUT_POST, 'title', FILTER_SANITIZE_STRING),
             PMF_Filter::filterInput(INPUT_POST, 'rating', FILTER_SANITIZE_STRING),
             PMF_Filter::filterInput(INPUT_POST, 'category', FILTER_SANITIZE_STRING),
-            PMF_Filter::filterInput(INPUT_POST, 'degree', FILTER_SANITIZE_STRING)
+            PMF_Filter::filterInput(INPUT_POST, 'degree', FILTER_SANITIZE_STRING),
+            $deleted
         );
         $player_id = PMF_Player::addPlayer($player_data);
         if ($player_id) {
@@ -37,7 +39,7 @@ if ($permission['editplayer']) {
 
     $players = PMF_Player::getAllPlayers();
     require_once '../common/players.update.values.php';
-    print PMF_TournamentRenderer::renderPlayersTable($players, $PMF_LANG);
+    print PMF_TournamentRenderer::renderPlayersTable($players, $PMF_LANG, true);
 
 } else {
     print $PMF_LANG['err_NotAuth'];

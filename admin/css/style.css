@@ -3648,3 +3648,22 @@ footer .copyright {
 .close-tour-button {
     margin-top: 15px;
 }
+
+.inputs-block {
+    margin-bottom: 5px;
+}
+
+.input-left {
+    width: 100px;
+    display: inline-block;
+    text-align: right;
+    padding-right: 16px;
+}
+
+.input-text input {
+    width:250px;
+}
+
+.input-text select {
+    width:260px;
+}
