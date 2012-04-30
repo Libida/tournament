@@ -8,7 +8,7 @@ if (!defined('IS_VALID_PHPMYFAQ')) {
 
 $tournament_id = $_REQUEST['tourn'];
 $tournament = PMF_TournamentService::getById($tournament_id);
-$participants = PMF_Player::getAllParticipantsSortedByRating($tournament_id);
+$participants = PMF_TournamentService::getAllParticipantsSortedByRating($tournament_id);
 
 $html = '<section style="margin-top: 20px;">';
 $html .= PMF_TournamentRenderer::renderTournamentStandings($tournament_id, $PMF_LANG);

@@ -1179,8 +1179,11 @@ $PMF_LANG['ad_tournedit_deleted'] = 'Удален';
 $PMF_LANG['ad_tournedit_submit'] = 'Обновить турнир';
 $PMF_LANG['ad_tournedit_add_players'] = 'Добавить игроков';
 $PMF_LANG['ad_tournedit_generate_tours'] = 'Сгенерировать туры';
-$PMF_LANG['ad_tournedit_generate_tours_disabled'] = 'Количество игроков должно быть больше 7-ми и четным';
-$PMF_LANG['ad_tournedit_generate_tours_winners_count'] = 'Количестов победителей';
+$PMF_LANG['ad_tournedit_generate_tours_disabled'] = 'Количество игроков должно быть четным';
+$PMF_LANG['ad_tournedit_generate_tours_winners_count'] = 'Количество победителей';
+$PMF_LANG['ad_tournedit_generate_tours_type'] = 'Система проведения';
+$PMF_LANG['ad_tournedit_generate_tours_swiss'] = 'Швейцарская';
+$PMF_LANG['ad_tournedit_generate_tours_round'] = 'Круговая';
 
 $PMF_LANG['tour'] = 'Тур';
 $PMF_LANG['ad_tour_close'] = 'Завершить тур';

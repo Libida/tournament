@@ -40,30 +40,15 @@ class PMF_Player
         return $participant;
     }
 
-
-    public static function getAllParticipantsSortedByRating($tournament_id)
+    private static function compareByRating($player_a, $player_b)
     {
-        $sql = sprintf("SELECT * FROM t_participants WHERE tournament_id=%d", $tournament_id);
-        $participants = PMF_DB_Helper::fetchAllResults($sql);
-        foreach ($participants as $participant) {
-            self::addPlayerToParticipant($participant);
-            $participant->name = $participant->player->last_name . " " . $participant->player->first_name;
-        }
-        usort($participants, 'self::compareByRating');
-        return $participants;
-    }
-
-    private static function compareByRating($participant_a, $participant_b)
-    {
-        $retval = $participant_b->rating - $participant_a->rating;
+        $retval = $player_b->rating - $player_a->rating;
         if ($retval == 0)
-            $retval = $participant_b->factor - $participant_a->factor;
-        if($retval == 0)
-            return strnatcmp($participant_a->name, $participant_b->name);
+            return strnatcmp($player_a->last_name, $player_b->last_name);
         return $retval;
     }
 
-    private static function addPlayerToParticipant($participant)
+    public static function addPlayerToParticipant($participant)
     {
         $player_id = $participant->player_id;
         $player = self::getPlayerById($player_id);
@@ -80,14 +65,18 @@ class PMF_Player
     public static function getAllPlayers()
     {
         $sql = "SELECT * FROM t_players WHERE deleted=0";
-        return self::fetchPlayers($sql);
+        $players = self::fetchPlayers($sql);
+        usort($players, 'self::compareByRating');
+        return $players;
     }
 
     public static function getAllPlayersForTournament($tournament_id)
     {
         $sql = "SELECT * FROM t_players AS p INNER JOIN t_tournaments_players AS tp ON p.id = tp.player_id WHERE tp.tournament_id = %d";
         $sql = sprintf($sql, $tournament_id);
-        return self::fetchPlayers($sql);
+        $players = self::fetchPlayers($sql);
+        usort($players, 'self::compareByRating');
+        return $players;
     }
 
     public static function getAllPlayersThatNotInTournament($tournament_id)
@@ -124,5 +113,10 @@ class PMF_Player
 
         $degree_id = $player->degree_id;
         $player->degree = PMF_DB_Helper::getById("t_degrees", $degree_id)->name;
+    }
+
+    public static function getParticipantRating($participant_id) {
+        $participant = self::getParticipantById($participant_id);
+        return $participant->rating;
     }
 }

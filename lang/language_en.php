@@ -1196,8 +1196,11 @@ $PMF_LANG['ad_tournedit_deleted'] = 'Deleted';
 $PMF_LANG['ad_tournedit_submit'] = 'Update tournament';
 $PMF_LANG['ad_tournedit_add_players'] = 'Add players';
 $PMF_LANG['ad_tournedit_generate_tours'] = 'Generate tours';
-$PMF_LANG['ad_tournedit_generate_tours_disabled'] = 'Num of players should be greater than 7 and even';
+$PMF_LANG['ad_tournedit_generate_tours_disabled'] = 'Num of players must be even';
 $PMF_LANG['ad_tournedit_generate_tours_winners_count'] = 'Winners count';
+$PMF_LANG['ad_tournedit_generate_tours_type'] = 'Type';
+$PMF_LANG['ad_tournedit_generate_tours_swiss'] = 'Swiss';
+$PMF_LANG['ad_tournedit_generate_tours_round'] = 'Round';
 
 
 $PMF_LANG['tour'] = 'Tour';

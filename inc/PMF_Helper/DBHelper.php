@@ -55,7 +55,7 @@ class PMF_DB_Helper
     public static function fetchAllResults($sql)
     {
         $result = PMF_Db::getInstance()->query($sql);
-        $games = PMF_Db::getInstance()->fetchAll($result);
-        return $games;
+        $result = PMF_Db::getInstance()->fetchAll($result);
+        return $result;
     }
 }

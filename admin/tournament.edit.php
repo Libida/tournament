@@ -11,7 +11,9 @@
 
     function submitGenerateTours() {
         var winnersCount = $("#winnersCount").val();
-        window.location.replace(getCurrentURL() + "&generatetours=" + winnersCount);
+        var toursType = $("#toursType").val();
+        window.location.replace(getCurrentURL() + "&generatetours=" + winnersCount + "&type=" + toursType);
+
     }
 
     function submitCloseTour() {
@@ -19,6 +21,14 @@
         window.location.replace(getCurrentURL() + "&closetour=" + currentTourIndex);
     }
 
+    function setSubmitToStartAvailabilityForSwissSystem() {
+        var participantsCount = $("tr").length - 1;
+        if (participantsCount % 2 == 1) {
+            $("#generateTours").attr('disabled', 'disabled');
+        } else {
+            $("#generateTours").removeAttr('disabled', 'disabled');
+        }
+    }
     $(document).ready(function() {
         $("#listOfUsers").live('change', function() {
             submitAddPlayer()
@@ -31,6 +41,17 @@
         $("#closeTour").live('click', function() {
             submitCloseTour();
         });
+        $("#toursType").live('change', function() {
+            if ($("#toursType").val() == 0) {
+                setSubmitToStartAvailabilityForSwissSystem();
+            }
+            if ($("#toursType").val() == 1) {
+                $("#generateTours").removeAttr('disabled', 'disabled');
+            }
+        });
+        if ($("#toursType").val() == 0) {
+            setSubmitToStartAvailabilityForSwissSystem();
+        }
     });
 </script>
 
@@ -66,7 +87,8 @@ if ($permission['edittourn']) {
     $tournament = PMF_TournamentService::getById($tournament_id);
     $tournament_started = $tournament->started != 0;
     if ($winners_count && !$tournament_started) {
-        PMF_TournamentService::generateTours($tournament_id, $winners_count);
+        $tours_type = $_GET['type'];
+        PMF_TournamentService::generateTours($tournament_id, $winners_count, $tours_type);
         $tournament_started = true;
     }
     ?>
@@ -164,8 +186,7 @@ if ($permission['edittourn']) {
                 ?>
             </select>
             <?php
-            if (count($players) >= 8 && count($players) % 2 == 0) {
-                printf("<input id='generateTours' type='button' value='%s'/>", $PMF_LANG['ad_tournedit_generate_tours']);
+            if (count($players) >= 4) {
                 ?>
                 <label for="winnersCount" style="display: inline;"><?php print $PMF_LANG['ad_tournedit_generate_tours_winners_count'] . ":"; ?></label>
                 <select id="winnersCount" style="width: 50px;">
@@ -176,8 +197,14 @@ if ($permission['edittourn']) {
                     <option value="5">5</option>
                     <option value="6">6</option>
                 </select>
+                <div>
+                    <label for="toursType" style="display: inline;"><?php print $PMF_LANG['ad_tournedit_generate_tours_type'] . ":"; ?></label>
+                    <select id="toursType" style="width: 250px;">
+                        <option value="0"><?php print $PMF_LANG['ad_tournedit_generate_tours_swiss'] ?></option>
+                        <option value="1"><?php print $PMF_LANG['ad_tournedit_generate_tours_round'] ?></option>
+                    </select>
+                </div>
                 <?php
-            } else {
                 printf("<input id='generateTours' type='button' value='%s' disabled='disabled' title='%s'/>",
                     $PMF_LANG['ad_tournedit_generate_tours'], $PMF_LANG['ad_tournedit_generate_tours_disabled']);
             }
@@ -185,7 +212,6 @@ if ($permission['edittourn']) {
         </div>
         <?php
     } else {
-        $participants = PMF_Player::getAllParticipantsSortedByRating($tournament_id);
         print '<section class="standings">';
         printf('<header><h3>%s</h3></header>', $PMF_LANG['ad_standings']);
         print PMF_TournamentRenderer::renderTournamentStandings($tournament_id, $PMF_LANG);

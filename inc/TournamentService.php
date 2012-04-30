@@ -81,13 +81,12 @@ class PMF_TournamentService
         PMF_Db::getInstance()->query($sql_remove_all_games_from_first_tour);
     }
 
-    public static function generateTours($tournament_id, $winners_count)
+    public static function generateTours($tournament_id, $winners_count, $tours_type)
     {
-        PMF_SwissTournGenerator::generateFirstTour($tournament_id, $winners_count);
-        $sql_set_tournament_started = sprintf("UPDATE t_tournaments SET started=%d WHERE id=%s", 1, $tournament_id);
-        PMF_Db::getInstance()->query($sql_set_tournament_started);
-        $sql_set_winners_count = sprintf("UPDATE t_tournaments SET winners_count=%d WHERE id=%s", $winners_count, $tournament_id);
-        PMF_Db::getInstance()->query($sql_set_winners_count);
+        $sql_update_tournament = "UPDATE t_tournaments SET started=%d, winners_count=%d, tours_type=%d WHERE id=%s";
+        $sql_update_tournament = sprintf($sql_update_tournament, 1, $winners_count, $tours_type, $tournament_id);
+        PMF_Db::getInstance()->query($sql_update_tournament);
+        self::getToursGenerator($tournament_id)->generateFirstTour($tournament_id, $winners_count);
     }
 
     public static function getTours($tournament_id)
@@ -162,10 +161,26 @@ class PMF_TournamentService
 
         self::updateTourAttributes($tour);
         foreach ($tour->games as $game) {
-            PMF_SwissTournGenerator::updateParticipantsRating($game);
+            self::getToursGenerator($tournament_id)->updateParticipantsRating($game);
         }
 
         $tournament = PMF_DB_Helper::getById(self::TOURNAMENTS_TABLE, $tournament_id);
-        return PMF_SwissTournGenerator::generateNextTour($tour->tournament_id, $tournament->winners_count);
+        return self::getToursGenerator($tournament_id)->generateNextTour($tour->tournament_id, $tournament->winners_count);
+    }
+
+    private static function getToursGenerator($tournament_id)
+    {
+        $tournament = PMF_DB_Helper::getById(self::TOURNAMENTS_TABLE, $tournament_id);
+        $tours_type = $tournament->tours_type;
+        if ($tours_type == 0) {
+            return new PMF_SwissToursGenerator();
+        }
+        if ($tours_type == 1) {
+            return new PMF_RoundToursGenerator();
+        }
+    }
+
+    public static function getAllParticipantsSortedByRating($tournament_id) {
+        return self::getToursGenerator($tournament_id)->getAllParticipantsSortedByRating($tournament_id);
     }
 }
