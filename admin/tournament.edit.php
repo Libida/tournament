@@ -91,6 +91,13 @@ if ($permission['edittourn']) {
         PMF_TournamentService::generateTours($tournament_id, $winners_count, $tours_type);
         $tournament_started = true;
     }
+
+    $first_new_score = $_REQUEST['first'];
+    $second_new_score = $_REQUEST['second'];
+    if (isset($first_new_score) && isset($second_new_score)) {
+        $game_id = $_REQUEST['game'];
+        PMF_TournamentService::updateGameScore($game_id, $first_new_score, $second_new_score);
+    }
     ?>
 
 <header>

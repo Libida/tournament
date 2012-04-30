@@ -4,8 +4,9 @@
             var gameId = $("#gameId").val();
             var firstScore = $(".first").val();
             var secondScore = $(".second").val();
-            window.location.replace(window.location.pathname + "?action=editgame&game=" +
-                gameId + "&first=" + firstScore + "&second=" + secondScore);
+            var tournamentId = $("#tournamentId").val();
+            window.location.replace(window.location.pathname + "?action=edittournament&game=" +
+                gameId + "&first=" + firstScore + "&second=" + secondScore + "&tourn=" + tournamentId);
             return false;
         });
     });
@@ -35,14 +36,6 @@ function printScoreOptions($selected_value)
 if ($permission['editgame']) {
     $game_id = PMF_Filter::filterInput(INPUT_GET, 'game', FILTER_VALIDATE_INT, 0);
     $game = PMF_TournamentService::getGameById($game_id);
-
-    $first_new_score = $_REQUEST['first'];
-    $second_new_score = $_REQUEST['second'];
-    print $_REQUEST['from'];
-    if (isset($first_new_score) && isset($second_new_score)) {
-        PMF_TournamentService::updateGameScore($game_id, $first_new_score, $second_new_score);
-        header('Location: ?action=edittournament&tourn=' . $game->first_participant->tournament_id);
-    }
     ?>
 
 <header>
@@ -50,6 +43,7 @@ if ($permission['editgame']) {
 </header>
 
 <form class="form-horizontal" action="<?php print $_SERVER['HTTP_REFERER']; ?>" method="post">
+    <input type="hidden" id="tournamentId" value="<?php print $game->first_participant->tournament_id; ?>"/>
     <input type="hidden" id="gameId" value="<?php print $game_id; ?>"/>
     <input type="hidden" id="fromURL" value="<?php print $_SERVER['HTTP_REFERER']; ?>"/>
     <table border="0" width="100%">
