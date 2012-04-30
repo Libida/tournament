@@ -8,9 +8,11 @@ if (!defined('IS_VALID_PHPMYFAQ')) {
 $players = PMF_Player::getAllPlayers();
 require 'common/players.update.values.php';
 
-$html = PMF_TournamentRenderer::renderPlayersTable($players, $PMF_LANG);
+$header = $PMF_LANG['ad_menu_players'];
+$table = PMF_TournamentRenderer::renderPlayersTable($players, $PMF_LANG);
 
 $tpl->parse('writeContent', array(
-    "playersTable" => $html
+    "header" => $header,
+    "playersTable" => $table
 ));
 $tpl->merge('writeContent', 'index');

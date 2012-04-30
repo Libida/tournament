@@ -20,7 +20,7 @@ if ($permission['edittourn']) {
         $type = 0;
         $tournament_data = array(
             PMF_Filter::filterInput(INPUT_POST, 'name', FILTER_SANITIZE_STRING),
-            PMF_Filter::filterInput(INPUT_POST, 'description', FILTER_SANITIZE_STRING),
+            html_entity_decode($_POST['description']),
             $started, $winners_count, $deleted, $type
         );
 
@@ -35,9 +35,10 @@ if ($permission['edittourn']) {
     if ($action == 'updatetournament') {
         $deleted = $_POST['deleted'] != null ? 1 : 0;
         $id = PMF_Filter::filterInput(INPUT_POST, 'id', FILTER_VALIDATE_INT);
+        $description = html_entity_decode($_POST['description']);
         $tournament_data = array(
             "name" => PMF_Filter::filterInput(INPUT_POST, 'name', FILTER_SANITIZE_STRING),
-            "description" => PMF_Filter::filterInput(INPUT_POST, 'description', FILTER_SANITIZE_STRING),
+            "description" => $description,
             "deleted" => $deleted
         );
         PMF_TournamentService::updateTournament($id, $tournament_data);

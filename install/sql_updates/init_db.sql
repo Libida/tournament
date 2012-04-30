@@ -411,3 +411,5 @@ ALTER TABLE `t_players` ADD COLUMN `deleted` Bool NOT NULL DEFAULT 0;
 ALTER TABLE `t_tournaments` ADD COLUMN `tours_type` int(11) NOT NULL DEFAULT 0;
 
 ALTER TABLE `t_participants` CHANGE `rating` `rating` float NOT NULL DEFAULT 0;
+
+ALTER TABLE `t_tournaments` CHANGE `description` `description` varchar(7000) NOT NULL;
