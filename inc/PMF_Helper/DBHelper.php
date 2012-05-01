@@ -27,8 +27,7 @@ class PMF_DB_Helper
 
     public static function getAllValues($table_name)
     {
-        $result = PMF_Db::getInstance()->query(sprintf("SELECT * FROM %s", $table_name));
-        return PMF_Db::getInstance()->fetchAll($result);
+        return self::fetchAllResults(sprintf("SELECT * FROM %s", $table_name));
     }
 
     public static function getById($table_name, $id)
@@ -55,7 +54,6 @@ class PMF_DB_Helper
     public static function fetchAllResults($sql)
     {
         $result = PMF_Db::getInstance()->query($sql);
-        $result = PMF_Db::getInstance()->fetchAll($result);
-        return $result;
+        return PMF_Db::getInstance()->fetchAll($result);
     }
 }
