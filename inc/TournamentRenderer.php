@@ -10,23 +10,30 @@ class PMF_TournamentRenderer
         $html .= sprintf('<th>%s</th>', $PMF_LANG['ad_standings_name']);
         $html .= sprintf('<th>%s</th>', $PMF_LANG['ad_player_country']);
         $html .= sprintf('<th>%s</th>', $PMF_LANG['ad_standings_points']);
+        $html .= sprintf('<th style="width: 30px;">%s</th>', 'K');
         $tournament = PMF_TournamentService::getById($tournament_id);
         $winners_count = $tournament->winners_count;
-        $i = 1;
+        $place = 1;
+        $prev_participant = null;
         $participants = PMF_TournamentService::getAllParticipantsSortedByRating($tournament_id);
         foreach ($participants as $participant) {
             $html .= '<tr>';
-            if ($i <= $winners_count) {
-                $html .= sprintf("<td class='winner'><strong>%d</strong></td>", $i);
+            if ($participant->rating == $prev_participant->rating && $participant->factor == $prev_participant->factor) {
+                $place--;
+            }
+            if ($place <= $winners_count) {
+                $html .= sprintf("<td class='winner'><strong>%d</strong></td>", $place++);
                 $html .= sprintf("<td class='winner'><strong>%s</strong></td>", $participant->name);
             } else {
-                $html .= sprintf("<td>%d</td>", $i);
+                $html .= sprintf("<td>%d</td>", $place++);
                 $html .= sprintf("<td>%s</td>", $participant->name);
             }
-            $i++;
+            $prev_participant = $participant;
+
             $html .= sprintf("<td style='text-align: center;'><img src='/tournament/images/countries/16/%s.png' title='%s'></td>",
                 $participant->player->country, $participant->player->country_title);
             $html .= sprintf("<td style='text-align: center;'>%s</td>", $participant->rating);
+            $html .= sprintf("<td style='text-align: center;'>%s</td>", $participant->factor);
             $html .= '</tr>';
         }
         $html .= '</table>';
@@ -35,6 +42,9 @@ class PMF_TournamentRenderer
 
     public static function renderPlayersTable($players, $PMF_LANG, $is_admin_menu = false)
     {
+        if (count($players) == 0) {
+            return "";
+        }
         $html = '<table id="players" border="1">';
         $html .= sprintf("<th>%s</th>", "№");
         $html .= sprintf("<th>%s</th>", $PMF_LANG['ad_player_last_name']);
