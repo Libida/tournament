@@ -94,12 +94,12 @@ class PMF_TournamentService
         $sql_get_tours = sprintf("SELECT * FROM t_tours WHERE tournament_id=%s ORDER BY tour_index", $tournament_id);
         $tours = PMF_DB_Helper::fetchAllResults($sql_get_tours);
         foreach ($tours as $tour) {
-            self::updateTourAttributes($tour);
+            self::addGamesObjectsToTour($tour);
         }
         return $tours;
     }
 
-    private static function updateTourAttributes($tour)
+    private static function addGamesObjectsToTour($tour)
     {
         $tour_id = $tour->id;
         $tour->games = self::getAllGamesForTour($tour_id);
@@ -150,7 +150,7 @@ class PMF_TournamentService
         PMF_Db::getInstance()->query($sql);
     }
 
-    public static function closeTour($tournament_id, $tour_id)
+    public static function closeTourAndGenerateNext($tournament_id, $tour_id)
     {
         $tour = PMF_DB_Helper::getById("t_tours", $tour_id);
         if ($tour->finished) {
@@ -159,13 +159,30 @@ class PMF_TournamentService
         $sql_close_tour = sprintf("UPDATE t_tours SET finished=1 WHERE id=%d", $tour_id);
         PMF_Db::getInstance()->query($sql_close_tour);
 
-        self::updateTourAttributes($tour);
-        foreach ($tour->games as $game) {
+        $tournament = PMF_DB_Helper::getById(self::TOURNAMENTS_TABLE, $tournament_id);
+        self::getToursGenerator($tournament_id)->generateNextTour($tour->tournament_id, $tournament->winners_count);
+    }
+
+    public static function updateStandings($tournament_id)
+    {
+        $games = self::getAllGamesForTournament($tournament_id);
+        self::resetStandings($tournament_id);
+        foreach ($games as $game) {
             self::getToursGenerator($tournament_id)->updateParticipantsRating($game);
         }
+    }
 
-        $tournament = PMF_DB_Helper::getById(self::TOURNAMENTS_TABLE, $tournament_id);
-        return self::getToursGenerator($tournament_id)->generateNextTour($tour->tournament_id, $tournament->winners_count);
+    private static function getAllGamesForTournament($tournament_id)
+    {
+        $sql = "SELECT * FROM t_games g INNER JOIN t_tours t ON g.tour_id=t.id WHERE t.tournament_id=%s";
+        $sql = sprintf($sql, $tournament_id);
+        return PMF_DB_Helper::fetchAllResults($sql);
+    }
+
+    private static function resetStandings($tournament_id)
+    {
+        $sql = sprintf("UPDATE t_participants SET rating=0, factor=0 WHERE tournament_id=%s", $tournament_id);
+        PMF_Db::getInstance()->query($sql);
     }
 
     private static function getToursGenerator($tournament_id)

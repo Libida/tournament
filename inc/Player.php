@@ -119,4 +119,9 @@ class PMF_Player
         $participant = self::getParticipantById($participant_id);
         return $participant->rating;
     }
+
+    public static function getParticipantFactor($participant_id) {
+        $participant = self::getParticipantById($participant_id);
+        return $participant->factor;
+    }
 }

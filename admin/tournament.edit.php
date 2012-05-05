@@ -81,7 +81,7 @@ if ($permission['edittourn']) {
     }
 
     if ($tour_id_to_close != 0) {
-        PMF_TournamentService::closeTour($tournament_id, $tour_id_to_close);
+        PMF_TournamentService::closeTourAndGenerateNext($tournament_id, $tour_id_to_close);
     }
 
     $tournament = PMF_TournamentService::getById($tournament_id);
@@ -97,6 +97,7 @@ if ($permission['edittourn']) {
     if (isset($first_new_score) && isset($second_new_score)) {
         $game_id = $_REQUEST['game'];
         PMF_TournamentService::updateGameScore($game_id, $first_new_score, $second_new_score);
+        PMF_TournamentService::updateStandings($tournament_id);
     }
     ?>
 
@@ -251,13 +252,11 @@ if ($permission['edittourn']) {
                 printf("<td>%s</td>", $game->second_name);
 
                 print "<td><div style='padding-left: 15px'> ";
-                if (!$tour->finished) {
-                    printf('<a href="?action=editgame&amp;game=%s"><img src="images/edit.png" width="16" height="16" alt="%s" title="%s" border="0" /></a>&nbsp;',
-                        $game->id,
-                        $PMF_LANG['game_edit_score'],
-                        $PMF_LANG['game_edit_score']
-                    );
-                }
+                printf('<a href="?action=editgame&amp;game=%s"><img src="images/edit.png" width="16" height="16" alt="%s" title="%s" border="0" /></a>&nbsp;',
+                    $game->id,
+                    $PMF_LANG['game_edit_score'],
+                    $PMF_LANG['game_edit_score']
+                );
                 print "</div></td>";
                 print "</tr>";
             }
