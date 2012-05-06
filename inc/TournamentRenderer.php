@@ -4,13 +4,16 @@ class PMF_TournamentRenderer
 {
     public static function renderTournamentStandings($tournament_id, $PMF_LANG)
     {
-        $html = '<table id="standings" border="1">';
+        $html = '<table id="standings" class="standings" border="1">';
         $html .= sprintf('<th style="width: 30px;">%s</th>', '№');
 
         $html .= sprintf('<th>%s</th>', $PMF_LANG['ad_standings_name']);
-        $html .= sprintf('<th>%s</th>', $PMF_LANG['ad_player_country']);
+        $html .= sprintf('<th >%s</th>', $PMF_LANG['ad_player_country']);
         $html .= sprintf('<th>%s</th>', $PMF_LANG['ad_standings_points']);
         $html .= sprintf('<th style="width: 30px;">%s</th>', 'K');
+        $html .= sprintf('<th style="width: 30px;">%s</th>', $PMF_LANG['ad_standings_wins']);
+        $html .= sprintf('<th style="width: 30px;">%s</th>', $PMF_LANG['ad_standings_loses']);
+        $html .= sprintf('<th style="width: 30px;">%s</th>', $PMF_LANG['ad_standings_draws']);
         $tournament = PMF_TournamentService::getById($tournament_id);
         $winners_count = $tournament->winners_count;
         $place = 1;
@@ -34,6 +37,10 @@ class PMF_TournamentRenderer
                 $participant->player->country, $participant->player->country_title);
             $html .= sprintf("<td style='text-align: center;'>%s</td>", $participant->rating);
             $html .= sprintf("<td style='text-align: center;'>%s</td>", $participant->factor);
+
+            $html .= sprintf("<td style='text-align: center;'>%s</td>", $participant->wins);
+            $html .= sprintf("<td style='text-align: center;'>%s</td>", $participant->loses);
+            $html .= sprintf("<td style='text-align: center;'>%s</td>", $participant->draws);
             $html .= '</tr>';
         }
         $html .= '</table>';

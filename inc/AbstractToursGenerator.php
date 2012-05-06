@@ -24,7 +24,28 @@ abstract class PMF_AbstractToursGenerator
             $participant->name = $participant->player->last_name . " " . $participant->player->first_name;
         }
         usort($participants, 'self::compareByRating');
+        $this->updateWinsLosesDraws($participants);
         return $participants;
+    }
+
+    private function updateWinsLosesDraws($participants)
+    {
+        foreach ($participants as $participant) {
+            $sql_wins = "select * from t_games where (first_participant_id=%d
+                            and first_participant_score > second_participant_score) or (second_participant_id=%d and second_participant_score > first_participant_score)";
+            $sql_loses = "select * from t_games where (first_participant_id=%d
+                            and first_participant_score < second_participant_score) or (second_participant_id=%d and second_participant_score < first_participant_score)";
+            $sql_draws = "select * from t_games where (first_participant_id=%d
+                            and first_participant_score = second_participant_score) or (second_participant_id=%d and second_participant_score = first_participant_score)";
+
+            $sql_wins = sprintf($sql_wins, $participant->id, $participant->id);
+            $sql_loses = sprintf($sql_loses, $participant->id, $participant->id);
+            $sql_draws = sprintf($sql_draws, $participant->id, $participant->id);
+
+            $participant->wins = count(PMF_DB_Helper::fetchAllResults($sql_wins));
+            $participant->loses = count(PMF_DB_Helper::fetchAllResults($sql_loses));
+            $participant->draws = count(PMF_DB_Helper::fetchAllResults($sql_draws));
+        }
     }
 
     protected function compareByRating($participant_a, $participant_b)

@@ -68,8 +68,8 @@ function printOptions($PMF_LANG, $options, $selected_value_id)
     <span class="input-text">
         <select id="gender" name="gender">
             <?php
-                $male = $player->male;
-                if ($male) {
+                $is_male = $player->male;
+                if ($is_male) {
                     printf('<option value="1" selected>%s</option>', $PMF_LANG["ad_player_male"]);
                     printf('<option value="0">%s</option>', $PMF_LANG["ad_player_female"]);
                 } else {
