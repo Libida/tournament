@@ -3654,7 +3654,7 @@ footer .copyright {
 }
 
 .input-left {
-    width: 100px;
+    width: 150px;
     display: inline-block;
     text-align: right;
     padding-right: 16px;
@@ -3662,6 +3662,11 @@ footer .copyright {
 
 .input-text input[type='text'],input[type='number'] {
     width:250px;
+}
+
+.input-text textarea {
+    width:500px;
+    height: 150px;
 }
 
 .input-text select {

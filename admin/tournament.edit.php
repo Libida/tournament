@@ -50,32 +50,80 @@ if ($permission['edittourn']) {
     <h2><?php print $PMF_LANG['ad_tournedit_header'] . '&nbsp' . $tournament->name; ?></h2>
 </header>
 
-<form class="form-horizontal" action="?action=updatetournament" method="post">
+<form action="?action=updatetournament" method="post">
     <input id="tournId" type="hidden" name="id" value="<?php print $tournament_id; ?>" />
 
-    <div class="control-group">
-        <label><?php print $PMF_LANG['ad_tournedit_title']; ?>:</label>
-        <div class="controls">
+    <div class="inputs-block">
+        <span class="input-left">
+            <label class="control-label" for="name"><?php print $PMF_LANG['ad_tournedit_title']; ?>:</label>
+        </span>
+        <span class="input-text">
             <input type="text" id="name" name="name" value="<?php print $tournament->name; ?>" />
-        </div>
+        </span>
     </div>
 
-    <div class="control-group">
-        <label><?php print $PMF_LANG['ad_tournedit_desc']; ?>:</label>
-        <div class="controls">
+    <div class="inputs-block">
+        <span class="input-left">
+            <label class="control-label" for="description"><?php print $PMF_LANG['ad_tournedit_desc']; ?>:</label>
+        </span>
+        <span class="input-text">
             <textarea id="description" name="description" rows="3" cols="80"><?php print $tournament->description ?></textarea>
-        </div>
+        </span>
     </div>
-    <div class="control-group">
-        <label for="deleted"><?php print $PMF_LANG['ad_tournedit_deleted']; ?>:</label>
-        <?php
-        if ($tournament->deleted) {
-            print '<input id="deleted" name="deleted" type="checkbox" checked="checked"/>';
-        } else {
-            print '<input id="deleted" name="deleted" type="checkbox" />';
+
+    <div class="inputs-block">
+        <span class="input-left">
+            <label class="control-label" for="deleted"><?php print $PMF_LANG['ad_tournedit_deleted']; ?>:</label>
+        </span>
+        <span class="input-text">
+            <?php
+            if ($tournament->deleted) {
+                print '<input id="deleted" name="deleted" type="checkbox" checked="checked"/>';
+            } else {
+                print '<input id="deleted" name="deleted" type="checkbox" />';
+            }
+            ?>
+        </span>
+    </div>
+    <?php
+        if ($tournament->started) {
+    ?>
+            <div class="inputs-block">
+                <span class="input-left">
+                    <label class="control-label"><?php print $PMF_LANG['ad_tournedit_generate_tours_type']; ?>:</label>
+                </span>
+                <span class="input-text">
+                    <?php
+                        if ($tournament->tours_type == 0) {
+                            print $PMF_LANG['ad_tournedit_generate_tours_swiss'];
+                        } else if ($tournament->tours_type == 1) {
+                            print $PMF_LANG['ad_tournedit_generate_tours_round'];
+                        }
+                    ?>
+                </span>
+            </div>
+    <?php
         }
-        ?>
+    ?>
+    <div class="inputs-block">
+        <span class="input-left">
+            <label class="control-label" for="pointsSystem"><?php print $PMF_LANG['ad_tournedit_points_system']; ?>:</label>
+        </span>
+        <span class="input-text">
+            <select id="pointsSystem" name="pointsSystem">
+                <?php
+                    if ($tournament->points_system == '3-1-0') {
+                        printf('<option value="3-1-0" selected="selected">%s</option>', '3 - 1 - 0');
+                        printf('<option value="1-0.5-0">%s</option>', '1 - 0.5 - 0');
+                    } else {
+                        printf('<option value="3-1-0">%s</option>', '3 - 1 - 0');
+                        printf('<option value="1-0.5-0" selected="selected">%s</option>', '1 - 0.5 - 0');
+                    }
+                ?>
+            </select>
+        </span>
     </div>
+
     <div class="form-actions">
         <input class="btn-primary" type="submit" name="submit" value="<?php print $PMF_LANG['ad_tournedit_submit']; ?>" />
     </div>

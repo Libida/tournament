@@ -103,5 +103,34 @@ abstract class PMF_AbstractToursGenerator
         return $tour_id;
     }
 
-    public abstract function  updateParticipantsRating($game);
+    public function updateParticipantsRating($game, $points_for_win, $points_for_draw)
+    {
+        $first_score = $game->first_participant_score;
+        $second_score = $game->second_participant_score;
+        if ($first_score == 0 && $second_score == 0) {
+            return;
+        }
+        $first_rating = PMF_Player::getParticipantRating($game->first_participant_id);
+        $second_rating = PMF_Player::getParticipantRating($game->second_participant_id);
+        $first_factor = PMF_Player::getParticipantFactor($game->first_participant_id);
+        $second_factor = PMF_Player::getParticipantFactor($game->second_participant_id);
+        if ($first_score > $second_score) {
+            $first_rating += $points_for_win;
+            $second_factor += $points_for_win;
+        } else if ($second_score > $first_score) {
+            $second_rating += $points_for_win;
+            $first_factor += $points_for_win;
+        } else {
+            $first_rating += $points_for_draw;
+            $first_factor += $points_for_draw;
+            $second_rating += $points_for_draw;
+            $second_factor += $points_for_draw;
+        }
+        $sql_update_rating = "UPDATE t_participants SET rating=%f WHERE id=%d";
+        PMF_Db::getInstance()->query(sprintf($sql_update_rating, $first_rating, $game->first_participant_id));
+        PMF_Db::getInstance()->query(sprintf($sql_update_rating, $second_rating, $game->second_participant_id));
+        $sql_update_factor = "UPDATE t_participants SET factor=%f WHERE id=%d";
+        PMF_Db::getInstance()->query(sprintf($sql_update_factor, $first_factor, $game->first_participant_id));
+        PMF_Db::getInstance()->query(sprintf($sql_update_factor, $second_factor, $game->second_participant_id));
+    }
 }

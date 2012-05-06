@@ -1192,6 +1192,7 @@ $PMF_LANG['ad_tourn_added'] = 'Tournament created.';
 $PMF_LANG['ad_tournedit_header'] = 'Edit tournament';
 $PMF_LANG['ad_tournedit_title'] = 'Title';
 $PMF_LANG['ad_tournedit_desc'] = 'Description';
+$PMF_LANG['ad_tournedit_points_system'] = 'Points system';
 $PMF_LANG['ad_tournedit_deleted'] = 'Deleted';
 $PMF_LANG['ad_tournedit_submit'] = 'Update tournament';
 $PMF_LANG['ad_tournedit_add_players'] = 'Add players';

@@ -166,9 +166,13 @@ class PMF_TournamentService
     public static function updateStandings($tournament_id)
     {
         $games = self::getAllGamesForTournament($tournament_id);
+        $points_system = split('-', self::getById($tournament_id)->points_system);
+        $points_for_win = $points_system[0];
+        $points_for_draw = $points_system[1];
+
         self::resetStandings($tournament_id);
         foreach ($games as $game) {
-            self::getToursGenerator($tournament_id)->updateParticipantsRating($game);
+            self::getToursGenerator($tournament_id)->updateParticipantsRating($game, $points_for_win, $points_for_draw);
         }
     }
 
