@@ -32,24 +32,6 @@ if ($permission['edittourn']) {
         }
     }
 
-    if ($action == 'updatetournament') {
-        $deleted = $_POST['deleted'] != null ? 1 : 0;
-        $id = PMF_Filter::filterInput(INPUT_POST, 'id', FILTER_VALIDATE_INT);
-        $description = html_entity_decode($_POST['description']);
-        $points_system = $_POST['pointsSystem'];
-        $tournament_data = array(
-            "name" => PMF_Filter::filterInput(INPUT_POST, 'name', FILTER_SANITIZE_STRING),
-            "description" => $description,
-            "deleted" => $deleted,
-            "points_system" => $points_system
-        );
-        PMF_TournamentService::updateTournament($id, $tournament_data);
-        $tournament = PMF_TournamentService::getById($id);
-        if ($tournament->started) {
-            PMF_TournamentService::updateStandings($id);
-        }
-    }
-
     if ($action == 'deletetournament') {
         $tournament_id = $_GET['tourn'];
         PMF_TournamentService::deleteTournament($tournament_id);
