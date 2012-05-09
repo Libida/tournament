@@ -1192,6 +1192,7 @@ $PMF_LANG['add'] = 'Добавить';
 $PMF_LANG['close'] = 'Закрыть';
 $PMF_LANG['ad_tour_close'] = 'Завершить тур';
 $PMF_LANG['game_edit_score'] = 'Изменить счет игры';
+$PMF_LANG['game_delete'] = 'Удалить игру';
 $PMF_LANG['ad_editgame_header'] = 'Редактирование игры';
 $PMF_LANG['ad_editgame_save'] = 'Сохранить';
 

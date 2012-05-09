@@ -209,4 +209,10 @@ class PMF_TournamentService
     {
         self::getToursGenerator($tournament_id)->createGame($tour_id, $first_participant_id, $second_participant_id);
     }
+
+    public static function deleteGame($game_id)
+    {
+        $sql = sprintf("DELETE FROM t_games WHERE id=%d", $game_id);
+        PMF_Db::getInstance()->query($sql);
+    }
 }

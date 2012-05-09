@@ -70,6 +70,12 @@ if ($permission['edittourn']) {
         $second_participant_id = $params[2];
         PMF_TournamentService::addGame($tournament_id, $tour_id, $first_participant_id, $second_participant_id);
     }
+
+    if ($_REQUEST['deletegame']) {
+        $game_id = $_REQUEST['deletegame'];
+        PMF_TournamentService::deleteGame($game_id);
+        PMF_TournamentService::updateStandings($tournament_id);
+    }
     ?>
 
 <header>
@@ -276,15 +282,21 @@ if ($permission['edittourn']) {
                     $PMF_LANG['game_edit_score'],
                     $PMF_LANG['game_edit_score']
                 );
+                printf('<a href="?action=edittournament&amp;tourn=%s&amp;deletegame=%s"><img src="images/delete.png" width="16" height="16" alt="%s" title="%s" border="0" /></a>&nbsp;',
+                    $tournament_id,
+                    $game->id,
+                    $PMF_LANG['game_delete'],
+                    $PMF_LANG['game_delete']
+                );
                 print "</div></td>";
                 print "</tr>";
             }
             print "</table>";
             if (!$tour->finished) {
                 printf("<input id='tourIndex' type='hidden' value='%s'/>", $tour->id);
-                printf("<div class='addMatchDiv' style='margin-top: 10px;'><a class='addMicroMatchLink' href='#'>%s</a></div>", $PMF_LANG['ad_add_micro_match']);
                 printf("<input id='closeTour' class='close-tour-button' type='submit' value='%s'/>", $PMF_LANG['ad_tour_close']);
             }
+            printf("<div class='addMatchDiv' style='margin-top: 10px;'><a class='addGameLink' href='#'>%s</a></div>", $PMF_LANG['ad_add_micro_match']);
             printf("<input class='tourId' type='hidden' value='%s'>", $tour->id);
             print "</article>";
         }
@@ -293,7 +305,7 @@ if ($permission['edittourn']) {
 </div>
 
 
-<div id="remarkPopup" class="messagepop pop">
+<div id="addGamePopup" class="messagepop pop">
     <?php
         $participants = PMF_TournamentService::getAllParticipantsSortedByRating($tournament_id);
     ?>
@@ -326,7 +338,7 @@ if ($permission['edittourn']) {
 
     <span style="float: right;">
         <a href="#" id="addGame" style="margin-right: 10px;"><?php print $PMF_LANG['add']; ?></a>
-        <a href="#" class="closeMicroMatchPopup"><?php print $PMF_LANG['close']; ?></a>
+        <a href="#" class="closeAddGame"><?php print $PMF_LANG['close']; ?></a>
     </span>
 </div>
 

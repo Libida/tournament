@@ -1210,6 +1210,7 @@ $PMF_LANG['ad_add_micro_match'] = 'Add a match';
 $PMF_LANG['add'] = 'Add';
 $PMF_LANG['close'] = 'Close';
 $PMF_LANG['game_edit_score'] = 'Edit game score';
+$PMF_LANG['game_delete'] = 'Delete game';
 $PMF_LANG['ad_editgame_header'] = 'Edit game';
 $PMF_LANG['ad_editgame_save'] = 'Save';
 

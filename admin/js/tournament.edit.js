@@ -35,7 +35,7 @@ function submitAddGame(tourId) {
     if (!firstParticipantId || !secondParticipantId || firstParticipantId == secondParticipantId) {
         return;
     }
-    window.location.replace(getCurrentURL() + "&addgame=" + tourId + "-" +firstParticipantId + "-" + secondParticipantId);
+    window.location.replace(getCurrentURL() + "&addgame=" + tourId + "-" + firstParticipantId + "-" + secondParticipantId);
 }
 
 $(document).ready(function () {
@@ -64,17 +64,17 @@ $(document).ready(function () {
         setAvailabilityForSwissSystem();
     }
 
-    $(".addMicroMatchLink").live('click', function() {
-        $(this).addClass("selected").parent().append($("#remarkPopup"));
-        $(".pop").slideFadeToggle(function() {
+    $(".addGameLink").live('click', function () {
+        $(this).addClass("selected").parent().append($("#addGamePopup"));
+        $(".pop").slideFadeToggle(function () {
             $("#remark").focus();
         });
         return false;
     });
 
-    $(".closeMicroMatchPopup").live('click', function() {
-        $(".pop").slideFadeToggle(function() {
-            $(".addMicroMatchLink").removeClass("selected");
+    $(".closeAddGame").live('click', function () {
+        $(".pop").slideFadeToggle(function () {
+            $(".addGameLink").removeClass("selected");
         });
         return false;
     });
@@ -86,6 +86,6 @@ $(document).ready(function () {
     })
 });
 
-$.fn.slideFadeToggle = function(easing, callback) {
-    return this.animate({ opacity: 'toggle', height: 'toggle' }, "fast", easing, callback);
+$.fn.slideFadeToggle = function (easing, callback) {
+    return this.animate({ opacity:'toggle', height:'toggle' }, "fast", easing, callback);
 };
