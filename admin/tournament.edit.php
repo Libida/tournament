@@ -62,6 +62,14 @@ if ($permission['edittourn']) {
         PMF_TournamentService::updateGameScore($game_id, $first_new_score, $second_new_score);
         PMF_TournamentService::updateStandings($tournament_id);
     }
+
+    if ($_REQUEST['addgame']) {
+        $params = split('-', $_REQUEST['addgame']);
+        $tour_id = $params[0];
+        $first_participant_id = $params[1];
+        $second_participant_id = $params[2];
+        PMF_TournamentService::addGame($tournament_id, $tour_id, $first_participant_id, $second_participant_id);
+    }
     ?>
 
 <header>
@@ -130,11 +138,11 @@ if ($permission['edittourn']) {
         <span class="input-text">
             <select id="pointsSystem" name="pointsSystem">
                 <?php
-                    if ($tournament->points_system == '3-1-0') {
-                        printf('<option value="3-1-0" selected="selected">%s</option>', '3 - 1 - 0');
+                    if ($tournament->points_system == '2-1-0') {
+                        printf('<option value="2-1-0" selected="selected">%s</option>', '2 - 1 - 0');
                         printf('<option value="1-0.5-0">%s</option>', '1 - 0.5 - 0');
                     } else {
-                        printf('<option value="3-1-0">%s</option>', '3 - 1 - 0');
+                        printf('<option value="2-1-0">%s</option>', '2 - 1 - 0');
                         printf('<option value="1-0.5-0" selected="selected">%s</option>', '1 - 0.5 - 0');
                     }
                 ?>
@@ -151,7 +159,7 @@ if ($permission['edittourn']) {
     $players = PMF_Player::getAllPlayersForTournament($tournament_id);
     if (count($players) > 0) {
         require_once '../common/players.update.values.php';
-        print '<table border="1"  width="100%">';
+        print '<table id="players" border="1"  width="100%">';
         printf("<th>%s</th>", "");
         printf("<th>%s</th>", $PMF_LANG['ad_player_last_name']);
         printf("<th>%s</th>", $PMF_LANG['ad_player_first_name']);
@@ -162,22 +170,22 @@ if ($permission['edittourn']) {
         printf("<th>%s</th>", $PMF_LANG['ad_player_category']);
         printf("<th>%s</th>", $PMF_LANG['ad_player_degree']);
         $i = 1;
-        foreach ($players as $player) {
+        foreach ($players as $participant) {
             print '<tr>';
             printf("<td>%d</td>", $i++);
-            printf("<td>%s</td>", $player->last_name);
-            printf("<td>%s</td>", $player->first_name);
-            printf("<td style='text-align: center;'><img src='../images/countries/32/%s.png' title='%s'></td>", $player->country, $player->country_title);
-            printf("<td>%s</td>", $player->birth_year);
-            printf("<td>%s</td>", $player->title);
-            printf("<td>%s</td>", $player->rating);
-            printf("<td>%s</td>", $player->category);
-            printf("<td>%s</td>", $player->degree);
+            printf("<td>%s</td>", $participant->last_name);
+            printf("<td>%s</td>", $participant->first_name);
+            printf("<td style='text-align: center;'><img src='../images/countries/32/%s.png' title='%s'></td>", $participant->country, $participant->country_title);
+            printf("<td>%s</td>", $participant->birth_year);
+            printf("<td>%s</td>", $participant->title);
+            printf("<td>%s</td>", $participant->rating);
+            printf("<td>%s</td>", $participant->category);
+            printf("<td>%s</td>", $participant->degree);
             if (!$tournament_started) {
                 print "<td>";
                 printf('<a href="?action=edittournament&amp;tourn=%s&removeplayer=%s"><img src="images/delete.png" width="16" height="16" alt="%s" title="%s" border="0" /></a>&nbsp;',
                     $tournament_id,
-                    $player->id,
+                    $participant->id,
                     $PMF_LANG['ad_categ_delete'],
                     $PMF_LANG['ad_categ_delete']
                 );
@@ -199,8 +207,8 @@ if ($permission['edittourn']) {
             <select id="listOfUsers">
                 <option></option>
                 <?php
-                foreach ($not_in_tournament_players as $player) {
-                    printf("<option value='%d'>%s %s</option>", $player->id, $player->last_name, $player->first_name);
+                foreach ($not_in_tournament_players as $participant) {
+                    printf("<option value='%d'>%s %s</option>", $participant->id, $participant->last_name, $participant->first_name);
                 }
                 ?>
             </select>
@@ -274,14 +282,53 @@ if ($permission['edittourn']) {
             print "</table>";
             if (!$tour->finished) {
                 printf("<input id='tourIndex' type='hidden' value='%s'/>", $tour->id);
+                printf("<div class='addMatchDiv' style='margin-top: 10px;'><a class='addMicroMatchLink' href='#'>%s</a></div>", $PMF_LANG['ad_add_micro_match']);
                 printf("<input id='closeTour' class='close-tour-button' type='submit' value='%s'/>", $PMF_LANG['ad_tour_close']);
             }
+            printf("<input class='tourId' type='hidden' value='%s'>", $tour->id);
             print "</article>";
         }
         ?>
     </section>
 </div>
 
+
+<div id="remarkPopup" class="messagepop pop">
+    <?php
+        $participants = PMF_TournamentService::getAllParticipantsSortedByRating($tournament_id);
+    ?>
+    <input type="hidden" value=""/>
+    <table style="width: 100%">
+        <tr>
+            <td>
+                <select class="selectParticipant" id="firstParticipant">
+                    <option></option>
+                    <?php
+                    foreach ($participants as $participant) {
+                        printf("<option value='%d'>%s</option>", $participant->id, $participant->name);
+                    }
+                    ?>
+                </select>
+            </td>
+            <td>&nbsp;-&nbsp;</td>
+            <td>
+                <select class="selectParticipant" id="secondParticipant">
+                    <option></option>
+                    <?php
+                    foreach ($participants as $participant) {
+                        printf("<option value='%d'>%s</option>", $participant->id, $participant->name);
+                    }
+                    ?>
+                </select>
+            </td>
+        </tr>
+    </table>
+
+    <span style="float: right;">
+        <a href="#" id="addGame" style="margin-right: 10px;"><?php print $PMF_LANG['add']; ?></a>
+        <a href="#" class="closeMicroMatchPopup"><?php print $PMF_LANG['close']; ?></a>
+    </span>
+</div>
 
 <?php
 } else {

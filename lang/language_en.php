@@ -13,7 +13,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
  * License for the specific language governing rights and limitations
  * under the License.
- * 
+ *
  * @category  phpMyFAQ
  * @package   Translation
  * @author    Thorsten Rinne <thorsten@phpmyfaq.de>
@@ -35,7 +35,7 @@
  * - no comments at the end of line after the var definition
  * - do not use '=' char in the array keys
  *   (eq. $PMF_LANG["a=b"] is not allowed)
- * 
+ *
  *  Please be consistent with this format as we need it for
  *  the translation tool to work propertly
  */
@@ -1081,7 +1081,7 @@ $PMF_LANG['msgShowHelp'] = 'Please seperate words by comma.';
 
 // added 2.6.0-RC - 2009-11-30 by Thorsten
 $PMF_LANG['msgUpdateFaqDate'] = 'update';
-$PMF_LANG['msgKeepFaqDate'] = 'keep'; 
+$PMF_LANG['msgKeepFaqDate'] = 'keep';
 $PMF_LANG['msgEditFaqDat'] = 'edit';
 $LANG_CONF['main.optionalMailAddress'] = array(0 => 'checkbox', 1 => 'Mail address as mandatory field (default: deactivated)');
 $LANG_CONF['search.useAjaxSearchOnStartpage'] = array(0 => 'checkbox', 1 => 'Instant Response on startpage (default: deactivated)');
@@ -1193,7 +1193,7 @@ $PMF_LANG['ad_tournedit_header'] = 'Edit tournament';
 $PMF_LANG['ad_tournedit_title'] = 'Title';
 $PMF_LANG['ad_tournedit_desc'] = 'Description';
 $PMF_LANG['ad_tournedit_points_system'] = 'Points system';
-$PMF_LANG['ad_tournedit_deleted'] = 'Deleted';
+$PMF_LANG['ad_tournedit_deleted'] = 'Do not display on the site';
 $PMF_LANG['ad_tournedit_submit'] = 'Update tournament';
 $PMF_LANG['ad_tournedit_add_players'] = 'Add players';
 $PMF_LANG['ad_tournedit_generate_tours'] = 'Generate tours';
@@ -1206,6 +1206,9 @@ $PMF_LANG['ad_tournedit_generate_tours_round'] = 'Round';
 
 $PMF_LANG['tour'] = 'Tour';
 $PMF_LANG['ad_tour_close'] = 'Close the tour';
+$PMF_LANG['ad_add_micro_match'] = 'Add a match';
+$PMF_LANG['add'] = 'Add';
+$PMF_LANG['close'] = 'Close';
 $PMF_LANG['game_edit_score'] = 'Edit game score';
 $PMF_LANG['ad_editgame_header'] = 'Edit game';
 $PMF_LANG['ad_editgame_save'] = 'Save';

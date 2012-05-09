@@ -1176,7 +1176,7 @@ $PMF_LANG['ad_tournedit_header'] = 'Редактирование турнира'
 $PMF_LANG['ad_tournedit_title'] = 'Название';
 $PMF_LANG['ad_tournedit_desc'] = 'Описание';
 $PMF_LANG['ad_tournedit_points_system'] = 'Система очков';
-$PMF_LANG['ad_tournedit_deleted'] = 'Удален';
+$PMF_LANG['ad_tournedit_deleted'] = 'Не отображать на сайте';
 $PMF_LANG['ad_tournedit_submit'] = 'Обновить турнир';
 $PMF_LANG['ad_tournedit_add_players'] = 'Добавить игроков';
 $PMF_LANG['ad_tournedit_generate_tours'] = 'Сгенерировать туры';
@@ -1187,6 +1187,9 @@ $PMF_LANG['ad_tournedit_generate_tours_swiss'] = 'Швейцарская';
 $PMF_LANG['ad_tournedit_generate_tours_round'] = 'Круговая';
 
 $PMF_LANG['tour'] = 'Тур';
+$PMF_LANG['ad_add_micro_match'] = 'Добавить матч';
+$PMF_LANG['add'] = 'Добавить';
+$PMF_LANG['close'] = 'Закрыть';
 $PMF_LANG['ad_tour_close'] = 'Завершить тур';
 $PMF_LANG['game_edit_score'] = 'Изменить счет игры';
 $PMF_LANG['ad_editgame_header'] = 'Редактирование игры';
@@ -1220,4 +1223,3 @@ $PMF_LANG['ad_player_category'] = 'Разряд';
 $PMF_LANG['ad_player_degree'] = 'Звание';
 $PMF_LANG['ad_player_added'] = 'Игрок успешно создан';
 $PMF_LANG['site_name'] = 'Чемпионат университета по шашкам';
-

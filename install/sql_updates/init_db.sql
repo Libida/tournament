@@ -416,4 +416,4 @@ ALTER TABLE `t_tournaments` CHANGE `description` `description` varchar(7000) NOT
 
 ALTER TABLE `t_participants` CHANGE `factor` `factor` float NOT NULL DEFAULT 0;
 
-ALTER TABLE `t_tournaments` ADD COLUMN `points_system` varchar(20) NOT NULL DEFAULT '3-1-0';
+ALTER TABLE `t_tournaments` ADD COLUMN `points_system` varchar(20) NOT NULL DEFAULT '2-1-0';

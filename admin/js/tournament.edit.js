@@ -20,14 +20,24 @@ function submitCloseTour() {
     window.location.replace(getCurrentURL() + "&closetour=" + currentTourIndex);
 }
 
-function setSubmitToStartAvailabilityForSwissSystem() {
-    var participantsCount = $("tr").length - 1;
+function setAvailabilityForSwissSystem() {
+    var participantsCount = $("#players tr").length - 1;
     if (participantsCount % 2 == 1) {
         $("#generateTours").attr('disabled', 'disabled');
     } else {
         $("#generateTours").removeAttr('disabled', 'disabled');
     }
 }
+
+function submitAddGame(tourId) {
+    var firstParticipantId = $("#firstParticipant").val();
+    var secondParticipantId = $("#secondParticipant").val();
+    if (!firstParticipantId || !secondParticipantId || firstParticipantId == secondParticipantId) {
+        return;
+    }
+    window.location.replace(getCurrentURL() + "&addgame=" + tourId + "-" +firstParticipantId + "-" + secondParticipantId);
+}
+
 $(document).ready(function () {
     $("#listOfUsers").live('change', function () {
         submitAddPlayer()
@@ -40,15 +50,42 @@ $(document).ready(function () {
     $("#closeTour").live('click', function () {
         submitCloseTour();
     });
+
     $("#toursType").live('change', function () {
         if ($("#toursType").val() == 0) {
-            setSubmitToStartAvailabilityForSwissSystem();
+            setAvailabilityForSwissSystem();
         }
         if ($("#toursType").val() == 1) {
             $("#generateTours").removeAttr('disabled', 'disabled');
         }
     });
+
     if ($("#toursType").val() == 0) {
-        setSubmitToStartAvailabilityForSwissSystem();
+        setAvailabilityForSwissSystem();
     }
+
+    $(".addMicroMatchLink").live('click', function() {
+        $(this).addClass("selected").parent().append($("#remarkPopup"));
+        $(".pop").slideFadeToggle(function() {
+            $("#remark").focus();
+        });
+        return false;
+    });
+
+    $(".closeMicroMatchPopup").live('click', function() {
+        $(".pop").slideFadeToggle(function() {
+            $(".addMicroMatchLink").removeClass("selected");
+        });
+        return false;
+    });
+
+    $("#addGame").live('click', function () {
+        var tourId = $(this).parents('.addMatchDiv').siblings('.tourId').val();
+        submitAddGame(tourId);
+        return false;
+    })
 });
+
+$.fn.slideFadeToggle = function(easing, callback) {
+    return this.animate({ opacity: 'toggle', height: 'toggle' }, "fast", easing, callback);
+};

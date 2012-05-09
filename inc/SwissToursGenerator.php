@@ -9,7 +9,7 @@ class PMF_SwissToursGenerator extends PMF_AbstractToursGenerator
         $second_part_of_participants = array_slice($participant_ids, count($participant_ids) / 2);
         $i = 0;
         while ($i <= count($first_part_of_participants) - 1) {
-            PMF_DB_Helper::createDBInstance("t_games", array($first_tour_id, $first_part_of_participants[$i], $second_part_of_participants[$i], 0, 0));
+            $this->createGame($first_tour_id, $first_part_of_participants[$i], $second_part_of_participants[$i]);
             $i++;
         }
     }
@@ -32,7 +32,7 @@ class PMF_SwissToursGenerator extends PMF_AbstractToursGenerator
                     if (!$participants[$j]->busy && !$this->played($participants[$i]->id, $participants[$j]->id)) {
                         $participants[$i]->busy = true;
                         $participants[$j]->busy = true;
-                        PMF_DB_Helper::createDBInstance("t_games", array($tour_id, $participants[$i]->id, $participants[$j]->id, 0, 0));
+                        $this->createGame($tour_id, $participants[$i]->id, $participants[$j]->id);
                         break;
                     }
                 }

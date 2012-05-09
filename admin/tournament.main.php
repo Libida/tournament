@@ -18,10 +18,11 @@ if ($permission['edittourn']) {
         $winners_count = 0;
         $deleted = 0;
         $type = 0;
+        $points_system = '';
         $tournament_data = array(
             PMF_Filter::filterInput(INPUT_POST, 'name', FILTER_SANITIZE_STRING),
             html_entity_decode($_POST['description']),
-            $started, $winners_count, $deleted, $type
+            $started, $winners_count, $deleted, $type, $points_system
         );
 
         $tournament_id = PMF_TournamentService::addTournament($tournament_data);

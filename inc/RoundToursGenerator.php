@@ -8,7 +8,7 @@ class PMF_RoundToursGenerator extends PMF_AbstractToursGenerator
         for ($i = 0; $i < count($participant_ids); $i++) {
             for ($j = $i + 1; $j < count($participant_ids); $j++) {
                 if (!$this->played($participant_ids[$i], $participant_ids[$j])) {
-                    PMF_DB_Helper::createDBInstance("t_games", array($first_tour_id, $participant_ids[$i], $participant_ids[$j], 0, 0));
+                    $this->createGame($first_tour_id, $participant_ids[$i], $participant_ids[$j]);
                 }
             }
         }

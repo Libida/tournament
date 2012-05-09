@@ -133,4 +133,9 @@ abstract class PMF_AbstractToursGenerator
         PMF_Db::getInstance()->query(sprintf($sql_update_factor, $first_factor, $game->first_participant_id));
         PMF_Db::getInstance()->query(sprintf($sql_update_factor, $second_factor, $game->second_participant_id));
     }
+
+    public function createGame($tour_id, $first_participant_id, $second_participant_id)
+    {
+        PMF_DB_Helper::createDBInstance("t_games", array($tour_id, $first_participant_id, $second_participant_id, 0, 0));
+    }
 }

@@ -204,4 +204,9 @@ class PMF_TournamentService
     public static function getAllParticipantsSortedByRating($tournament_id) {
         return self::getToursGenerator($tournament_id)->getAllParticipantsSortedByRating($tournament_id);
     }
+
+    public static function addGame($tournament_id, $tour_id, $first_participant_id, $second_participant_id)
+    {
+        self::getToursGenerator($tournament_id)->createGame($tour_id, $first_participant_id, $second_participant_id);
+    }
 }
