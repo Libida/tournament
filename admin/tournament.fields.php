@@ -58,13 +58,8 @@ if ($tournament->started) {
     <span class="input-text">
         <select id="pointsSystem" name="pointsSystem">
             <?php
-            if ($tournament->points_system == '2-1-0') {
-                printf('<option value="2-1-0" selected="selected">%s</option>', '2 - 1 - 0');
-                printf('<option value="1-0.5-0">%s</option>', '1 - 0.5 - 0');
-            } else {
-                printf('<option value="2-1-0">%s</option>', '2 - 1 - 0');
-                printf('<option value="1-0.5-0" selected="selected">%s</option>', '1 - 0.5 - 0');
-            }
+            $values = array('2-1-0', '1-0.5-0');
+            printOptions($values, $tournament->points_system);
             ?>
         </select>
     </span>
@@ -77,14 +72,23 @@ if ($tournament->started) {
     </span>
     <span class="input-text">
         <select id="ageCategory" name="ageCategory">
-            <option value="5-10">5-10</option>
             <?php
-            if ($tournament->age_category == '11-30') {
-                printf('<option value="11-30" selected="selected">%s</option>', '11-30');
-            } else {
-                printf('<option value="11-30">%s</option>', '11-30');
-            }
+            $values = array('5-10', '11-30');
+            printOptions($values, $tournament->age_category);
             ?>
         </select>
     </span>
 </div>
+
+<?php
+function printOptions($values, $selected_value)
+{
+    foreach ($values as $value) {
+        if ($value == $selected_value) {
+            printf('<option value="%s" selected="selected">%s</option>', $value, $value);
+        } else {
+            printf('<option value="%s">%s</option>', $value, $value);
+        }
+    }
+}
+?>
