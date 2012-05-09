@@ -1193,6 +1193,7 @@ $PMF_LANG['ad_tournedit_header'] = 'Edit tournament';
 $PMF_LANG['ad_tournedit_title'] = 'Title';
 $PMF_LANG['ad_tournedit_desc'] = 'Description';
 $PMF_LANG['ad_tournedit_points_system'] = 'Points system';
+$PMF_LANG['ad_tournedit_age_category'] = 'Age category';
 $PMF_LANG['ad_tournedit_deleted'] = 'Do not display on the site';
 $PMF_LANG['ad_tournedit_submit'] = 'Update tournament';
 $PMF_LANG['ad_tournedit_add_players'] = 'Add players';

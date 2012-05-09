@@ -16,13 +16,14 @@ if ($permission['edittourn']) {
     if ($action == 'savetournament') {
         $started = 0;
         $winners_count = 0;
-        $deleted = 0;
+        $deleted = $_POST['deleted'] == 'on' ? 1 : 0;
         $type = 0;
-        $points_system = '';
+        $points_system = $_POST['pointsSystem'];
+        $age_category = $_POST['ageCategory'];
         $tournament_data = array(
             PMF_Filter::filterInput(INPUT_POST, 'name', FILTER_SANITIZE_STRING),
             html_entity_decode($_POST['description']),
-            $started, $winners_count, $deleted, $type, $points_system
+            $started, $winners_count, $deleted, $type, $points_system, $age_category
         );
 
         $tournament_id = PMF_TournamentService::addTournament($tournament_data);

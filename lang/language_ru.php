@@ -1176,6 +1176,7 @@ $PMF_LANG['ad_tournedit_header'] = 'Редактирование турнира'
 $PMF_LANG['ad_tournedit_title'] = 'Название';
 $PMF_LANG['ad_tournedit_desc'] = 'Описание';
 $PMF_LANG['ad_tournedit_points_system'] = 'Система очков';
+$PMF_LANG['ad_tournedit_age_category'] = 'Возрастная категория';
 $PMF_LANG['ad_tournedit_deleted'] = 'Не отображать на сайте';
 $PMF_LANG['ad_tournedit_submit'] = 'Обновить турнир';
 $PMF_LANG['ad_tournedit_add_players'] = 'Добавить игроков';
