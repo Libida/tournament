@@ -14,7 +14,7 @@ class PMF_Tournament_Renderer
         $html .= sprintf('<th style="width: 30px;">%s</th>', $PMF_LANG['ad_standings_wins']);
         $html .= sprintf('<th style="width: 30px;">%s</th>', $PMF_LANG['ad_standings_loses']);
         $html .= sprintf('<th style="width: 30px;">%s</th>', $PMF_LANG['ad_standings_draws']);
-        $tournament = PMF_Tournament_TournamentService::getById($tournament_id);
+        $tournament = PMF_Tournament_TournamentService::getTournamentById($tournament_id);
         $winners_count = $tournament->winners_count;
         $place = 1;
         $prev_participant = null;

@@ -83,7 +83,7 @@ class PMF_Tournament_Player
         $sql = "SELECT * FROM t_players WHERE id NOT IN (SELECT player_id FROM t_tournaments_players WHERE tournament_id = %d) AND deleted=0";
         $sql = sprintf($sql, $tournament_id);
         $all_players = self::fetchPlayers($sql);
-        $tournament = PMF_Tournament_TournamentService::getById($tournament_id);
+        $tournament = PMF_Tournament_TournamentService::getTournamentById($tournament_id);
         $age_category = split('-', $tournament->age_category);
         $min_age = $age_category[0];
         $max_age = $age_category[1];

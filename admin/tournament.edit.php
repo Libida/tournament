@@ -27,7 +27,7 @@ if ($permission['edittourn']) {
             "criteria" => $selected_criteria
         );
         PMF_Tournament_TournamentService::updateTournament($tournament_id, $tournament_data);
-        $tournament = PMF_Tournament_TournamentService::getById($tournament_id);
+        $tournament = PMF_Tournament_TournamentService::getTournamentById($tournament_id);
         if ($tournament->started) {
             PMF_Tournament_TournamentService::updateStandings($tournament_id);
         }
@@ -51,7 +51,7 @@ if ($permission['edittourn']) {
         PMF_Tournament_TournamentService::closeTourAndGenerateNext($tournament_id, $tour_id_to_close);
     }
 
-    $tournament = PMF_Tournament_TournamentService::getById($tournament_id);
+    $tournament = PMF_Tournament_TournamentService::getTournamentById($tournament_id);
     $tournament_started = $tournament->started != 0;
     if ($winners_count && !$tournament_started) {
         $tours_type = $_GET['type'];

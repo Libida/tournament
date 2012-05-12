@@ -21,7 +21,7 @@ class PMF_Tournament_TournamentService
         return PMF_Db::getInstance()->fetchAll($result);
     }
 
-    public static function getById($tourn_id)
+    public static function getTournamentById($tourn_id)
     {
         return PMF_Helper_DB::getById(self::TOURNAMENTS_TABLE, $tourn_id);
     }
@@ -165,7 +165,7 @@ class PMF_Tournament_TournamentService
     public static function updateStandings($tournament_id)
     {
         $games = self::getAllGamesForTournament($tournament_id);
-        $points_system = split('-', self::getById($tournament_id)->points_system);
+        $points_system = split('-', self::getTournamentById($tournament_id)->points_system);
         $points_for_win = $points_system[0];
         $points_for_draw = $points_system[1];
 

@@ -7,7 +7,7 @@ if (!defined('IS_VALID_PHPMYFAQ')) {
 
 
 $tournament_id = $_REQUEST['tourn'];
-$tournament = PMF_Tournament_TournamentService::getById($tournament_id);
+$tournament = PMF_Tournament_TournamentService::getTournamentById($tournament_id);
 $participants = PMF_Tournament_TournamentService::getAllParticipantsSortedByRating($tournament_id);
 
 $html = $tournament->description;
