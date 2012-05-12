@@ -49,21 +49,24 @@ abstract class PMF_Tournament_AbstractToursGenerator
 
     protected function compareByRating($participant_a, $participant_b)
     {
-        $retval = $participant_b->rating - $participant_a->rating;
-        if ($retval == 0) {
-            $retval = $this->compareWithSameRating($participant_a, $participant_b);
+        $result = $participant_b->rating - $participant_a->rating;
+        if ($result == 0) {
+            $result = $this->compareWithSameRating($participant_a, $participant_b);
         }
-        if ($retval == 0) {
-            $retval = $participant_b->factor - $participant_a->factor;
-        }
-        if($retval == 0)
-            $retval = strnatcmp($participant_a->name, $participant_b->name);
-        if ($retval == 0)
+        if($result == 0)
+            $result = strnatcmp($participant_a->name, $participant_b->name);
+        if ($result == 0)
             return strnatcmp($participant_a->last_name, $participant_b->last_name);
-        return $retval;
+        return $result;
     }
 
-    protected abstract function compareWithSameRating($participant_a, $participant_b);
+    protected function compareWithSameRating($participant_a, $participant_b)
+    {
+        $tournament_id = $participant_a->tournament_id;
+        $tournament = PMF_Tournament_Service::getTournamentById($tournament_id);
+        $criteria = PMF_Tournament_AbstractCriteria::createCompositeCriteria($tournament->criteria);
+        return $criteria->compareParticipants($participant_a, $participant_b);
+    }
 
     protected function played($participant_a_id, $participant_b_id)
     {

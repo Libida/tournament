@@ -47,9 +47,4 @@ class PMF_Tournament_SwissToursGenerator extends PMF_Tournament_AbstractToursGen
         }
         return intval($numOfTours);
     }
-
-    protected function compareWithSameRating($participant_a, $participant_b)
-    {
-        return $participant_b->factor - $participant_a->factor;
-    }
 }
