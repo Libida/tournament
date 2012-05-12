@@ -41,6 +41,8 @@ abstract class PMF_Tournament_AbstractCriteria
                 return new PMF_Tournament_BergerCriteria($wrapped_criteria);
             case 1:
                 return new PMF_Tournament_BuhgoltzCriteria($wrapped_criteria);
+            case 2:
+                return new PMF_Tournament_PersonalCriteria($wrapped_criteria);
         }
     }
 

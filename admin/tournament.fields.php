@@ -93,6 +93,10 @@ if ($tournament->started) {
             <label style="display: inline;" for="buhgoltz"><?php print $PMF_LANG['ad_tournedit_buhgoltz']; ?></label>
             <input class="criteria" id="buhgoltz" type="checkbox" value="1"/>
         </span>
+        <span style="margin-right: 10px;">
+            <label style="display: inline;" for="personal"><?php print $PMF_LANG['ad_tournedit_personal']; ?></label>
+            <input class="criteria" id="personal" type="checkbox" value="2"/>
+        </span>
     </span>
 </div>
 

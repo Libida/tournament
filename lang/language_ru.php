@@ -1181,6 +1181,7 @@ $PMF_LANG['ad_tournedit_criteria'] = 'Критерии';
 $PMF_LANG['ad_tournedit_selected_criteria'] = 'Выбранные критерии';
 $PMF_LANG['ad_tournedit_buhgoltz'] = 'Бухгольтц';
 $PMF_LANG['ad_tournedit_berger'] = 'Бергер';
+$PMF_LANG['ad_tournedit_personal'] = 'Личная встреча (1-ая игра)';
 $PMF_LANG['ad_tournedit_deleted'] = 'Не отображать на сайте';
 $PMF_LANG['ad_tournedit_submit'] = 'Обновить турнир';
 $PMF_LANG['ad_tournedit_add_players'] = 'Добавить игроков';

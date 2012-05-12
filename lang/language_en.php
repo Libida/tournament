@@ -1198,6 +1198,7 @@ $PMF_LANG['ad_tournedit_criteria'] = 'Criteria';
 $PMF_LANG['ad_tournedit_selected_criteria'] = 'Selected criteria';
 $PMF_LANG['ad_tournedit_buhgoltz'] = 'Buhgoltz';
 $PMF_LANG['ad_tournedit_berger'] = 'Berger';
+$PMF_LANG['ad_tournedit_personal'] = 'Personal meeting (first game)';
 $PMF_LANG['ad_tournedit_deleted'] = 'Do not display on the site';
 $PMF_LANG['ad_tournedit_submit'] = 'Update tournament';
 $PMF_LANG['ad_tournedit_add_players'] = 'Add players';
