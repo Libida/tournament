@@ -4,8 +4,8 @@ abstract class PMF_Tournament_AbstractToursGenerator
 {
     public function generateFirstTour($tournament_id)
     {
-        $players = PMF_Tournament_Player::getAllPlayersForTournament($tournament_id);
-        $participant_ids = PMF_Tournament_TournamentService::createParticipantsForTournament($tournament_id, $players);
+        $players = PMF_Tournament_PlayerService::getAllPlayersForTournament($tournament_id);
+        $participant_ids = PMF_Tournament_Service::createParticipantsForTournament($tournament_id, $players);
         $first_tour_id = $this->createFirstTour($tournament_id);
         $this->createGamesForFirstTour($participant_ids, $first_tour_id);
     }
@@ -19,7 +19,7 @@ abstract class PMF_Tournament_AbstractToursGenerator
         $sql = sprintf("SELECT * FROM t_participants WHERE tournament_id=%d", $tournament_id);
         $participants = PMF_Helper_DB::fetchAllResults($sql);
         foreach ($participants as $participant) {
-            PMF_Tournament_Player::addPlayerToParticipant($participant);
+            PMF_Tournament_PlayerService::addPlayerToParticipant($participant);
             $participant->name = $participant->player->last_name . " " . $participant->player->first_name;
         }
         usort($participants, 'self::compareByRating');
@@ -86,7 +86,7 @@ abstract class PMF_Tournament_AbstractToursGenerator
 
     protected function createFirstTour($tournament_id)
     {
-        PMF_Tournament_TournamentService::deleteAllTours($tournament_id);
+        PMF_Tournament_Service::deleteAllTours($tournament_id);
         $first_tour_id = $this->createTour($tournament_id, 1);
         return $first_tour_id;
     }
@@ -98,7 +98,7 @@ abstract class PMF_Tournament_AbstractToursGenerator
 
         $finished = 0;
         $tour_id = PMF_Helper_DB::createDBInstance("t_tours", array($tournament_id, $tour_index, $finished));
-        PMF_Tournament_TournamentService::deleteAllGamesOfTour($tour_id);
+        PMF_Tournament_Service::deleteAllGamesOfTour($tour_id);
         return $tour_id;
     }
 
@@ -109,10 +109,10 @@ abstract class PMF_Tournament_AbstractToursGenerator
         if ($first_score == 0 && $second_score == 0) {
             return;
         }
-        $first_rating = PMF_Tournament_Player::getParticipantRating($game->first_participant_id);
-        $second_rating = PMF_Tournament_Player::getParticipantRating($game->second_participant_id);
-        $first_factor = PMF_Tournament_Player::getParticipantFactor($game->first_participant_id);
-        $second_factor = PMF_Tournament_Player::getParticipantFactor($game->second_participant_id);
+        $first_rating = PMF_Tournament_PlayerService::getParticipantRating($game->first_participant_id);
+        $second_rating = PMF_Tournament_PlayerService::getParticipantRating($game->second_participant_id);
+        $first_factor = PMF_Tournament_PlayerService::getParticipantFactor($game->first_participant_id);
+        $second_factor = PMF_Tournament_PlayerService::getParticipantFactor($game->second_participant_id);
         if ($first_score > $second_score) {
             $first_rating += $points_for_win;
             $second_factor += $points_for_win;

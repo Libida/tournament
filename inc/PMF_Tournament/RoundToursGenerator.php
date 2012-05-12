@@ -34,15 +34,15 @@ class PMF_Tournament_RoundToursGenerator extends PMF_Tournament_AbstractToursGen
 
             if ($first_id == $participant_id) {
                 if ($first_score > $second_score) {
-                    $factor += PMF_Tournament_Player::getParticipantRating($second_id);
+                    $factor += PMF_Tournament_PlayerService::getParticipantRating($second_id);
                 } else if ($first_score == $second_score) {
-                    $factor += PMF_Tournament_Player::getParticipantRating($second_id) / 2;
+                    $factor += PMF_Tournament_PlayerService::getParticipantRating($second_id) / 2;
                 }
             } else if ($second_id == $participant_id) {
                 if ($second_score > $first_score) {
-                    $factor += PMF_Tournament_Player::getParticipantRating($first_id);
+                    $factor += PMF_Tournament_PlayerService::getParticipantRating($first_id);
                 } else if ($second_score == $first_score) {
-                    $factor += PMF_Tournament_Player::getParticipantRating($first_id) / 2;
+                    $factor += PMF_Tournament_PlayerService::getParticipantRating($first_id) / 2;
                 }
             }
         }

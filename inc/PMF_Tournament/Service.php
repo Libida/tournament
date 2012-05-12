@@ -1,6 +1,6 @@
 <?php
 
-class PMF_Tournament_TournamentService
+class PMF_Tournament_Service
 {
     const TOURNAMENTS_TABLE = 't_tournaments';
 
@@ -124,8 +124,8 @@ class PMF_Tournament_TournamentService
     {
         $first_participant_id = $game->first_participant_id;
         $second_participant_id = $game->second_participant_id;
-        $first_participant = PMF_Tournament_Player::getParticipantById($first_participant_id);
-        $second_participant = PMF_Tournament_Player::getParticipantById($second_participant_id);
+        $first_participant = PMF_Tournament_PlayerService::getParticipantById($first_participant_id);
+        $second_participant = PMF_Tournament_PlayerService::getParticipantById($second_participant_id);
 
         $game->first_participant = $first_participant;
         $game->second_participant = $second_participant;

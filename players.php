@@ -5,7 +5,7 @@ if (!defined('IS_VALID_PHPMYFAQ')) {
     exit();
 }
 
-$players = PMF_Tournament_Player::getAllPlayers();
+$players = PMF_Tournament_PlayerService::getAllPlayers();
 require 'common/players.update.values.php';
 
 $header = $PMF_LANG['ad_menu_players'];

@@ -5,7 +5,7 @@
 
 if ($permission['edittourn']) {
     print '<ul>';
-    foreach (PMF_Tournament_TournamentService::getAllDeletedTournaments() as $tourn) {
+    foreach (PMF_Tournament_Service::getAllDeletedTournaments() as $tourn) {
         print '<li>';
         printf("<a href='?action=edittournament&amp;tourn=%s' style='margin-right: 7px;'>%s</a>", $tourn->id, $tourn->name);
         print '</li>';

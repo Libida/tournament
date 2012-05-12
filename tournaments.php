@@ -6,7 +6,7 @@ if (!defined('IS_VALID_PHPMYFAQ')) {
 }
 
 $html = '<ul id="tournaments" style="font-size: 15px;">';
-foreach (PMF_Tournament_TournamentService::getAllTournaments() as $tourn) {
+foreach (PMF_Tournament_Service::getAllTournaments() as $tourn) {
     $html .= '<li>';
     $html .= sprintf("<a href='?action=tournview&amp;tourn=%s'>%s</a>", $tourn->id, $tourn->name);
     $html .= '</li>';

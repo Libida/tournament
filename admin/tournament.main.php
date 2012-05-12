@@ -27,7 +27,7 @@ if ($permission['edittourn']) {
             $started, $winners_count, $deleted, $type, $points_system, $age_category, $selected_criteria
         );
 
-        $tournament_id = PMF_Tournament_TournamentService::addTournament($tournament_data);
+        $tournament_id = PMF_Tournament_Service::addTournament($tournament_data);
         if ($tournament_id) {
             printf('<p class="alert alert-success">%s</p>', $PMF_LANG['ad_tourn_added']);
         } else {
@@ -37,11 +37,11 @@ if ($permission['edittourn']) {
 
     if ($action == 'deletetournament') {
         $tournament_id = $_GET['tourn'];
-        PMF_Tournament_TournamentService::deleteTournament($tournament_id);
+        PMF_Tournament_Service::deleteTournament($tournament_id);
     }
 
     print '<ul>';
-    foreach (PMF_Tournament_TournamentService::getAllTournaments() as $tourn) {
+    foreach (PMF_Tournament_Service::getAllTournaments() as $tourn) {
         print '<li>';
         printf("<a href='?action=edittournament&amp;tourn=%s' style='margin-right: 7px;'>%s</a>", $tourn->id, $tourn->name);
         print '</li>';
