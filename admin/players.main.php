@@ -29,7 +29,7 @@ if ($permission['editplayer']) {
             PMF_Filter::filterInput(INPUT_POST, 'degree', FILTER_SANITIZE_STRING),
             $deleted
         );
-        $player_id = PMF_Player::addPlayer($player_data);
+        $player_id = PMF_Tournament_Player::addPlayer($player_data);
         if ($player_id) {
             printf('<p class="alert alert-success">%s</p>', $PMF_LANG['ad_player_added']);
         } else {
@@ -52,12 +52,12 @@ if ($permission['editplayer']) {
             "degree_id" => PMF_Filter::filterInput(INPUT_POST, 'degree', FILTER_SANITIZE_STRING),
             "deleted" => $deleted
         );
-        PMF_Player::updatePlayer($id, $player_data);
+        PMF_Tournament_Player::updatePlayer($id, $player_data);
     }
 
-    $players = PMF_Player::getAllPlayers();
+    $players = PMF_Tournament_Player::getAllPlayers();
     require_once '../common/players.update.values.php';
-    print PMF_TournamentRenderer::renderPlayersTable($players, $PMF_LANG, true);
+    print PMF_Tournament_Renderer::renderPlayersTable($players, $PMF_LANG, true);
 
 } else {
     print $PMF_LANG['err_NotAuth'];

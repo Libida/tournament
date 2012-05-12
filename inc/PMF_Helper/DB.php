@@ -1,6 +1,6 @@
 <?php
 
-class PMF_DB_Helper
+class PMF_Helper_DB
 {
     private function __construct()
     {

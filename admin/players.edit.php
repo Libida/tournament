@@ -11,7 +11,7 @@ if (!defined('IS_VALID_PHPMYFAQ')) {
 
 <?php
 $player_id = $_GET['player'];
-$player = PMF_Player::getPlayerById($player_id);
+$player = PMF_Tournament_Player::getPlayerById($player_id);
 if ($permission["addplayer"]) {
     ?>
 <form action="?action=updateplayer" method="post">

@@ -39,19 +39,19 @@ function submitAddGame(tourId) {
 }
 
 $(document).ready(function () {
-    $("#listOfUsers").live('change', function () {
+    $("#listOfUsers").on('change', function () {
         submitAddPlayer()
     });
 
-    $("#generateTours").live('click', function () {
+    $("#generateTours").on('click', function () {
         submitGenerateTours();
     });
 
-    $("#closeTour").live('click', function () {
+    $("#closeTour").on('click', function () {
         submitCloseTour();
     });
 
-    $("#toursType").live('change', function () {
+    $("#toursType").on('change', function () {
         if ($("#toursType").val() == 0) {
             setAvailabilityForSwissSystem();
         }
@@ -64,7 +64,7 @@ $(document).ready(function () {
         setAvailabilityForSwissSystem();
     }
 
-    $(".addGameLink").live('click', function () {
+    $(".addGameLink").on('click', function () {
         $(this).addClass("selected").parent().append($("#addGamePopup"));
         $(".pop").slideFadeToggle(function () {
             $("#remark").focus();
@@ -72,14 +72,14 @@ $(document).ready(function () {
         return false;
     });
 
-    $(".closeAddGame").live('click', function () {
+    $(".closeAddGame").on('click', function () {
         $(".pop").slideFadeToggle(function () {
             $(".addGameLink").removeClass("selected");
         });
         return false;
     });
 
-    $("#addGame").live('click', function () {
+    $("#addGame").on('click', function () {
         var tourId = $(this).parents('.addMatchDiv').siblings('.tourId').val();
         submitAddGame(tourId);
         return false;

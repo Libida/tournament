@@ -40,7 +40,7 @@ function printOptions($PMF_LANG, $options, $selected_value_id)
         <label for="country"><?php print $PMF_LANG["ad_player_country"]; ?>:</label>
     </span>
     <?php
-    $countries = PMF_Player::getAllCountries();
+    $countries = PMF_Tournament_Player::getAllCountries();
     ?>
     <span class="input-text">
         <select id="country" name="country">
@@ -87,7 +87,7 @@ function printOptions($PMF_LANG, $options, $selected_value_id)
     </span>
     <span class="input-text">
         <?php
-        $titles = PMF_Player::getAllTitles();
+        $titles = PMF_Tournament_Player::getAllTitles();
         ?>
         <select id="title" name="title">
             <?php
@@ -113,7 +113,7 @@ function printOptions($PMF_LANG, $options, $selected_value_id)
     </span>
     <span class="input-text">
         <?php
-        $categories = PMF_Player::getAllCategories();
+        $categories = PMF_Tournament_Player::getAllCategories();
         ?>
         <select id="category" name="category">
             <?php
@@ -130,7 +130,7 @@ function printOptions($PMF_LANG, $options, $selected_value_id)
     </span>
     <span class="input-text">
         <?php
-        $degrees = PMF_Player::getAllDegrees();
+        $degrees = PMF_Tournament_Player::getAllDegrees();
         ?>
         <select id="degree" name="degree">
             <?php

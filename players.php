@@ -5,11 +5,11 @@ if (!defined('IS_VALID_PHPMYFAQ')) {
     exit();
 }
 
-$players = PMF_Player::getAllPlayers();
+$players = PMF_Tournament_Player::getAllPlayers();
 require 'common/players.update.values.php';
 
 $header = $PMF_LANG['ad_menu_players'];
-$table = PMF_TournamentRenderer::renderPlayersTable($players, $PMF_LANG);
+$table = PMF_Tournament_Renderer::renderPlayersTable($players, $PMF_LANG);
 
 $tpl->parse('writeContent', array(
     "header" => $header,

@@ -1,3 +1,5 @@
+<script type="text/javascript" src="js/tournament.fields.js"></script>
+
 <div class="inputs-block">
     <span class="input-left">
         <label class="control-label" for="name"><?php print $PMF_LANG['ad_tournedit_title']; ?>:</label>
@@ -52,8 +54,7 @@ if ($tournament->started) {
 ?>
 <div class="inputs-block">
     <span class="input-left">
-        <label class="control-label" for="pointsSystem"><?php print $PMF_LANG['ad_tournedit_points_system']; ?>
-            :</label>
+        <label class="control-label" for="pointsSystem"><?php print $PMF_LANG['ad_tournedit_points_system']; ?>:</label>
     </span>
     <span class="input-text">
         <select id="pointsSystem" name="pointsSystem">
@@ -67,8 +68,7 @@ if ($tournament->started) {
 
 <div class="inputs-block">
     <span class="input-left">
-        <label class="control-label" for="ageCategory"><?php print $PMF_LANG['ad_tournedit_age_category']; ?>
-            :</label>
+        <label class="control-label" for="ageCategory"><?php print $PMF_LANG['ad_tournedit_age_category']; ?>:</label>
     </span>
     <span class="input-text">
         <select id="ageCategory" name="ageCategory">
@@ -77,6 +77,32 @@ if ($tournament->started) {
             printOptions($values, $tournament->age_category);
             ?>
         </select>
+    </span>
+</div>
+
+<div class="inputs-block">
+    <span class="input-left">
+        <label class="control-label"><?php print $PMF_LANG['ad_tournedit_criteria']; ?>:</label>
+    </span>
+    <span class="input-text">
+        <span style="margin-right: 10px;">
+            <label style="display: inline;" for="berger"><?php print $PMF_LANG['ad_tournedit_berger']; ?></label>
+            <input class="criteria" id="berger" type="checkbox" value="0"/>
+        </span>
+        <span style="margin-right: 10px;">
+            <label style="display: inline;" for="buhgoltz"><?php print $PMF_LANG['ad_tournedit_buhgoltz']; ?></label>
+            <input class="criteria" id="buhgoltz" type="checkbox" value="1"/>
+        </span>
+    </span>
+</div>
+
+<input type="hidden" id="selectedCriteria" name="selectedCriteria" value="<?php print $tournament->criteria ?>"/>
+
+<div id="selectedCriteriaDiv" class="inputs-block">
+    <span class="input-left">
+        <label class="control-label"><?php print $PMF_LANG['ad_tournedit_selected_criteria']; ?>:</label>
+    </span>
+    <span id="selectedCriteriaText" class="input-text">
     </span>
 </div>
 

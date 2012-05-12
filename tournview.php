@@ -7,16 +7,16 @@ if (!defined('IS_VALID_PHPMYFAQ')) {
 
 
 $tournament_id = $_REQUEST['tourn'];
-$tournament = PMF_TournamentService::getById($tournament_id);
-$participants = PMF_TournamentService::getAllParticipantsSortedByRating($tournament_id);
+$tournament = PMF_Tournament_TournamentService::getById($tournament_id);
+$participants = PMF_Tournament_TournamentService::getAllParticipantsSortedByRating($tournament_id);
 
 $html = $tournament->description;
 
 $html .= '<section style="margin-top: 20px;">';
-$html .= PMF_TournamentRenderer::renderTournamentStandings($tournament_id, $PMF_LANG);
+$html .= PMF_Tournament_Renderer::renderTournamentStandings($tournament_id, $PMF_LANG);
 $html .= '</section>';
 
-$tours = PMF_TournamentService::getTours($tournament_id);
+$tours = PMF_Tournament_TournamentService::getTours($tournament_id);
 foreach ($tours as $tour) {
     $html .= "<article style='margin-top: 25px;'>";
     $html .= "<header>";

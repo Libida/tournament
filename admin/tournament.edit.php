@@ -17,17 +17,19 @@ if ($permission['edittourn']) {
         $description = html_entity_decode($_POST['description']);
         $points_system = $_POST['pointsSystem'];
         $age_category = $_POST['ageCategory'];
+        $selected_criteria = $_POST['selectedCriteria'] ? $_POST['selectedCriteria'] : 0;
         $tournament_data = array(
             "name" => PMF_Filter::filterInput(INPUT_POST, 'name', FILTER_SANITIZE_STRING),
             "description" => $description,
             "deleted" => $deleted,
             "points_system" => $points_system,
-            "age_category" => $age_category
+            "age_category" => $age_category,
+            "criteria" => $selected_criteria
         );
-        PMF_TournamentService::updateTournament($tournament_id, $tournament_data);
-        $tournament = PMF_TournamentService::getById($tournament_id);
+        PMF_Tournament_TournamentService::updateTournament($tournament_id, $tournament_data);
+        $tournament = PMF_Tournament_TournamentService::getById($tournament_id);
         if ($tournament->started) {
-            PMF_TournamentService::updateStandings($tournament_id);
+            PMF_Tournament_TournamentService::updateStandings($tournament_id);
         }
     }
 
@@ -38,22 +40,22 @@ if ($permission['edittourn']) {
     $tour_id_to_close = PMF_Filter::filterInput(INPUT_GET, 'closetour', FILTER_VALIDATE_INT, 0);
 
     if ($add_player_id != 0) {
-        PMF_TournamentService::addPlayerToTournament($tournament_id, $add_player_id);
+        PMF_Tournament_TournamentService::addPlayerToTournament($tournament_id, $add_player_id);
     }
 
     if ($remove_player_id != 0) {
-        PMF_TournamentService::removePlayerFromTournament($tournament_id, $remove_player_id);
+        PMF_Tournament_TournamentService::removePlayerFromTournament($tournament_id, $remove_player_id);
     }
 
     if ($tour_id_to_close != 0) {
-        PMF_TournamentService::closeTourAndGenerateNext($tournament_id, $tour_id_to_close);
+        PMF_Tournament_TournamentService::closeTourAndGenerateNext($tournament_id, $tour_id_to_close);
     }
 
-    $tournament = PMF_TournamentService::getById($tournament_id);
+    $tournament = PMF_Tournament_TournamentService::getById($tournament_id);
     $tournament_started = $tournament->started != 0;
     if ($winners_count && !$tournament_started) {
         $tours_type = $_GET['type'];
-        PMF_TournamentService::generateTours($tournament_id, $winners_count, $tours_type);
+        PMF_Tournament_TournamentService::generateTours($tournament_id, $winners_count, $tours_type);
         $tournament_started = true;
     }
 
@@ -61,8 +63,8 @@ if ($permission['edittourn']) {
     $second_new_score = $_REQUEST['second'];
     if (isset($first_new_score) && isset($second_new_score)) {
         $game_id = $_REQUEST['game'];
-        PMF_TournamentService::updateGameScore($game_id, $first_new_score, $second_new_score);
-        PMF_TournamentService::updateStandings($tournament_id);
+        PMF_Tournament_TournamentService::updateGameScore($game_id, $first_new_score, $second_new_score);
+        PMF_Tournament_TournamentService::updateStandings($tournament_id);
     }
 
     if ($_REQUEST['addgame']) {
@@ -70,13 +72,13 @@ if ($permission['edittourn']) {
         $tour_id = $params[0];
         $first_participant_id = $params[1];
         $second_participant_id = $params[2];
-        PMF_TournamentService::addGame($tournament_id, $tour_id, $first_participant_id, $second_participant_id);
+        PMF_Tournament_TournamentService::addGame($tournament_id, $tour_id, $first_participant_id, $second_participant_id);
     }
 
     if ($_REQUEST['deletegame']) {
         $game_id = $_REQUEST['deletegame'];
-        PMF_TournamentService::deleteGame($game_id);
-        PMF_TournamentService::updateStandings($tournament_id);
+        PMF_Tournament_TournamentService::deleteGame($game_id);
+        PMF_Tournament_TournamentService::updateStandings($tournament_id);
     }
     ?>
 
@@ -95,10 +97,10 @@ if ($permission['edittourn']) {
 </form>
 <div style="width: 75%;">
     <?php
-    $players = PMF_Player::getAllPlayersForTournament($tournament_id);
+    $players = PMF_Tournament_Player::getAllPlayersForTournament($tournament_id);
     if (count($players) > 0) {
         require_once '../common/players.update.values.php';
-        print '<table id="players" border="1"  width="100%">';
+        print '<table id="players" border="1"  width="100%" style="text-align: center;">';
         printf("<th>%s</th>", "");
         printf("<th>%s</th>", $PMF_LANG['ad_player_last_name']);
         printf("<th>%s</th>", $PMF_LANG['ad_player_first_name']);
@@ -114,7 +116,7 @@ if ($permission['edittourn']) {
             printf("<td>%d</td>", $i++);
             printf("<td>%s</td>", $participant->last_name);
             printf("<td>%s</td>", $participant->first_name);
-            printf("<td style='text-align: center;'><img src='../images/countries/32/%s.png' title='%s'></td>", $participant->country, $participant->country_title);
+            printf("<td><img src='../images/countries/32/%s.png' title='%s'></td>", $participant->country, $participant->country_title);
             printf("<td>%s</td>", $participant->birth_year);
             printf("<td>%s</td>", $participant->title);
             printf("<td>%s</td>", $participant->rating);
@@ -136,7 +138,7 @@ if ($permission['edittourn']) {
         print '</table>';
     }
 
-    $not_in_tournament_players = PMF_Player::getAllPlayersThatNotInTournament($tournament_id);
+    $not_in_tournament_players = PMF_Tournament_Player::getAllPlayersThatNotInTournament($tournament_id);
     ?>
     <?php
     if (!$tournament_started) {
@@ -180,14 +182,14 @@ if ($permission['edittourn']) {
     } else {
         print '<section class="standings">';
         printf('<header><h3>%s</h3></header>', $PMF_LANG['ad_standings']);
-        print PMF_TournamentRenderer::renderTournamentStandings($tournament_id, $PMF_LANG);
+        print PMF_Tournament_Renderer::renderTournamentStandings($tournament_id, $PMF_LANG);
         print '</section>';
     }
     ?>
 
     <section class="tours">
         <?php
-        $tours = PMF_TournamentService::getTours($tournament_id);
+        $tours = PMF_Tournament_TournamentService::getTours($tournament_id);
 
         foreach ($tours as $tour) {
             if (!$tour->finished) {
@@ -240,7 +242,7 @@ if ($permission['edittourn']) {
 
 <div id="addGamePopup" class="messagepop pop">
     <?php
-        $participants = PMF_TournamentService::getAllParticipantsSortedByRating($tournament_id);
+        $participants = PMF_Tournament_TournamentService::getAllParticipantsSortedByRating($tournament_id);
     ?>
     <input type="hidden" value=""/>
     <table style="width: 100%">

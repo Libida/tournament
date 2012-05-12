@@ -23,7 +23,7 @@ if (!defined('IS_VALID_PHPMYFAQ')) {
 function printScoreOptions($selected_value)
 {
     $i = 0;
-    while ($i <= PMF_TournamentService::getMaxGameScore()) {
+    while ($i <= PMF_Tournament_TournamentService::getMaxGameScore()) {
         if ($selected_value == $i) {
             printf("<option value='%d' selected='selected'>%d</option>", $i, $i);
         } else {
@@ -35,7 +35,7 @@ function printScoreOptions($selected_value)
 
 if ($permission['editgame']) {
     $game_id = PMF_Filter::filterInput(INPUT_GET, 'game', FILTER_VALIDATE_INT, 0);
-    $game = PMF_TournamentService::getGameById($game_id);
+    $game = PMF_Tournament_TournamentService::getGameById($game_id);
     ?>
 
 <header>
