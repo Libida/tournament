@@ -227,11 +227,11 @@ if ($permission['edittourn']) {
                 print "</tr>";
             }
             print "</table>";
+            printf("<div class='addMatchDiv' style='margin-top: 10px;'><a class='addGameLink' href='#'>%s</a></div>", $PMF_LANG['ad_add_micro_match']);
             if (!$tour->finished) {
                 printf("<input id='tourIndex' type='hidden' value='%s'/>", $tour->id);
                 printf("<input id='closeTour' class='close-tour-button' type='submit' value='%s'/>", $PMF_LANG['ad_tour_close']);
             }
-            printf("<div class='addMatchDiv' style='margin-top: 10px;'><a class='addGameLink' href='#'>%s</a></div>", $PMF_LANG['ad_add_micro_match']);
             printf("<input class='tourId' type='hidden' value='%s'>", $tour->id);
             print "</article>";
         }
