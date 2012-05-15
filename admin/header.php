@@ -183,15 +183,15 @@ switch ($action) {
     <script src="../js/plugins/autocomplete/jquery.autocomplete.pack.js"></script>
     <script src="../js/plugins/datePicker/date.js"></script>
     <script src="../js/plugins/datePicker/jquery.datePicker.js"></script>
-    <script src="editor/tiny_mce.js?<?php print time(); ?>"></script>
+    <script type="text/javascript" src="editor/tiny_mce.js"></script>
 
     <script type="text/javascript">
         tinyMCE.init({
             // General options
             mode     : "textareas",
             language : "<?php print (PMF_Language::isASupportedTinyMCELanguage($LANGCODE) ? $LANGCODE : 'en'); ?>",
-            width    : "500",
-            height   : "480",
+            width    : "300",
+            height   : "280",
             theme    : "advanced",
             plugins  : "spellchecker,pagebreak,style,layer,table,save,advhr,advimage,advlink,emotions,iespell,inlinepopups,insertdatetime,preview,media,searchreplace,print,contextmenu,paste,directionality,fullscreen,noneditable,visualchars,nonbreaking,xhtmlxtras,template,syntaxhl,phpmyfaq",
             theme_advanced_blockformats : "p,div,h1,h2,h3,h4,h5,h6,blockquote,dt,dd,code,samp",

@@ -10,10 +10,10 @@
 </div>
 
 <div class="inputs-block">
-    <span class="input-left">
+    <span class="input-left" style="float: left;">
         <label class="control-label" for="description"><?php print $PMF_LANG['ad_tournedit_desc']; ?>:</label>
     </span>
-    <span class="input-text">
+    <span style="display: inline-block;">
         <textarea id="description" name="description" rows="3" cols="80"><?php print $tournament->description; ?></textarea>
     </span>
 </div>
