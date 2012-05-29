@@ -1167,6 +1167,8 @@ $PMF_LANG['Albania'] = 'Албания';
 
 
 $PMF_LANG['none'] = '-';
+$PMF_LANG['ad_menu_tourn'] = 'Турнир';
+$PMF_LANG['ad_menu_tourn_news'] = 'Новости турнира';
 $PMF_LANG['ad_menu_tourn_edit'] = 'Турниры';
 $PMF_LANG['ad_menu_deleted_tourns'] = 'Удаленные турниры';
 $PMF_LANG['ad_tourn_new'] = 'Создание нового турнира';

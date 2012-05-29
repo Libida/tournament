@@ -14,6 +14,8 @@ if (!defined('IS_VALID_PHPMYFAQ')) {
 if ($permission['edittourn']) {
 
     if ($action == 'savetournament') {
+        $name = PMF_Filter::filterInput(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+        $description = html_entity_decode($_POST['description']);
         $started = 0;
         $winners_count = 0;
         $deleted = $_POST['deleted'] == 'on' ? 1 : 0;
@@ -22,9 +24,7 @@ if ($permission['edittourn']) {
         $age_category = $_POST['ageCategory'];
         $selected_criteria = $_POST['selectedCriteria'] ? $_POST['selectedCriteria'] : 0;
         $tournament_data = array(
-            PMF_Filter::filterInput(INPUT_POST, 'name', FILTER_SANITIZE_STRING),
-            html_entity_decode($_POST['description']),
-            $started, $winners_count, $deleted, $type, $points_system, $age_category, $selected_criteria
+            $name, $description, $started, $winners_count, $deleted, $type, $points_system, $age_category, $selected_criteria
         );
 
         $tournament_id = PMF_Tournament_Service::addTournament($tournament_data);

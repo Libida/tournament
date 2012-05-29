@@ -143,7 +143,8 @@ class PMF_News
                         'allowComments' => ('y' == $row->comment),
                         'link'          => $row->link,
                         'linkTitle'     => $row->linktitel,
-                        'target'        => $row->target);
+                        'target'        => $row->target,
+                        'tournament_id' => $row->tournament_id);
                     $news[] = $item;
                 }
             }
@@ -160,12 +161,15 @@ class PMF_News
      * 
      * @return string
      */
-    public function getNews($showArchive = false, $active = true)
+    public function getNews($showArchive = false, $active = true, $tournament_id = -1)
     {
         $output = '';
         $news   = $this->getLatestData($showArchive, $active);
 
         foreach ($news as $item) {
+            if ($tournament_id != -1 && $item['tournament_id'] != $tournament_id) {
+                continue;
+            }
 
             $url = sprintf('%s?action=news&amp;newsid=%d&amp;newslang=%s',
                            PMF_Link::getSystemRelativeUri(),
@@ -176,7 +180,6 @@ class PMF_News
             if (isset($item['header'])) {
                 $oLink->itemTitle = $item['header'];
             }
-
 
 
             $output .= sprintf(
@@ -305,7 +308,8 @@ class PMF_News
                     'allowComments' => $allowComments,
                     'link'          => $row->link,
                     'linkTitle'     => $row->linktitel,
-                    'target'        => $row->target);
+                    'target'        => $row->target,
+                    'tournament_id' => $row->tournament_id);
             }
         }
 
@@ -352,9 +356,9 @@ class PMF_News
             INSERT INTO
                 %sfaqnews
             (id, datum, lang, header, artikel, author_name, author_email, date_start, date_end, active, comment,
-            link, linktitel, target)
+            link, linktitel, target, tournament_id)
                 VALUES
-            (%d, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')",
+            (%d, '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', %d)",
             SQLPREFIX,
             $this->db->nextId(SQLPREFIX.'faqnews', 'id'),
             $data['date'],
@@ -369,7 +373,8 @@ class PMF_News
             $data['comment'],
             $data['link'],
             $data['linkTitle'],
-            $data['target']);
+            $data['target'],
+            $data['tournament_id']);
 
         if (!$this->db->query($query)) {
             return false;
@@ -404,7 +409,8 @@ class PMF_News
                 comment = '%s',
                 link = '%s',
                 linktitel = '%s',
-                target = '%s'
+                target = '%s',
+                tournament_id = %d
             WHERE
                 id = %d",
             SQLPREFIX,
@@ -421,6 +427,7 @@ class PMF_News
             $data['link'],
             $data['linkTitle'],
             $data['target'],
+            $data['tournament_id'],
             $id);
 
         if (!$this->db->query($query)) {

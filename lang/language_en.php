@@ -1184,6 +1184,8 @@ $PMF_LANG["msg2answerFAQ"] = "Answered";
 $PMF_LANG['headerUserControlPanel'] = 'My account';
 
 //C&C
+$PMF_LANG['ad_menu_tourn'] = 'Tournament';
+$PMF_LANG['ad_menu_tourn_news'] = 'Tournament news';
 $PMF_LANG['ad_menu_tourn_edit'] = 'Tournaments';
 $PMF_LANG['ad_menu_deleted_tourns'] = 'Deleted tournaments';
 $PMF_LANG['ad_tourn_new'] = 'Create new tornament';

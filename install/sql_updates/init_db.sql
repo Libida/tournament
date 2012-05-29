@@ -419,3 +419,5 @@ ALTER TABLE `t_participants` CHANGE `factor` `factor` float NOT NULL DEFAULT 0;
 ALTER TABLE `t_tournaments` ADD COLUMN `points_system` varchar(20) NOT NULL DEFAULT '2-1-0';
 ALTER TABLE `t_tournaments` ADD COLUMN `age_category` varchar(20) NOT NULL DEFAULT '5-10';
 ALTER TABLE `t_tournaments` ADD COLUMN `criteria` varchar(30) NOT NULL DEFAULT '';
+
+ALTER TABLE `faqnews` ADD COLUMN `tournament_id` int(11) NOT NULL DEFAULT 0;

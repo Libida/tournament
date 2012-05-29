@@ -42,9 +42,12 @@ foreach ($tours as $tour) {
 }
 
 
+$news = new PMF_News($db, $Language);
 
 $tpl->parse('writeContent', array(
     "header" => $tournament->name,
+    "news_header" => $PMF_LANG['ad_menu_tourn_news'],
+    "writeNews" => $news->getNews(false, true, $tournament_id),
     "content" => $html
 ));
 $tpl->merge('writeContent', 'index');

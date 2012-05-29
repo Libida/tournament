@@ -45,6 +45,19 @@ if ('addnews' == $action && $permission["addnews"]) {
             <legend><?php print $PMF_LANG['ad_news_add']; ?></legend>
 
             <div class="control-group">
+                <label class="control-label" for="tournament"><?php print $PMF_LANG["ad_menu_tourn"]; ?>:</label>
+                <div class="controls">
+                    <select id="tournament" name="tournament">
+                        <?php
+                        foreach (PMF_Tournament_Service::getAllTournaments() as $tourn) {
+                            printf("<option value='%s'>%s</option>", $tourn->id, $tourn->name);
+                        }
+                        ?>
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-group">
                 <label class="control-label" for="newsheader"><?php print $PMF_LANG['ad_news_header']; ?></label>
                 <div class="controls">
                     <input type="text" name="newsheader" id="newsheader" autofocus="autofocus" />
@@ -211,6 +224,25 @@ if ('addnews' == $action && $permission["addnews"]) {
             <input type="hidden" name="id" value="<?php print $newsData['id']; ?>" />
 
             <div class="control-group">
+                <label class="control-label" for="tournament"><?php print $PMF_LANG["ad_menu_tourn"]; ?>:</label>
+                <div class="controls">
+                    <select id="tournament" name="tournament">
+                        <?php
+                        $tournament_id = $newsData['tournament_id'];
+                        foreach (PMF_Tournament_Service::getAllTournaments() as $tourn) {
+                            if ($tourn->id == $tournament_id) {
+                                printf("<option value='%s' selected>%s</option>", $tourn->id, $tourn->name);
+                            } else {
+                                printf("<option value='%s'>%s</option>", $tourn->id, $tourn->name);
+                            }
+
+                        }
+                        ?>
+                    </select>
+                </div>
+            </div>
+
+            <div class="control-group">
                 <label class="control-label" for="newsheader"><?php print $PMF_LANG['ad_news_header']; ?></label>
                 <div class="controls">
                     <input type="text" name="newsheader" id="newsheader"
@@ -354,6 +386,8 @@ if ('addnews' == $action && $permission["addnews"]) {
     $linktitle = PMF_Filter::filterInput(INPUT_POST, 'linkTitle', FILTER_SANITIZE_STRIPPED);
     $newslang  = PMF_Filter::filterInput(INPUT_POST, 'langTo', FILTER_SANITIZE_STRING);
     $target    = PMF_Filter::filterInput(INPUT_POST, 'target', FILTER_SANITIZE_STRIPPED);
+    $tournament_id = PMF_Filter::filterInput(INPUT_POST, 'tournament', FILTER_SANITIZE_STRING);
+
     
     $newsData = array(
         'lang'          => $newslang,
@@ -368,7 +402,8 @@ if ('addnews' == $action && $permission["addnews"]) {
         'link'          => $link,
         'linkTitle'     => $linktitle,
         'date'          => date('YmdHis'),
-        'target'        => (is_null($target)) ? '' : $target
+        'target'        => (is_null($target)) ? '' : $target,
+        'tournament_id' => $tournament_id
     );
 
     if ($news->addNewsEntry($newsData)) {
@@ -391,6 +426,7 @@ if ('addnews' == $action && $permission["addnews"]) {
     $linktitle = PMF_Filter::filterInput(INPUT_POST, 'linkTitle', FILTER_SANITIZE_STRIPPED);
     $newslang  = PMF_Filter::filterInput(INPUT_POST, 'langTo', FILTER_SANITIZE_STRING);
     $target    = PMF_Filter::filterInput(INPUT_POST, 'target', FILTER_SANITIZE_STRIPPED);
+    $tournament_id = PMF_Filter::filterInput(INPUT_POST, 'tournament', FILTER_SANITIZE_STRING);
 
     $newsData = array(
         'lang'          => $newslang,
@@ -405,7 +441,8 @@ if ('addnews' == $action && $permission["addnews"]) {
         'link'          => $link,
         'linkTitle'     => $linktitle,
         'date'          => date('YmdHis'),
-        'target'        => (is_null($target)) ? '' : $target);
+        'target'        => (is_null($target)) ? '' : $target,
+        'tournament_id' => $tournament_id);
     
     $newsId = PMF_Filter::filterInput(INPUT_POST, 'id', FILTER_VALIDATE_INT);
     if ($news->updateNewsEntry($newsId, $newsData)) {

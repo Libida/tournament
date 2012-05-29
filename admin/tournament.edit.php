@@ -12,14 +12,15 @@ if ($permission['edittourn']) {
     $tournament_id = PMF_Filter::filterInput(INPUT_GET, 'tourn', FILTER_VALIDATE_INT, 0);
 
     if ($action == 'updatetournament') {
-        $deleted = $_POST['deleted'] != null ? 1 : 0;
         $tournament_id = PMF_Filter::filterInput(INPUT_POST, 'id', FILTER_VALIDATE_INT);
+        $name = PMF_Filter::filterInput(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
         $description = html_entity_decode($_POST['description']);
+        $deleted = $_POST['deleted'] == 'on' ? 1 : 0;
         $points_system = $_POST['pointsSystem'];
         $age_category = $_POST['ageCategory'];
         $selected_criteria = $_POST['selectedCriteria'] ? $_POST['selectedCriteria'] : 0;
         $tournament_data = array(
-            "name" => PMF_Filter::filterInput(INPUT_POST, 'name', FILTER_SANITIZE_STRING),
+            "name" => $name,
             "description" => $description,
             "deleted" => $deleted,
             "points_system" => $points_system,
@@ -98,6 +99,7 @@ if ($permission['edittourn']) {
 <div style="width: 75%;">
     <?php
     $players = PMF_Tournament_PlayerService::getAllPlayersForTournament($tournament_id);
+
     if (count($players) > 0) {
         require_once '../common/players.update.values.php';
         print '<table id="players" border="1"  width="100%" style="text-align: center;">';
