@@ -1225,9 +1225,10 @@ $PMF_LANG['ad_editgame_save'] = 'Save';
 $PMF_LANG['ad_standings'] = 'Standings';
 $PMF_LANG['ad_standings_name'] = 'Name';
 $PMF_LANG['ad_standings_points'] = 'Points';
-$PMF_LANG['ad_standings_wins'] = 'W';
-$PMF_LANG['ad_standings_loses'] = 'L';
-$PMF_LANG['ad_standings_draws'] = 'D';
+$PMF_LANG['ad_standings_k'] = 'K';
+$PMF_LANG['ad_standings_wins'] = 'Wins';
+$PMF_LANG['ad_standings_loses'] = 'Loses';
+$PMF_LANG['ad_standings_draws'] = 'Draws';
 
 $PMF_LANG['ad_refresh_captcha'] = 'click here to refresh image';
 

@@ -1207,9 +1207,10 @@ $PMF_LANG['ad_editgame_save'] = 'Сохранить';
 $PMF_LANG['ad_standings'] = 'Турнирная таблица';
 $PMF_LANG['ad_standings_name'] = 'Имя';
 $PMF_LANG['ad_standings_points'] = 'Очки';
-$PMF_LANG['ad_standings_wins'] = 'В';
-$PMF_LANG['ad_standings_loses'] = 'П';
-$PMF_LANG['ad_standings_draws'] = 'Н';
+$PMF_LANG['ad_standings_k'] = 'Коэфф.';
+$PMF_LANG['ad_standings_wins'] = 'Побед';
+$PMF_LANG['ad_standings_loses'] = 'Поражений';
+$PMF_LANG['ad_standings_draws'] = 'Ничьих';
 
 $PMF_LANG['ad_refresh_captcha'] = 'нажмите здесь, чтобы обновить изображение';
 

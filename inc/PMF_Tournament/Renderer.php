@@ -10,7 +10,7 @@ class PMF_Tournament_Renderer
         $html .= sprintf('<th>%s</th>', $PMF_LANG['ad_standings_name']);
         $html .= sprintf('<th >%s</th>', $PMF_LANG['ad_player_country']);
         $html .= sprintf('<th>%s</th>', $PMF_LANG['ad_standings_points']);
-        $html .= sprintf('<th style="width: 30px;">%s</th>', 'K');
+        $html .= sprintf('<th style="width: 30px;">%s</th>', $PMF_LANG['ad_standings_k']);
         $html .= sprintf('<th style="width: 30px;">%s</th>', $PMF_LANG['ad_standings_wins']);
         $html .= sprintf('<th style="width: 30px;">%s</th>', $PMF_LANG['ad_standings_loses']);
         $html .= sprintf('<th style="width: 30px;">%s</th>', $PMF_LANG['ad_standings_draws']);
