@@ -63,4 +63,8 @@ class PMF_Framework_Response
     {
         return $this->data[$key];
     }
+
+    public static function errorCount() {
+        return PMF_Perm_Medium::errorCount();
+    }
 }

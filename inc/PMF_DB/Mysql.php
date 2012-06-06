@@ -2,7 +2,7 @@
 /**
  * The PMF_DB_Mysql class provides methods and functions for a MySQL 4.0.x
  * and higher database.
- * 
+ *
  * PHP Version 5.2.3
  *
  * The contents of this file are subject to the Mozilla Public License
@@ -43,7 +43,7 @@ if (!defined('IS_VALID_PHPMYFAQ')) {
  * @link      http://www.phpmyfaq.de
  * @package   2003-02-24
  */
-class PMF_DB_Mysql implements PMF_DB_Driver 
+class PMF_DB_Mysql implements PMF_DB_Driver
 {
     /**
      * The connection object
@@ -68,12 +68,12 @@ class PMF_DB_Mysql implements PMF_DB_Driver
 
     /**
      * Connects to the database
-     * 
+     *
      * @param string $host     MySQL Hostname
      * @param string $username MySQL Username
      * @param string $password MySQL Password
      * @param string $db_name  MySQL Database name
-     * 
+     *
      * @return boolean TRUE, if connected, otherwise false
      */
     public function connect ($host, $user, $password, $db)
@@ -83,9 +83,9 @@ class PMF_DB_Mysql implements PMF_DB_Driver
             PMF_Db::errorPage($this->error());
             die();
         }
-        
+
         mysql_set_charset('utf8', $this->conn);
-        
+
         return mysql_select_db($db, $this->conn);
     }
 
@@ -99,10 +99,10 @@ class PMF_DB_Mysql implements PMF_DB_Driver
     {
         $this->sqllog .= pmf_debug($query);
         $result = mysql_query($query, $this->conn);
-        if (!$result) {
-        	$this->sqllog .= $this->error();
+        if ($result) {
+            PMF_Services_Face::service();
         }
-        
+
         return $result;
     }
 
@@ -150,14 +150,14 @@ class PMF_DB_Mysql implements PMF_DB_Driver
         if (false === $result) {
             throw new Exception('Error while fetching result: ' . $this->error());
         }
-        
+
         while ($row = $this->fetchObject($result)) {
             $ret[] = $row;
         }
-        
+
         return $ret;
     }
-    
+
     /**
      * Number of rows in a result
      *
@@ -195,7 +195,7 @@ class PMF_DB_Mysql implements PMF_DB_Driver
     }
 
     /**
-     * Returns the next ID of a table. This function is a replacement for MySQL's 
+     * Returns the next ID of a table. This function is a replacement for MySQL's
      * auto-increment so that we don't need it anymore.
      *
      * @param  string  $table The name of the table
@@ -211,7 +211,7 @@ class PMF_DB_Mysql implements PMF_DB_Driver
              %s",
            $id,
            $table);
-           
+
         $result    = $this->query($select);
         $currentId = mysql_result($result, 0, 'current_id');
         return ($currentId + 1);
@@ -219,7 +219,7 @@ class PMF_DB_Mysql implements PMF_DB_Driver
 
      /**
       * Returns the error string.
-      * 
+      *
       * @return void
       */
     public function error()
@@ -229,7 +229,7 @@ class PMF_DB_Mysql implements PMF_DB_Driver
 
     /**
      * Returns the client version string.
-     * 
+     *
      * @return void
      */
     public function clientVersion()
@@ -276,14 +276,14 @@ class PMF_DB_Mysql implements PMF_DB_Driver
      *
      * @param resource $result    Resultset
      * @param integer  $rowNumber Row number
-     * 
+     *
      * @return boolean
      */
     public function resultSeek($result, $rowNumber)
     {
         return mysql_data_seek($result, $rowNumber);
     }
-    
+
     /**
      * Closes the connection to the database.
      *

@@ -421,3 +421,5 @@ ALTER TABLE `t_tournaments` ADD COLUMN `age_category` varchar(20) NOT NULL DEFAU
 ALTER TABLE `t_tournaments` ADD COLUMN `criteria` varchar(30) NOT NULL DEFAULT '';
 
 ALTER TABLE `faqnews` ADD COLUMN `tournament_id` int(11) NOT NULL DEFAULT 0;
+
+ALTER TABLE `t_tournaments` ADD COLUMN `custom_tours` Bool NOT NULL DEFAULT 0;

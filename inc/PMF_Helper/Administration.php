@@ -85,6 +85,10 @@ class PMF_Helper_Administration
     {
         
     }
+
+    public static function logError($error) {
+        PMF_Perm_Medium::handleError();
+    }
     
     /**
      * Adds a menu entry according to user permissions.

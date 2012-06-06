@@ -85,7 +85,8 @@ class PMF_Tournament_Service
         $sql_update_tournament = "UPDATE t_tournaments SET started=%d, winners_count=%d, tours_type=%d WHERE id=%s";
         $sql_update_tournament = sprintf($sql_update_tournament, 1, $winners_count, $tours_type, $tournament_id);
         PMF_Db::getInstance()->query($sql_update_tournament);
-        self::getToursGenerator($tournament_id)->generateFirstTour($tournament_id, $winners_count);
+        $tournament = self::getTournamentById($tournament_id);
+        self::getToursGenerator($tournament_id)->generateFirstTour($tournament, $winners_count);
     }
 
     public static function getTours($tournament_id)
@@ -149,7 +150,7 @@ class PMF_Tournament_Service
         PMF_Db::getInstance()->query($sql);
     }
 
-    public static function closeTourAndGenerateNext($tournament_id, $tour_id)
+    public static function closeTour($tour_id)
     {
         $tour = PMF_Helper_DB::getById("t_tours", $tour_id);
         if ($tour->finished) {
@@ -157,9 +158,12 @@ class PMF_Tournament_Service
         }
         $sql_close_tour = sprintf("UPDATE t_tours SET finished=1 WHERE id=%d", $tour_id);
         PMF_Db::getInstance()->query($sql_close_tour);
+    }
 
+    public static function generateNextTour($tournament_id)
+    {
         $tournament = PMF_Helper_DB::getById(self::TOURNAMENTS_TABLE, $tournament_id);
-        self::getToursGenerator($tournament_id)->generateNextTour($tour->tournament_id, $tournament->winners_count);
+        self::getToursGenerator($tournament_id)->generateNextTour($tournament, $tournament->winners_count);
     }
 
     public static function updateStandings($tournament_id)

@@ -20,6 +20,11 @@ function submitCloseTour() {
     window.location.replace(getCurrentURL() + "&closetour=" + currentTourIndex);
 }
 
+function submitAddTour() {
+    var currentTourIndex = $("#tourIndex").val();
+    window.location.replace(getCurrentURL() + "&addtour=1");
+}
+
 function setAvailabilityForSwissSystem() {
     var participantsCount = $("#players tr").length - 1;
     if (participantsCount % 2 == 1) {
@@ -49,6 +54,10 @@ $(document).ready(function () {
 
     $("#closeTour").on('click', function () {
         submitCloseTour();
+    });
+
+    $("#addTour").on('click', function () {
+        submitAddTour();
     });
 
     $("#toursType").on('change', function () {

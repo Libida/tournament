@@ -13,18 +13,8 @@ class PMF_Tournament_SwissToursGenerator extends PMF_Tournament_AbstractToursGen
         }
     }
 
-    public function generateNextTour($tournament_id, $winners_count)
+    protected function createGamesForNextTour($participants, $tour_id)
     {
-        $participants = $this->getAllParticipantsSortedByRating($tournament_id);
-
-        $current_tours_count = $this->getCurrentNumOfTours($tournament_id);
-        if ($current_tours_count >= $this->getNumOfTours(count($participants), $winners_count)) {
-            return;
-        }
-
-        $tour_index = $current_tours_count + 1;
-        $tour_id = $this->createTour($tournament_id, $tour_index);
-
         for ($i = 0; $i < count($participants); $i++) {
             if (!$participants[$i]->busy) {
                 for ($j = $i + 1; $j < count($participants); $j++) {
@@ -39,7 +29,7 @@ class PMF_Tournament_SwissToursGenerator extends PMF_Tournament_AbstractToursGen
         }
     }
 
-    private function getNumOfTours($players_count, $winners_count)
+    protected function getNumOfTours($players_count, $winners_count)
     {
         $numOfTours = log($players_count, 2);
         if ($winners_count > 1) {

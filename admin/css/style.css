@@ -3645,8 +3645,10 @@ footer .copyright {
     height: 40px;
 }
 
-.close-tour-button {
+.tour-button {
     margin-top: 15px;
+    background: #fff359;
+    color: black;
 }
 
 .inputs-block {

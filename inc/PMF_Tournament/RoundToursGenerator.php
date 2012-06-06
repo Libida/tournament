@@ -17,4 +17,13 @@ class PMF_Tournament_RoundToursGenerator extends PMF_Tournament_AbstractToursGen
     public function generateNextTour($tournament_id, $winners_count)
     {
     }
+
+    protected function getNumOfTours($players_count, $winners_count)
+    {
+        return 1;
+    }
+
+    protected function createGamesForNextTour($tournament_id, $winners_count)
+    {
+    }
 }

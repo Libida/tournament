@@ -10,6 +10,7 @@ if (!defined('IS_VALID_PHPMYFAQ')) {
 
 if ($permission['edittourn']) {
     $tournament_id = PMF_Filter::filterInput(INPUT_GET, 'tourn', FILTER_VALIDATE_INT, 0);
+    $tournament = PMF_Tournament_Service::getTournamentById($tournament_id);
 
     if ($action == 'updatetournament') {
         $tournament_id = PMF_Filter::filterInput(INPUT_POST, 'id', FILTER_VALIDATE_INT);
@@ -19,13 +20,15 @@ if ($permission['edittourn']) {
         $points_system = $_POST['pointsSystem'];
         $age_category = $_POST['ageCategory'];
         $selected_criteria = $_POST['selectedCriteria'] ? $_POST['selectedCriteria'] : 0;
+        $custom_tours = $_POST['custom_tours'] == 'on' ? 1 : 0;
         $tournament_data = array(
             "name" => $name,
             "description" => $description,
             "deleted" => $deleted,
             "points_system" => $points_system,
             "age_category" => $age_category,
-            "criteria" => $selected_criteria
+            "criteria" => $selected_criteria,
+            "custom_tours" => $custom_tours
         );
         PMF_Tournament_Service::updateTournament($tournament_id, $tournament_data);
         $tournament = PMF_Tournament_Service::getTournamentById($tournament_id);
@@ -39,6 +42,7 @@ if ($permission['edittourn']) {
     $remove_player_id = PMF_Filter::filterInput(INPUT_GET, 'removeplayer', FILTER_VALIDATE_INT, 0);
     $winners_count = PMF_Filter::filterInput(INPUT_GET, 'generatetours', FILTER_VALIDATE_INT, 0);
     $tour_id_to_close = PMF_Filter::filterInput(INPUT_GET, 'closetour', FILTER_VALIDATE_INT, 0);
+    $add_tour = PMF_Filter::filterInput(INPUT_GET, 'addtour', FILTER_VALIDATE_INT, 0) == 1 ? true : false;
 
     if ($add_player_id != 0) {
         PMF_Tournament_Service::addPlayerToTournament($tournament_id, $add_player_id);
@@ -49,10 +53,18 @@ if ($permission['edittourn']) {
     }
 
     if ($tour_id_to_close != 0) {
-        PMF_Tournament_Service::closeTourAndGenerateNext($tournament_id, $tour_id_to_close);
+        PMF_Tournament_Service::closeTour($tour_id_to_close);
+        if (!$tournament->custom_tours) {
+            PMF_Tournament_Service::generateNextTour($tournament_id, $tour_id_to_close);
+        }
     }
 
-    $tournament = PMF_Tournament_Service::getTournamentById($tournament_id);
+    if ($add_tour) {
+        if ($tournament->custom_tours) {
+            PMF_Tournament_Service::generateNextTour($tournament_id, $tour_id_to_close);
+        }
+    }
+
     $tournament_started = $tournament->started != 0;
     if ($winners_count && !$tournament_started) {
         $tours_type = $_GET['type'];
@@ -232,13 +244,18 @@ if ($permission['edittourn']) {
             printf("<div class='addMatchDiv' style='margin-top: 10px;'><a class='addGameLink' href='#'>%s</a></div>", $PMF_LANG['ad_add_micro_match']);
             if (!$tour->finished) {
                 printf("<input id='tourIndex' type='hidden' value='%s'/>", $tour->id);
-                printf("<input id='closeTour' class='close-tour-button' type='submit' value='%s'/>", $PMF_LANG['ad_tour_close']);
+                printf("<input id='closeTour' class='tour-button' type='submit' value='%s'/>", $PMF_LANG['ad_tour_close']);
             }
             printf("<input class='tourId' type='hidden' value='%s'>", $tour->id);
             print "</article>";
         }
         ?>
     </section>
+    <?php
+        if ($tournament->custom_tours && $tournament->started) {
+            printf("<input id='addTour' class='tour-button' type='submit' value='%s'/>", $PMF_LANG['ad_tour_add']);
+        }
+    ?>
 </div>
 
 

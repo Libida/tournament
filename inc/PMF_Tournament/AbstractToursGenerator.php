@@ -2,17 +2,39 @@
 
 abstract class PMF_Tournament_AbstractToursGenerator
 {
-    public function generateFirstTour($tournament_id)
+    public function generateFirstTour($tournament)
     {
-        $players = PMF_Tournament_PlayerService::getAllPlayersForTournament($tournament_id);
-        $participant_ids = PMF_Tournament_Service::createParticipantsForTournament($tournament_id, $players);
-        $first_tour_id = $this->createFirstTour($tournament_id);
-        $this->createGamesForFirstTour($participant_ids, $first_tour_id);
+        $players = PMF_Tournament_PlayerService::getAllPlayersForTournament($tournament->id);
+        $participant_ids = PMF_Tournament_Service::createParticipantsForTournament($tournament->id, $players);
+        $first_tour_id = $this->createFirstTour($tournament->id);
+        if (!$tournament->custom_tours) {
+            $this->createGamesForFirstTour($participant_ids, $first_tour_id);
+        }
     }
 
     protected abstract function createGamesForFirstTour($participant_ids, $first_tour_id);
 
-    public abstract function generateNextTour($tournament_id, $winners_count);
+    public function generateNextTour($tournament, $winners_count)
+    {
+        $participants = $this->getAllParticipantsSortedByRating($tournament->id);
+        $current_tours_count = $this->getCurrentNumOfTours($tournament->id);
+        if (!$tournament->custom_tours) {
+            $max_tours_count = $this->getNumOfTours(count($participants), $winners_count);
+            if ($current_tours_count >= $max_tours_count) {
+                return;
+            }
+        }
+
+        $tour_index = $current_tours_count + 1;
+        $tour_id = $this->createTour($tournament->id, $tour_index);
+
+        if (!$tournament->custom_tours) {
+            $this->createGamesForNextTour($participants, $tour_id);
+        }
+    }
+
+    protected abstract function getNumOfTours($players_count, $winners_count);
+    protected abstract function createGamesForNextTour($participants, $tour_id);
 
     public function getAllParticipantsSortedByRating($tournament_id)
     {

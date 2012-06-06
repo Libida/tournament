@@ -23,8 +23,9 @@ if ($permission['edittourn']) {
         $points_system = $_POST['pointsSystem'];
         $age_category = $_POST['ageCategory'];
         $selected_criteria = $_POST['selectedCriteria'] ? $_POST['selectedCriteria'] : 0;
+        $custom_tours = $_POST['custom_tours'] == 'on' ? 1 : 0;
         $tournament_data = array(
-            $name, $description, $started, $winners_count, $deleted, $type, $points_system, $age_category, $selected_criteria
+            $name, $description, $started, $winners_count, $deleted, $type, $points_system, $age_category, $selected_criteria, $custom_tours
         );
 
         $tournament_id = PMF_Tournament_Service::addTournament($tournament_data);

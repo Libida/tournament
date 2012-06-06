@@ -30,7 +30,7 @@
  * @since     2002-08-20
  */
 
-define('COPYRIGHT', '&copy; 2001-2012 <a href="http://www.phpmyfaq.de/">phpMyFAQ Team</a> | Follow us on <a href="http://twitter.com/phpMyFAQ">Twitter</a> | All rights reserved.');
+define('COPYRIGHT', '&copy; 2012 <a href="http://www.phpmyfaq.de/">Maryia Rudzko</a>');
 define('PMF_ROOT_DIR', dirname(dirname(__FILE__)));
 define('IS_VALID_PHPMYFAQ', null);
 
@@ -130,16 +130,6 @@ $system = new PMF_System();
 <section id="main">
     <div class="container">
         <div class="row" style="padding-left: 20px;">
-            <div class="hero-unit hello-phpmyfaq" style="text-align: center; height: 60px;">
-                <h1>phpMyFAQ <?php print PMF_System::getVersion(); ?> Setup</h1>
-                <p>
-                    Did you already read the <a style="color: #ffffff; text-decoration: underline;"
-                    href="http://www.phpmyfaq.de/documentation.php">documentation</a> carefully before starting the phpMyFAQ
-                    setup? :-)
-                </p>
-            </div>
-        </div>
-        <div class="row" style="padding-left: 20px;">
 <?php
 
 if (version_compare(PHP_VERSION, PMF_System::VERSION_MINIMUM_PHP, '<')) {
@@ -178,12 +168,12 @@ if (! $system->checkRequiredExtensions()) {
     die();
 }
 
-if (! $system->checkphpMyFAQInstallation()) {
+/*if (! $system->checkphpMyFAQInstallation()) {
     print '<p class="alert alert-error">It seems you\'re already running a version of phpMyFAQ. Please use the ' .
           '<a href="update.php">update script</a>.</p>';
     HTMLFooter();
     die();
-}
+}*/
 
 $dirs       = array('/attachments', '/config', '/data');
 $faileddirs = array();
@@ -226,11 +216,6 @@ if (!isset($_POST["sql_server"]) && !isset($_POST["sql_user"]) && !isset($_POST[
               'installation. Please enable Freetype support in GD extension otherwise the Captchas for spam ' .
               'protection will be quite easy to break.</p>';
     }
-    if (! extension_loaded('curl') || ! extension_loaded('openssl')) {
-        print '<p class="alert alert-error">You don\'t have cURL and/or OpenSSL support enabled in your PHP installation. ' .
-              'Please enable cURL and/or OpenSSL support in your php.ini file otherwise you can\'t use the Twitter ' .
-              ' support.</p>';
-    }
 ?>
         </div>
 
@@ -238,7 +223,7 @@ if (!isset($_POST["sql_server"]) && !isset($_POST["sql_user"]) && !isset($_POST[
         <div class="row">
             <div class="span6">
                 <fieldset>
-                <legend>Add your database connection setup</legend>
+                <legend>Database connection setup</legend>
                     <div class="control-group">
                         <label class="control-label" for="sql_type">Database server:</label>
                         <div class="controls">
@@ -310,7 +295,7 @@ if (!isset($_POST["sql_server"]) && !isset($_POST["sql_user"]) && !isset($_POST[
                         <div class="controls">
                             <input type="text" name="sqltblpre" id="sqltblpre" />
                             <p class="help-block">
-                                Please enter a table prefix here if you want to install more phpMyFAQ installations on
+                                Please enter a table prefix here if you want to install more Tournament installations on
                                 one database.
                             </p>
                         </div>
@@ -383,7 +368,7 @@ if (!isset($_POST["sql_server"]) && !isset($_POST["sql_user"]) && !isset($_POST[
 
             <div class="span6">
                 <fieldset>
-                <legend>Your phpMyFAQ setup</legend>
+                <legend>System settings</legend>
                     <div class="control-group">
                         <label class="control-label" for="language">Default language:</label>
                         <div class="controls">
@@ -462,12 +447,9 @@ if (!isset($_POST["sql_server"]) && !isset($_POST["sql_user"]) && !isset($_POST[
 
         <div class="row" style="padding-left: 20px; text-align: center;">
 
-            <p class="alert alert-danger">
-                Dude, this is an early alpha version. Please don't install this version on production!
-            </p>
 
             <input class="btn-primary btn-large" type="submit"
-                   value="Click to install phpMyFAQ <?php print PMF_System::getVersion(); ?>" />
+                   value="Click to install tournament system" />
         </div>
         <div class="row" style="padding-left: 20px;">
             <p class="alert alert-info" style="margin-top: 20px;">

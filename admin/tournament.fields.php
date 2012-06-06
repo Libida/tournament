@@ -49,9 +49,26 @@ if ($tournament->started) {
         ?>
     </span>
 </div>
+
 <?php
 }
 ?>
+
+<div class="inputs-block">
+    <span class="input-left">
+        <label class="control-label" for="custom_tours"><?php print $PMF_LANG['ad_tournedit_custom_tours']; ?>:</label>
+    </span>
+    <span class="input-text">
+        <?php
+        if ($tournament->custom_tours) {
+            print '<input id="custom_tours" name="custom_tours" type="checkbox" checked="checked"/>';
+        } else {
+            print '<input id="custom_tours" name="custom_tours" type="checkbox" />';
+        }
+        ?>
+    </span>
+</div>
+
 <div class="inputs-block">
     <span class="input-left">
         <label class="control-label" for="pointsSystem"><?php print $PMF_LANG['ad_tournedit_points_system']; ?>:</label>
@@ -86,16 +103,16 @@ if ($tournament->started) {
     </span>
     <span class="input-text">
         <span style="margin-right: 10px;">
-            <label style="display: inline;" for="berger"><?php print $PMF_LANG['ad_tournedit_berger']; ?></label>
             <input class="criteria" id="berger" type="checkbox" value="0"/>
+            <label style="display: inline;" for="berger"><?php print $PMF_LANG['ad_tournedit_berger']; ?></label>
         </span>
         <span style="margin-right: 10px;">
-            <label style="display: inline;" for="buhgoltz"><?php print $PMF_LANG['ad_tournedit_buhgoltz']; ?></label>
             <input class="criteria" id="buhgoltz" type="checkbox" value="1"/>
+            <label style="display: inline;" for="buhgoltz"><?php print $PMF_LANG['ad_tournedit_buhgoltz']; ?></label>
         </span>
         <span style="margin-right: 10px;">
-            <label style="display: inline;" for="personal"><?php print $PMF_LANG['ad_tournedit_personal']; ?></label>
             <input class="criteria" id="personal" type="checkbox" value="2"/>
+            <label style="display: inline;" for="personal"><?php print $PMF_LANG['ad_tournedit_personal']; ?></label>
         </span>
     </span>
 </div>
